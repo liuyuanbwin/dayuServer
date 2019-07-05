@@ -21,8 +21,8 @@ router.get('/', async(ctx, next) => {
     }
 })
 
-router.post('/', async(ctx, next) => {
-    console.log(ctx.request.body + ' **** ' + ctx.request.body.name)
+router.post('/add', async(ctx, next) => {
+   console.log(ctx.request.body + ' **** ' + ctx.request.body.name)
    const user = new User({
        name:ctx.request.body.name,
        sex:ctx.request.body.sex,
@@ -30,7 +30,8 @@ router.post('/', async(ctx, next) => {
        hobby:ctx.request.body.hobby,
        marriage:ctx.request.body.marriage,
        birthday:ctx.request.body.birthday,
-       address:ctx.request.body.address
+       address:ctx.request.body.address,
+       role:ctx.request.body.role
    })
 
    let code = 0
@@ -46,6 +47,13 @@ router.post('/', async(ctx, next) => {
    ctx.body = {
        code
    }
+})
+
+router.delete('/delete/:id',async(ctx,next) => {
+    console.log('要删除的是 ' + ctx.params.id)
+    const result = await Person.where({
+        id
+    })
 })
 
 module.exports= router

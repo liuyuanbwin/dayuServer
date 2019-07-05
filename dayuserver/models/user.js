@@ -8,6 +8,7 @@ let userSchema = new mongoose.Schema({
     marriage:String,
     birthday:Date,
     address:String,
+    role:Number
 },{
     _id:true
 })
