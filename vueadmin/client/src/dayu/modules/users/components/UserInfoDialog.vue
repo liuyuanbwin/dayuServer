@@ -73,7 +73,7 @@ export default {
           let url =
             this.dialong.option == "add" ? "add" : `/edit/${this.form.id}`;
 
-          this.$axios.post(`http://localhost:3000/api/users/${url}`, this.form).then(res => {
+          this.$axios.post(`/api/users/${url}`, this.form).then(res => {
             this.$message({
               type: "success",
               message: "数据添加成功"
