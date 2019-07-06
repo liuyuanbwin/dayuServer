@@ -13,16 +13,14 @@
             border
             style="width: 100%">
             <el-table-column
-                label="日期"
-                align="center"
-                width="120">
-                <template slot-scope="scope">
-                    <i class="el-icon-time"></i>
-                    <span style="margin-left: 10px">{{ scope.row.date | moment }}</span>
-                </template>
-            </el-table-column>
+					type="index"
+					label="序号"
+					align='center'
+					sortable
+					width="70">
+				</el-table-column>
             <el-table-column
-                label="用户名"
+                label="客户姓名"
                 align="center"
                 width="120">
                 <template slot-scope="scope">
@@ -30,49 +28,33 @@
                 </template>
             </el-table-column>
             <el-table-column
+                label="联系电话"
+                align="center"
+                width="180">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.tel }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                label="客户身份"
+                align="center"
+                width="120">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ roleStr(scope.row.role) }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column
                 label="性别"
                 align="center"
-                width="60">
+                width="80">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.sex }}</span>
                 </template>
             </el-table-column>
             <el-table-column
-                label="状态"
-                align="center"
-                width="60">
-                <template slot-scope="scope">
-                    <span style="margin-left: 10px">{{ scope.row.state }}</span>
-                </template>
-            </el-table-column>
-            <el-table-column
-                label="爱好"
-                align="center"
-                width="180">
-                <template slot-scope="scope">
-                    <span style="margin-left: 10px">{{ scope.row.hobby }}</span>
-                </template>
-            </el-table-column>
-            <el-table-column
-                label="是否已婚"
-                align="center"
-                width="180">
-                <template slot-scope="scope">
-                    <span style="margin-left: 10px">{{ scope.row.marriage }}</span>
-                </template>
-            </el-table-column>
-            <el-table-column
-                label="生日"
-                align="center"
-                width="180">
-                <template slot-scope="scope">
-                    <span style="margin-left: 10px">{{ scope.row.birthday | moment }}</span>
-                </template>
-            </el-table-column>
-            <el-table-column
                 label="联系地址"
                 align="center"
-                width="180">
+                width="320">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.address }}</span>
                 </template>
@@ -111,16 +93,22 @@ export default {
       form: {   //添加和删除需要传递的字段名
         name: "",
         sex: "",
-        state: "",
-        hobby: "",
-        marriage: "",
-        birthday: "",
+        tel: "",
         address: "",
         role:0
       }
     };
   },
   methods: {
+    roleStr(role){
+      let roleStrs = [
+          {title:"一般客户",role:0},
+          {title:"投保人", role:1},
+          {title:"被保险人", role:2},
+          {title:"联系人", role:3}
+      ]
+      return roleStrs[parseInt(role)].title;
+    },
     userInfo() {
       console.log('获取用户列表')
       this.$axios
@@ -142,10 +130,7 @@ export default {
       this.form = {
           name: row.name,
           sex: row.sex,
-          state: row.state,
-          hobby: row.hobby,
-          marriage: row.marriage,
-          birthday: row.birthday,
+          state: row.tel,
           address: row.address,
           id:row._id,
           role:row.role
@@ -184,12 +169,10 @@ export default {
       this.form = {
         name: "",
         sex: "",
-        state: "",
-        hobby: "",
-        marriage: "",
         birthday: "",
         address: "",
-        role:0
+        role:0,
+        tel:""
       }
     }
   },

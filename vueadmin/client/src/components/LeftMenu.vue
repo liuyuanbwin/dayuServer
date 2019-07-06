@@ -39,7 +39,7 @@ export default {
         },
         {
           icon: "el-icon-mobile-phone",
-          name: "信息222222列表",
+          name: "信息列表",
           path: "/listuser"
         },
         {

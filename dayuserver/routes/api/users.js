@@ -26,10 +26,7 @@ router.post('/add', async(ctx, next) => {
    const user = new User({
        name:ctx.request.body.name,
        sex:ctx.request.body.sex,
-       state:ctx.request.body.state,
-       hobby:ctx.request.body.hobby,
-       marriage:ctx.request.body.marriage,
-       birthday:ctx.request.body.birthday,
+       tel:ctx.request.body.tel,
        address:ctx.request.body.address,
        role:ctx.request.body.role
    })
@@ -51,9 +48,18 @@ router.post('/add', async(ctx, next) => {
 
 router.delete('/delete/:id',async(ctx,next) => {
     console.log('要删除的是 ' + ctx.params.id)
-    const result = await Person.where({
-        id
-    })
+    let code = 0
+    try {
+        await User.deleteOne({_id:ctx.params.id},function(err,doc){
+        
+        })
+        code = 0
+    } catch (error) {
+        code = -1
+    }
+     ctx.body= {
+         code
+     }
 })
 
 module.exports= router

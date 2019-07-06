@@ -50,7 +50,7 @@ const router = new Router({
         {
           path: "/listuser",
           name: "listuser",
-          component: () => import("./views/ListUser"),
+          component: () => import("./dayu/modules/bills/Bills"),
           meta: { title: "信息列表" }
         },
         {
