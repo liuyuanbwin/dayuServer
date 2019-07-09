@@ -6,8 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "npm run serve",
-    "push": "git add .&&git commit -m '8'&&git push origin master"
+    "start": "npm run serve"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -17,7 +16,7 @@
     "js-cookie": "^2.2.0",
     "jwt-decode": "^2.2.0",
     "mavon-editor": "^2.6.17",
-    "moment": "^2.22.2",
+    "moment": "^2.24.0",
     "vue": "^2.5.17",
     "vue-amap": "^0.5.8",
     "vue-aplayer": "^1.6.1",

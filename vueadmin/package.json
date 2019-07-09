@@ -8,6 +8,7 @@
     "client": "npm start --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
+    "push": "git add .&&git commit -m '8'&&git push origin master",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",

@@ -10,62 +10,50 @@
       :visible.sync="dialong.show"
     >
       <el-form :model="form" ref="formdoalog" :rules="formdialog" label-width="80px">
-        <el-form-item label-width="160px" label="车牌号" prop="plate">
-          <el-input v-model="form.plate"></el-input>
-        </el-form-item>
-        <el-form-item label-width="160px" label="汽车品牌" prop="brand">
-          <el-input v-model="form.brand"></el-input>
-        </el-form-item>
-        <el-form-item label-width="160px" label="汽车型号" prop="model">
-          <el-input v-model="form.model"></el-input>
-        </el-form-item>
-        <el-form-item label-width="160px" label="车主姓名" prop="owners">
-          <el-input v-model="form.owners"></el-input>
+        <el-form-item label-width="160px" label="车牌号" prop="plate_num">
+          <el-input v-model="form.plate_num"></el-input>
         </el-form-item>
         <el-form-item label-width="160px" label="被保险人" prop="insurant">
           <el-input v-model="form.insurant"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="联系人" prop="linkman">
-          <el-input v-model="form.linkman"></el-input>
+        <el-form-item label-width="160px" label="汽车型号" prop="vehicle_type">
+          <el-input v-model="form.vehicle_type"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="联系人电话" prop="linkmanTel">
-          <el-input v-model="form.linkmanTel"></el-input>
+        <el-form-item label-width="160px" label="首次登记日期" prop="regist_date">
+          <el-date-picker v-model="form.regist_date" type="date" placeholder="选择日期"></el-date-picker>
         </el-form-item>
-        <el-form-item label-width="160px" label="首次登记日期" prop="registDate">
-          <el-date-picker v-model="form.registDate" type="date" placeholder="选择日期"></el-date-picker>
+        <el-form-item label-width="160px" label="业务部门" prop="busi_depart">
+          <el-input v-model="form.busi_depart"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="车辆类型" prop="vehicleType">
-          <el-input v-model="form.vehicleType"></el-input>
+        <el-form-item label-width="160px" label="车架号" prop="vin_no">
+          <el-input v-model="form.vin_no"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="出单单位" prop="agentUnit">
-          <el-input v-model="form.agentUnit"></el-input>
+        <el-form-item label-width="160px" label="发动机号" prop="engine_sn">
+          <el-input v-model="form.engine_sn"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="业务经理" prop="agent">
-          <el-input v-model="form.agent"></el-input>
+        <el-form-item label-width="160px" label="投保的是" prop="insure_is">
+          <el-input v-model="form.insure_is"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="最近一次投保公司" prop="latestUnit">
-          <el-input v-model="form.latestUnit"></el-input>
+        <el-form-item label-width="160px" label="交强险到期日期" prop="cli_expire_date">
+          <el-date-picker v-model="form.cli_expire_date" type="date" placeholder="选择日期"></el-date-picker>
         </el-form-item>
-        <el-form-item label-width="160px" label="最近一次投保公司电话" prop="latestUnitTel">
-          <el-input v-model="form.latestUnitTel"></el-input>
+        <el-form-item label-width="160px" label="商业险到期日期" prop="gap_expire_date">
+          <el-date-picker v-model="form.gap_expire_date" type="date" placeholder="选择日期"></el-date-picker>
         </el-form-item>
-        <el-form-item label-width="160px" label="今年投保公司" prop="toyearUnit">
-          <el-input v-model="form.toyearUnit"></el-input>
+        <el-form-item label-width="160px" label="商业险内容" prop="gap_content">
+          <el-input v-model="form.gap_content"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="今年投保公司电话" prop="toyearUnitTel">
-          <el-input v-model="form.toyearUnitTel"></el-input>
+        <el-form-item label-width="160px" label="验车日期" prop="checkcar_date">
+          <el-date-picker v-model="form.checkcar_date" type="date" placeholder="选择日期"></el-date-picker>
         </el-form-item>
-        <el-form-item label-width="160px" label="交强险到期日期" prop="CLIExpireDate">
-          <el-date-picker v-model="form.CLIExpireDate" type="date" placeholder="选择日期"></el-date-picker>
+        <el-form-item label-width="160px" label="客服电话" prop="customer_tel">
+          <el-input v-model="form.customer_tel"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="商业险到期日期" prop="GAPExpireDate">
-          <el-date-picker v-model="form.GAPExpireDate" type="date" placeholder="选择日期"></el-date-picker>
+        <el-form-item label-width="160px" label="出险电话" prop="report_tel">
+          <el-input v-model="form.report_tel"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="商业险内容" prop="GAPContent">
-          <el-input v-model="form.GAPContent"></el-input>
-        </el-form-item>
-        <el-form-item label-width="160px" label="咨询电话" prop="hotline">
-          <el-input v-model="form.hotline"></el-input>
+        <el-form-item label-width="160px" label="去年投保情况" prop="lastyear_info">
+          <el-input v-model="form.lastyear_info"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
