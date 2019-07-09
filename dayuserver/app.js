@@ -13,6 +13,7 @@ const index = require('./routes/index')
 //const bills = require('./routes/bills')
 const users = require('./routes/api/users')
 const bills = require('./routes/api/bills')
+const vehicle = require('./routes/api/vehicles')
 
 // error handler
 onerror(app)
@@ -57,6 +58,7 @@ app.use(cors())
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(bills.routes(), bills.allowedMethods())
+app.use(vehicle.routes(), vehicle.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
