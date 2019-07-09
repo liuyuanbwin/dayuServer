@@ -22,34 +22,33 @@
                         width="70"></el-table-column>
                     <el-table-column label="车牌号" align='center' width="120">
                         <template slot-scope="scope">
-                            <span style="margin-left: 10px">{{ scope.row.plate }}</span>
+                            <span style="margin-left: 10px">{{ scope.row.plate_num }}</span>
                         </template>
                     </el-table-column>
-                    <el-table-column label="车主" align='center' width="80">
-                        <template slot-scope="scope">
-                            <span style="margin-left: 10px">{{ scope.row.owners }}</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="汽车型号" align='center' width="80">
-                        <template slot-scope="scope">
-                            <span style="margin-left: 10px">{{ scope.row.brand }}
-                                -
-                                {{ scope.row.model }}</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="被保险人" align='center' width="200">
+                    <el-table-column label="被保险人" align='center' width="80">
                         <template slot-scope="scope">
                             <span style="margin-left: 10px">{{ scope.row.insurant }}</span>
                         </template>
                     </el-table-column>
-                    <el-table-column label="联系人" align='center' width="180">
+                    <el-table-column label="商险到期日期" align='center' width="200">
                         <template slot-scope="scope">
-                            <span style="margin-left: 10px">{{ scope.row.linkman }}</span>
+                            <span style="margin-left: 10px">{{ scope.row.gap_expire_date }}
+                               </span>
                         </template>
                     </el-table-column>
-                    <el-table-column label="联系人电话" align='center'>
+                    <el-table-column label="交强险" align='center' width="200">
                         <template slot-scope="scope">
-                            <span style="margin-left: 10px">{{ scope.row.linkmanTel }}</span>
+                            <span style="margin-left: 10px">{{ scope.row.cli_expire_date }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="客服电话" align='center' width="180">
+                        <template slot-scope="scope">
+                            <span style="margin-left: 10px">{{ scope.row.customer_tel }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="报险电话" align='center'>
+                        <template slot-scope="scope">
+                            <span style="margin-left: 10px">{{ scope.row.report_tel }}</span>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" fixed="right">
@@ -106,13 +105,11 @@
             getInfoList() {
                 this
                     .$axios
-                    .get('/api/bills')
+                    .get('/api/vehicles')
                     .then(res => {
                         if (res.data.status === 1) {
                             const data = res.data.results;
-                            // this.tableData = data;
                             this.allTableData = data;
-                            // console.log(this.tableData)
                             this.setPaginations()
                         }
                     })
@@ -212,12 +209,12 @@
             }
         },
         created() {
-            this.getInfoList()
+            this.getInfoList();
         },
         components: {
             BillDialog
         }
-    }
+}
 </script>
 
 <style scoped="scoped">
