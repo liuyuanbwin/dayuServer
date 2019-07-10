@@ -14,6 +14,7 @@ const index = require('./routes/index')
 const users = require('./routes/api/users')
 const bills = require('./routes/api/bills')
 const vehicle = require('./routes/api/vehicles')
+const login = require('./routes/api/login')
 
 // error handler
 onerror(app)
@@ -59,6 +60,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(bills.routes(), bills.allowedMethods())
 app.use(vehicle.routes(), vehicle.allowedMethods())
+app.use(login.routes(), login.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

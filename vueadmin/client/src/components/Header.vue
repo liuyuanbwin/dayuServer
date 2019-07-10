@@ -7,7 +7,7 @@
         <div class="collapse-btn" @click="collapseChage">
           <i class="el-icon-menu icon-btn"></i>
         </div>
-        <span class="title">后台管理系统</span>
+        <span class="title">大宇车险管理系统</span>
       </el-col>
       <el-col :span="6" class="user">
         <div class="btn-fullscreen icon-font"></div>
@@ -15,13 +15,6 @@
           <div class="btn-fullscreen icon-font">
             <el-tooltip class="item" effect="dark" content="锁屏" placement="bottom">
               <i class="iconfont icon-bofangqi-suoping" @click="handleLockScreen"></i>
-            </el-tooltip>
-          </div>
-          <div class="btn-fullscreen icon-font">
-            <el-tooltip class="item" effect="dark" content="跳转到github" placement="bottom">
-              <a href="https://github.com/MrZHLF/vue-admin" target="_blank">
-                <i class="iconfont icon-github"></i>
-              </a>
             </el-tooltip>
           </div>
           <div class="btn-fullscreen icon-font">
@@ -35,10 +28,11 @@
               <i class="el-icon-rank"></i>
             </el-tooltip>
           </div>
-          <img class="avatar" :src="users.avatar">
+          <!-- <img class="avatar" :src="users.avatar"> -->
           <div class="welcome">
             <p class="name comename">欢迎</p>
-            <p class="name avatarname">{{users.name}}</p>
+            <p class="name avatarname">石微微</p>
+            <!-- <p class="name avatarname">{{users.name}}</p> -->
           </div>
           <span class="username">
             <el-dropdown trigger="click" @command="setDialogInfo">
@@ -168,9 +162,9 @@ export default {
 .header-nav {
   width: 100%;
   height: 60px;
-  background: #324057;
-  color: #fff;
-  border-bottom: 1px solid #1f2d3d;
+  background: #f8f8f6;
+  color: rgb(20, 20, 24);
+  border-bottom: 1px solid #ebedf0;
   overflow: hidden;
   padding: 5px 0;
 }

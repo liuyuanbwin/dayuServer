@@ -5,8 +5,8 @@ import store from './store/index'
 import axios from './http'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
- import moment from 'moment'
- import echarts from 'echarts'
+import moment from 'moment'
+import echarts from 'echarts'
 import VueQuillEditor from 'vue-quill-editor'
 Vue.prototype.$echarts = echarts 
 Vue.prototype.$moment = moment 
@@ -27,7 +27,7 @@ VueAMap.initAMapApiLoader({
 });
 
 Vue.prototype.$axios = axios
-axios.defaults.baseURL = 'http://www.bl1000.cn:3000'
+axios.defaults.baseURL = 'http://localhost:3000'
 
 //全局时间格式化过滤
 Vue.filter('moment', function (value, formatString) {

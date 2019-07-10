@@ -7,7 +7,7 @@
           class="el-menu-vertical-demo"
           :collapse="collapse"
           :default-active="$route.path"
-          background-color="#324057"
+          background-color="#f8f8f6"
           text-color="#fff"
         >
           <Menu :items="items"/>
@@ -149,7 +149,7 @@ export default {
   top: 71px;
   left: 0;
   min-height: 100%;
-  background-color: #324057;
+  background-color: #f8f8f6;
   z-index: 99;
 }
 .sidebar {
