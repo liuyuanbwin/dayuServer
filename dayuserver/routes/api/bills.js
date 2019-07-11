@@ -1,22 +1,41 @@
 const router = require('koa-router')()
 const Bill = require('../../models/bill')
+const proving = require('../../token/proving')
 
 router.prefix('/api/bills')
 
 router.get('/', async(ctx, next) => {
-    const result = await Bill.findOne({
-        plate:ctx.params.plate
-    })
 
-    const results = await Bill.find({})
-
-    console.log(result)
-
-    ctx.body = {
-        code:0,
-        result,
-        results,
-        status:1
+    
+    let token  =ctx.request.header.authorization
+    if(token){
+        let res = proving(token)
+        if(res && res.exp <= new Date()/1000){
+            ctx.body = {
+                message:'token过期',
+                code:3
+            };
+        }else{
+            const result = await Bill.findOne({
+                plate:ctx.params.plate
+            })
+        
+            const results = await Bill.find({})
+        
+            console.log(result)
+        
+            ctx.body = {
+                code:0,
+                result,
+                results,
+                status:1
+            }
+        }
+    }else{
+        ctx.body = {
+            msg:'没有token',
+            code:0
+        }
     }
 })
 

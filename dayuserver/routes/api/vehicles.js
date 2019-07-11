@@ -1,20 +1,60 @@
 const router = require('koa-router')()
 const Vehicle = require('../../models/vehicle')
+const proving = require('../../token/proving')
 
 router.prefix('/api/vehicles')
 
 router.get('/', async(ctx,next) => {
-    const result = await Vehicle.findOne({
-        plate_num:ctx.params.plate_num
-    })
 
-    const results = await Vehicle.find({})
+    console.log(ctx)
 
-    ctx.body = {
-        code:0,
-        result,
-        results,
-        status:1
+    let token = ctx.request.header.authorization 
+    console.log('>>>>>>' + token)
+    if(token){
+        let res = proving(token)
+        console.log(res + ' token 类型 ==>' + typeof(res))
+
+        if(res){
+            console.log('判定通过')
+        }else{
+            console.log('判定没通过')
+        }
+
+        if(!res){
+            ctx.status = 401
+            ctx.body = {
+                message:'token 不是token 无效'
+            }
+            return
+        }
+
+        if(res && res.exp <= new Date()/1000){
+
+            ctx.status = 401
+            ctx.body = {
+                messag:'token 过期 无效'
+            }
+            
+           
+        }else{
+            const result = await Vehicle.findOne({
+                plate_num:ctx.params.plate_num
+            })
+        
+            const results = await Vehicle.find({})
+            ctx.status = 200
+            ctx.body = {
+                code:0,
+                result,
+                results,
+                status:1
+            }
+        }
+    }else{
+        ctx.status = 401
+            ctx.body = {
+                messag:'token 没有 无效'
+            }
     }
 })
 

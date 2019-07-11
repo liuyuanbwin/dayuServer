@@ -21,14 +21,13 @@ router.get('/', async(ctx, next) => {
     }
 })
 
-router.post('/add', async(ctx, next) => {
+router.post('/register', async(ctx, next) => {
    console.log(ctx.request.body + ' **** ' + ctx.request.body.name)
    const user = new User({
        name:ctx.request.body.name,
-       sex:ctx.request.body.sex,
-       tel:ctx.request.body.tel,
-       address:ctx.request.body.address,
-       role:ctx.request.body.role
+       email:ctx.request.body.email,
+       password:ctx.request.body.password,
+       identity:ctx.request.body.identity
    })
 
    let code = 0

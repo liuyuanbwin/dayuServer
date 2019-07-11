@@ -20,13 +20,13 @@ const router = new Router({
           path: "/home",
           name: "home",
           component: () => import("./views/Home/Home"),
-          meta: { title: "首页" }
+          meta: { title: "首页",auth:true }
         },
         {
           path: "/staff",
           name: "staff",
           component: () => import("./dayu/modules/users/Users"),
-          meta: { title: "用户信息" }
+          meta: { title: "用户信息",auth:true }
         },
         {
           path: "/listuser",
@@ -123,10 +123,17 @@ const router = new Router({
 
 // 路由守卫
 router.beforeEach((to, from, next) => {
+  if(to.meta.auth){
+    if(localStorage.getItem('token')){
+      next()
+    }else{
+      next({path:'/'})
+    }
+  }else{
+    next()
+  }
   
-  const isLogin = localStorage.eleToken ? true : false
-
-  next()
+  // const isLogin = localStorage.eleToken ? true : false
 
   // if (to.path === '/login' || to.path === '/register') {
   //   next()

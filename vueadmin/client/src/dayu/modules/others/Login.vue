@@ -28,8 +28,8 @@ export default {
   data () {
 	return {
 	  loginUser: {
-			email: '',
-			password: '',
+			email: '119077905@qq.com',
+			password: 'wolaile',
 	},
 		rules: {
 			email: [
@@ -47,7 +47,10 @@ export default {
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
 					this.$axios.post('/api/login',this.loginUser).then(res => {
-						 console.log(res)
+						 console.log('登录成功 >>>>> ' + res.data.tk)
+						localStorage.setItem('token', res.data.tk)
+						localStorage.setItem('user', res.data.user)
+						this.$router.push('/index')
 						 /*
 						const { token }  = res.data; 
 						localStorage.setItem('eleToken',token); //存储token

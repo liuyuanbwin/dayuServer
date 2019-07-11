@@ -18,7 +18,7 @@
                 <el-form-item label="选择身份">
                     <el-select v-model="registerUser.identity" placeholder="请选择身份">
                         <el-option value="manager" label="管理员"></el-option>
-                        <el-option value="employee" label="员工"></el-option>
+                        <el-option value="employee" label="业务员"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item>
@@ -31,6 +31,7 @@
 
 <script>
 // @ is an alias to /src
+const md5 = require('../../common/tools')
 export default {
   name: 'Register',
   data () {
@@ -43,11 +44,11 @@ export default {
     }
     return {
       registerUser: {
-        name: '',
-        email: '',
-        password: '',
-        password2: '',
-        identity: ''
+        name: 'shiweiwei',
+        email: 'shiweiwei@163.com',
+        password: 'wolaile11',
+        password2: 'wolaile11',
+        identity: 'employee'
       },
       rules: {
         name: [
@@ -78,6 +79,7 @@ export default {
     submitForm (formName) {
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
+          this.registerUser.password = md5.MD5(this.registerUser.password)
 					this.$axios.post('/api/users/register',this.registerUser).then(res => {
             this.$message({
               message: '注册成功',

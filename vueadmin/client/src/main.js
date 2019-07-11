@@ -27,7 +27,6 @@ VueAMap.initAMapApiLoader({
 });
 
 Vue.prototype.$axios = axios
-axios.defaults.baseURL = 'http://localhost:3000'
 
 //全局时间格式化过滤
 Vue.filter('moment', function (value, formatString) {

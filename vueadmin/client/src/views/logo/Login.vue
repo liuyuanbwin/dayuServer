@@ -1,7 +1,7 @@
 <template>
 	<div class="form_container">
 		<div class="manage_tip">
-			<span class="title">在线后台管理系统</span>
+			<span class="title">在线ssss后台管理系统</span>
 			<el-form :model="loginUser" status-icon :rules="rules" ref="loginForm" class="loginForm" label-width="80px">
 				<el-form-item label="邮箱" prop="email">
 					<el-input v-model="loginUser.email" placeholder="请输入邮箱"></el-input>
@@ -47,6 +47,10 @@ export default {
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
 					this.$axios.post('/api/users/login',this.loginUser).then(res => {
+						localStorage.setItem('token', res.data.token)
+						localStorage.setItem('user', res.data.user)
+						this.$router.push('/index')
+						/*
 						// console.log(res)
 						const { token }  = res.data; 
 						localStorage.setItem('eleToken',token); //存储token
@@ -59,6 +63,7 @@ export default {
 						this.$store.dispatch('setUSER',decode)
 
 						this.$router.push('/index')
+						*/
 		 			})
 				}
 			})

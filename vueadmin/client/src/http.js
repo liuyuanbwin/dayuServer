@@ -16,14 +16,16 @@ function endLoading() {
   //使用Element loading-close 方法
   loading.close();
 }
-
+axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.headers.common['Authorization'] = 'Bearer 5' + localStorage.getItem('token')
 // 请求拦截  设置统一header
 axios.interceptors.request.use(
   config => {
     // 加载
     startLoading();
-    if (localStorage.eleToken)
-      config.headers.Authorization = localStorage.eleToken;
+    console.log('interceptor ' + localStorage.getItem('token'))
+    if (localStorage.getItem('token'))
+      config.headers.Authorization = 'Bearer 5' + localStorage.getItem('token')
     return config;
   },
   error => {
@@ -41,12 +43,13 @@ axios.interceptors.response.use(
     // 错误提醒
     endLoading();
     Message.error(error.response.data);
+    console.log('>>>> ' + JSON.stringify(error.response.data))
 
-    const { status } = 200;//error.response;
+    const { status } = error.response;
     if (status == 401) {
       Message.error("token值无效，请重新登录");
       // 清除token
-      localStorage.removeItem("eleToken");
+      localStorage.removeItem("token");
 
       // 页面跳转
       router.push("/login");
