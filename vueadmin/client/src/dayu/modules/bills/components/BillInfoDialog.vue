@@ -17,7 +17,7 @@
           <el-input v-model="form.insurant"></el-input>
         </el-form-item>
         <el-form-item label-width="160px" label="汽车型号" prop="vehicle_type">
-          <el-input v-model="form.vehicle_type"></el-input>
+          <el-input v-model="form.vechicle_type"></el-input>
         </el-form-item>
         <el-form-item label-width="160px" label="首次登记日期" prop="regist_date">
           <el-date-picker v-model="form.regist_date" type="date" placeholder="选择日期"></el-date-picker>
@@ -32,7 +32,7 @@
           <el-input v-model="form.engine_sn"></el-input>
         </el-form-item>
         <el-form-item label-width="160px" label="投保的是" prop="insure_is">
-          <el-input v-model="form.insure_is"></el-input>
+          <el-input v-model="form.insured_is"></el-input>
         </el-form-item>
         <el-form-item label-width="160px" label="交强险到期日期" prop="cli_expire_date">
           <el-date-picker v-model="form.cli_expire_date" type="date" placeholder="选择日期"></el-date-picker>
@@ -70,18 +70,18 @@ export default {
   name: "BillInfoDialog",
   data() {
     return {
-      formdialog: {
-        plate: [{ required: true, message: "车牌号不能为空", trigger: "blur" }],
-        registDate:[{ required: true, message: "请填写首次登记日期", trigger: "blur"}],
-        linkmanTel: [{ required: true, message: "请填写联系电话", trigger: "blur"}]
-      },
-      roles:[
-          {title:"一般客户",role:0},
-          {title:"投保人", role:1},
-          {title:"被保险人", role:2},
-          {title:"联系人", role:3}
-      ],
-      role:"一般客户"
+      // formdialog: {
+      //   plate: [{ required: true, message: "车牌号不能为空", trigger: "blur" }],
+      //   registDate:[{ required: true, message: "请填写首次登记日期", trigger: "blur"}],
+      //   linkmanTel: [{ required: true, message: "请填写联系电话", trigger: "blur"}]
+      // },
+      // roles:[
+      //     {title:"一般客户",role:0},
+      //     {title:"投保人", role:1},
+      //     {title:"被保险人", role:2},
+      //     {title:"联系人", role:3}
+      // ],
+      // role:"一般客户"
     };
   },
   props: {
@@ -97,7 +97,7 @@ export default {
           let url =
             this.dialong.option == "add" ? "add" : `/edit/${this.form.id}`;
           console.log(this.form)
-          this.$axios.post(`/api/bills/${url}`, this.form).then(res => {
+          this.$axios.post(`/api/vehicles/${url}`, this.form).then(res => {
             this.$message({
               type: "success",
               message: "数据添加成功"

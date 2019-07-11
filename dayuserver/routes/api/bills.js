@@ -66,7 +66,7 @@ router.post('/add', async(ctx, next) => {
     let code = 0
 
     try {
-        await bill.save()
+        //await bill.save()
         code = 0
     } catch (error) {
         code = -1

@@ -63,7 +63,7 @@ router.post('/add', async(ctx,next) => {
     const vehicle = new Vehicle({
         plate_num:ctx.request.body.plate_num,
         insurant:ctx.request.body.insurant,
-        vechicle_type:ctx.request.body.vechicle_type,
+        vehicle_type:ctx.request.body.vehicle_type,
         regist_date:ctx.request.body.regist_date,
         busi_depart:ctx.request.body.busi_depart,
         vin_no:ctx.request.body.vin_no,
