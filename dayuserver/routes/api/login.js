@@ -1,6 +1,7 @@
 const router = require('koa-router')()
 const addtoken = require('../../token/addtoken')
 const proving = require('../../token/proving')
+const User = require('../../models/user')
 
 router.prefix('/api')
 
@@ -16,7 +17,13 @@ router.post('/login', async ctx => {
     let user = ctx.request.body.email;
     let pass = ctx.request.body.password;
     console.log('login <<<>>>' + JSON.stringify(ctx.request.body))
-    result = await wait(ctx)
+
+    const result = await User.find({
+        email:ctx.request.body.email
+    })
+
+    console.log(result + ' ---- ' + result.email)
+    
     let tk = addtoken({user, pass})
     ctx.status = 200
     ctx.body = {

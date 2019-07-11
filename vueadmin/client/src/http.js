@@ -25,7 +25,7 @@ axios.interceptors.request.use(
     startLoading();
     console.log('interceptor ' + localStorage.getItem('token'))
     if (localStorage.getItem('token'))
-      config.headers.Authorization = 'Bearer 5' + localStorage.getItem('token')
+      config.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
     return config;
   },
   error => {

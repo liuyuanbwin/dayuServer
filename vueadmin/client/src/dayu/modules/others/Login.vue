@@ -28,7 +28,7 @@ export default {
   data () {
 	return {
 	  loginUser: {
-			email: '119077905@qq.com',
+			email: 'shiweiwei@163.com',
 			password: 'wolaile',
 	},
 		rules: {
