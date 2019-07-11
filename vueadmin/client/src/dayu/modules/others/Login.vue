@@ -28,8 +28,8 @@ export default {
   data () {
 	return {
 	  loginUser: {
-			email: 'shiweiwei@163.com',
-			password: 'wolaile',
+			email: '',
+			password: '',
 	},
 		rules: {
 			email: [
