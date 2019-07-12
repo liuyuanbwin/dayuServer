@@ -1,12 +1,12 @@
 const router = require('koa-router')()
 const Vehicle = require('../../models/vehicle')
 const proving = require('../../token/proving')
+const path = require('path')
+var fs = require('fs')
 
 router.prefix('/api/vehicles')
 
 router.get('/', async(ctx,next) => {
-
-    console.log(ctx)
 
     let token = ctx.request.header.authorization 
     console.log('>>>>>>' + token)
@@ -60,6 +60,55 @@ router.get('/', async(ctx,next) => {
 
 router.post('/add', async(ctx,next) => {
     console.log(ctx.request.body)
+
+    /*
+    var file = path.join(__dirname,'/dayudata_final.json')
+
+    var data = fs.readFileSync(file,'utf-8')
+
+    var vvs = JSON.parse(data)
+
+    let errorCount = 0
+    for(i = 0; i < vvs.length;i++){
+        let v = vvs[i]
+    const vehicle = new Vehicle({
+        plate_num:v.plate_num,
+        insurant:v.insurant,
+        vehicle_type:v.vehicle_type,
+        regist_date:v.regist_date,
+        busi_depart:v.busi_depart,
+        vin_no:v.vin_no,
+        engine_sn:v.engine_sn,
+        insured_is:v.insured_is,
+        cli_expire_date:v.cli_expire_date,
+        gap_expire_date:v.gap_expire_date,
+        gap_content:v.gap_content,
+        checkcar_date:v.checkcar_date,
+        customer_tel:v.customer_tel,
+        report_tel:v.report_tel,
+        lastyear_info:v.lastyear_info
+    })
+    
+
+    let code = 0
+
+    try {
+        await vehicle.save()
+        console.log(i)
+        ctx.body = {
+            code:0
+        }  
+    } catch (err) {
+        errorCount += 1
+        console.log(err)
+        console.log('error >>>>> ' + errorCount)
+        ctx.body = {
+            code:-1
+        }
+    }
+    }
+    */
+    
     const vehicle = new Vehicle({
         plate_num:ctx.request.body.plate_num,
         insurant:ctx.request.body.insurant,
@@ -77,6 +126,7 @@ router.post('/add', async(ctx,next) => {
         report_tel:ctx.request.body.report_tel,
         lastyear_info:ctx.request.body.lastyear_info
     })
+    
 
     let code = 0
 
