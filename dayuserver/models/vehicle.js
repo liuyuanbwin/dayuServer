@@ -15,7 +15,15 @@ let vehicleSchema = new mongoose.Schema({
     checkcar_date:Date,
     customer_tel:String,
     report_tel:String,
-    lastyear_info:String
+    remark:String,
+    owner:String,
+    linkman:String,
+    linkman_tel1:String,
+    linkman_tel2:String,
+    busi_man:String,
+    busi_man_tel:String,
+    headquarter:String,
+    car_model:String
 },{
     _id:true
 })

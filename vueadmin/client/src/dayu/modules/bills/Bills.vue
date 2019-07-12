@@ -3,14 +3,31 @@
         <div class="staff-top">
             <el-form :inline="true">
                 <!-- <el-input v-model="vehicleSearch" placeholder="请输入"/> -->
-                <el-input v-model="vehicleSearch" placeholder="" style="width:240px" v-on:input="doFilter"></el-input>
-                
+
                 <el-form-item class="btnRight">
+                    <el-input
+                        v-model="vehicleSearch"
+                        placeholder=""
+                        style="width:240px;margin-right:10px;float:left;"
+                        v-on:input="doFilter"></el-input>
                     <el-button
                         type="primary"
-                        size="small"
+                        size="middle"
+                        icon="el-icon-time"
+                        style="margin-right:10px;"
+                        @click='checkcarexpire()'>交强险到期提醒</el-button>
+                    <el-button
+                        type="primary"
+                        size="middle"
+                        icon="el-icon-news"
+                        style="margin-right:10px;"
+                        @click='insurancexpire()'>保险到期提醒</el-button>
+                    <el-button
+                        type="primary"
+                        size="middle"
                         icon="el-icon-edit-outline"
-                        @click='addBill()'>添加</el-button>
+                        @click='addBill()'
+                        style="margin-right:10px;">添加</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -97,7 +114,7 @@
                     layout: 'total, sizes, prev, pager, next, jumper'
                 },
                 allTableData: [],
-                filteData:[],
+                filteData: [],
                 dialong: {
                     show: false,
                     title: "",
@@ -107,13 +124,39 @@
             }
         },
         methods: {
+            checkcarexpire() {
+                this.filteData = this
+                    .allTableData
+                    .filter(data => {
+
+                        var date = data['cli_expire_date']
+                        //console.log (this.judgeTime(date.replace(/-|T|:/g,'')))
+                        if (date) {
+                            return this.judgeTime(date.replace(/-|T|:/g, '')) > -30 && this.judgeTime(
+                                date.replace(/-|T|:/g, '')
+                            ) < 0
+                        } else {
+                            return false
+                        }
+
+                    })
+                this.setPaginations()
+            },
+            judgeTime(data) {
+                var date = data.toString();
+                var year = date.substring(0, 4);
+                var month = date.substring(4, 6);
+                var day = date.substring(6, 8);
+                var d1 = new Date(year + '/' + month + '/' + day);
+                var dd = new Date();
+                var y = dd.getFullYear();
+                var m = dd.getMonth() + 1;
+                var d = dd.getDate();
+                var d2 = new Date(y + '/' + m + '/' + d);
+                var iday = parseInt(d2 - d1) / 1000 / 60 / 60 / 24;
+                return iday;
+            },
             doFilter() {
-                // if (this.vehicleSearch == "") {
-                //     this
-                //         .$message
-                //         .warning("查询条件不能为空！");
-                //     return;
-                // }
                 const vehicleSearch = this.vehicleSearch
                 if (vehicleSearch) {
                     this.filteData = this
@@ -125,15 +168,19 @@
                                     return String(data[key])
                                         .toLowerCase()
                                         .indexOf(vehicleSearch) > -1
-        
+
                                 })
                         })
                     console.log(this.filteData.length + ' --- ' + this.allTableData.length)
                     this.setPaginations()
-                }else{
-                    console.log('+++++  ' + this.filteData.length + ' --- ' + this.allTableData.length)
-                this.filteData= this.allTableData
-                this.setPaginations()
+                } else {
+                    console.log(
+                        '+++++  ' + this.filteData.length + ' --- ' + this.allTableData.length
+                    )
+                    this.filteData = this
+                        .allTableData
+                        this
+                        .setPaginations()
                 }
             },
             timeRound(date) {
@@ -206,18 +253,26 @@
                     plate_num: row.plate_num,
                     insurant: row.insurant,
                     vehicle_type: row.vehicle_type,
-                    regist_date: row.regist_date,
+                    regist_date: this.timeRound(row.regist_date),
                     busi_depart: row.busi_depart,
                     vin_no: row.vin_no,
                     engine_sn: row.engine_sn,
                     insured_is: row.insured_is,
-                    cli_expire_date: row.cli_expire_date,
-                    gap_expire_date: row.gap_expire_date,
+                    cli_expire_date: this.timeRound(row.cli_expire_date),
+                    gap_expire_date: this.timeRound(row.gap_expire_date),
                     gap_content: row.gap_content,
-                    checkcar_date: row.checkcar_date,
+                    checkcar_date: this.timeRound(row.checkcar_date),
                     customer_tel: row.customer_tel,
                     report_tel: row.report_tel,
-                    lastyear_info: row.lastyear_info
+                   remark:row.remark,
+    owner:row.owner,
+    linkman:row.linkman,
+    linkman_tel1:row.linkman_tel1,
+    linkman_tel2:row.linkman_tel2,
+    busi_man:row.busi_man,
+    busi_man_tel:row.busi_man_tel,
+    headquarter:row.headquarter,
+    car_model:row.car_model
                 }
             },
             billDelete(index, row) {

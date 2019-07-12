@@ -58,10 +58,7 @@ router.get('/', async(ctx,next) => {
     }
 })
 
-router.post('/add', async(ctx,next) => {
-    console.log(ctx.request.body)
-
-    /*
+router.post('/reload', async(ctx, next) => {
     var file = path.join(__dirname,'/dayudata_final.json')
 
     var data = fs.readFileSync(file,'utf-8')
@@ -86,7 +83,15 @@ router.post('/add', async(ctx,next) => {
         checkcar_date:v.checkcar_date,
         customer_tel:v.customer_tel,
         report_tel:v.report_tel,
-        lastyear_info:v.lastyear_info
+        remark:v.remark,
+    owner:v.owner,
+    linkman:v.linkman,
+    linkman_tel1:v.linkman_tel1,
+    linkman_tel2:v.linkman_tel2,
+    busi_man:v.busi_man,
+    busi_man_tel:v.busi_man_tel,
+    headquarter:v.headquarter,
+    car_model:v.car_model
     })
     
 
@@ -107,9 +112,11 @@ router.post('/add', async(ctx,next) => {
         }
     }
     }
-    */
-    
-    
+})
+
+router.post('/add', async(ctx,next) => {
+    console.log(ctx.request.body)
+
     const vehicle = new Vehicle({
         plate_num:ctx.request.body.plate_num,
         insurant:ctx.request.body.insurant,
@@ -125,7 +132,15 @@ router.post('/add', async(ctx,next) => {
         checkcar_date:ctx.request.body.checkcar_date,
         customer_tel:ctx.request.body.customer_tel,
         report_tel:ctx.request.body.report_tel,
-        lastyear_info:ctx.request.body.lastyear_info
+        remark:ctx.request.remark,
+    owner:ctx.request.body.owner,
+    linkman:ctx.request.linkman,
+    linkman_tel1:ctx.request.linkman_tel1,
+    linkman_tel2:ctx.request.linkman_tel2,
+    busi_man:ctx.request.busi_man,
+    busi_man_tel:ctx.request.busi_man_tel,
+    headquarter:ctx.request.headquarter,
+    car_model:ctx.request.car_model
     })
     
 
