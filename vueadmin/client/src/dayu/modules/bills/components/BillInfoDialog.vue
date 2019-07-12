@@ -16,9 +16,17 @@
         <el-form-item label-width="160px" label="被保险人" prop="insurant">
           <el-input v-model="form.insurant"></el-input>
         </el-form-item>
-        <el-form-item label-width="160px" label="汽车型号" prop="vehicle_type">
+        <!-- <el-form-item label-width="160px" label="汽车型号" prop="vehicle_type">
           <el-input v-model="form.vehicle_type"></el-input>
-        </el-form-item>
+        </el-form-item> -->
+        <el-form-item label-width="160px" label="汽车类型" prop="vehicle_type">
+                    <el-select v-model="form.vehicle_type" placeholder="请选择汽车类型">
+                        <el-option value="under5" label="5人以下客车"></el-option>
+                        <el-option value="beyond5" label="5人以上轿车"></el-option>
+                        <el-option value="trunk" label="货车"></el-option>
+                        <el-option value="other" label="其他"></el-option>
+                    </el-select>
+                </el-form-item>
         <el-form-item label-width="160px" label="首次登记日期" prop="regist_date">
           <el-date-picker v-model="form.regist_date" type="date" :editable="true" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
         </el-form-item>
