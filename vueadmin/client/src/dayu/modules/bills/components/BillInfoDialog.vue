@@ -9,7 +9,7 @@
       :close-on-click-modal="false"
       :visible.sync="dialong.show"
     >
-      <el-form :model="form" ref="formdoalog" :rules="formdialog" label-width="80px">
+      <el-form :model="form" ref="formdoalog" label-width="80px">
         <el-form-item label-width="160px" label="车牌号" prop="plate_num">
           <el-input v-model="form.plate_num"></el-input>
         </el-form-item>
@@ -17,10 +17,10 @@
           <el-input v-model="form.insurant"></el-input>
         </el-form-item>
         <el-form-item label-width="160px" label="汽车型号" prop="vehicle_type">
-          <el-input v-model="form.vechicle_type"></el-input>
+          <el-input v-model="form.vehicle_type"></el-input>
         </el-form-item>
         <el-form-item label-width="160px" label="首次登记日期" prop="regist_date">
-          <el-date-picker v-model="form.regist_date" type="date" placeholder="选择日期"></el-date-picker>
+          <el-date-picker v-model="form.regist_date" type="date" :editable="true" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
         </el-form-item>
         <el-form-item label-width="160px" label="业务部门" prop="busi_depart">
           <el-input v-model="form.busi_depart"></el-input>
@@ -35,16 +35,16 @@
           <el-input v-model="form.insured_is"></el-input>
         </el-form-item>
         <el-form-item label-width="160px" label="交强险到期日期" prop="cli_expire_date">
-          <el-date-picker v-model="form.cli_expire_date" type="date" placeholder="选择日期"></el-date-picker>
+          <el-date-picker v-model="form.cli_expire_date" type="date" :editable="true" value-format="yyyy-MM-dd"  placeholder="选择日期"></el-date-picker>
         </el-form-item>
         <el-form-item label-width="160px" label="商业险到期日期" prop="gap_expire_date">
-          <el-date-picker v-model="form.gap_expire_date" type="date" placeholder="选择日期"></el-date-picker>
+          <el-date-picker v-model="form.gap_expire_date" type="date" :editable="true" value-format="yyyy-MM-dd"  placeholder="选择日期"></el-date-picker>
         </el-form-item>
         <el-form-item label-width="160px" label="商业险内容" prop="gap_content">
           <el-input v-model="form.gap_content"></el-input>
         </el-form-item>
         <el-form-item label-width="160px" label="验车日期" prop="checkcar_date">
-          <el-date-picker v-model="form.checkcar_date" type="date" placeholder="选择日期"></el-date-picker>
+          <el-date-picker v-model="form.checkcar_date" type="date" :editable="true" value-format="yyyy-MM-dd"  placeholder="选择日期"></el-date-picker>
         </el-form-item>
         <el-form-item label-width="160px" label="客服电话" prop="customer_tel">
           <el-input v-model="form.customer_tel"></el-input>

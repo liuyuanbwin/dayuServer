@@ -205,7 +205,7 @@
                 this.form = {
                     plate_num: row.plate_num,
                     insurant: row.insurant,
-                    vechicle_type: row.vechicle_type,
+                    vehicle_type: row.vehicle_type,
                     regist_date: row.regist_date,
                     busi_depart: row.busi_depart,
                     vin_no: row.vin_no,

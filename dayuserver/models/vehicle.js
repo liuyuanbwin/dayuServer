@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 let vehicleSchema = new mongoose.Schema({
     plate_num:String,
     insurant:String,
-    vechicle_type:String,
+    vehicle_type:String,
     regist_date:Date,
     busi_depart:String,
     vin_no:String,
