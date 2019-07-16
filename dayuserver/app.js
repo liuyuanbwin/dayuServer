@@ -13,6 +13,7 @@ const users = require('./src/routes/api/users')
 const vehicle = require('./src/routes/api/vehicles')
 const login = require('./src/routes/api/login')
 const handle = require('./src/routes/wx/handle')
+const WeChat = require('./src/helpers/wechat')
 
 
 const xlogger = require('./src/middleware/logger')
@@ -21,6 +22,7 @@ const xmlParse = require('./src/middleware/xmlParse')
 // error handler
 onerror(app)
 
+new WeChat()
 //config
 const db = require('./config/keys').mongoURI
 
