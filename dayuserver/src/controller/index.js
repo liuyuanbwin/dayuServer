@@ -3,10 +3,11 @@ const dayu = require('../helpers/dayu')
 
 exports.gethandle = async (ctx, next) => {
     const result = wx.auth(ctx)
+    var result1 = await dayu.getUserlist()
+        console.log('result ' + JSON.stringify(result1) + result1)
     if(result){
         ctx.body = ctx.query.echostr
-        var result1 = await dayu.getUserlist()
-        console.log('result ' + JSON.stringify(result1) + result1)
+        
     }else{
         ctx.body = {
             code:-1, msg:'meishibiedao'
