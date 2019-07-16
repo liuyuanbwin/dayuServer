@@ -8,13 +8,11 @@ const logger = require('koa-logger')
 const cors = require('koa-cors')
 const mongoose = require('mongoose')
 
-const index = require('./routes/index')
-//const users = require('./routes/users')
-//const bills = require('./routes/bills')
-const users = require('./routes/api/users')
-const bills = require('./routes/api/bills')
-const vehicle = require('./routes/api/vehicles')
-const login = require('./routes/api/login')
+const index = require('./src/routes/index')
+const users = require('./src/routes/api/users')
+const vehicle = require('./src/routes/api/vehicles')
+const login = require('./src/routes/api/login')
+const handle = require('./src/routes/wx/handle')
 
 // error handler
 onerror(app)
@@ -55,12 +53,11 @@ app.use(async (ctx, next) => {
 
 app.use(cors())
 
-// routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
-app.use(bills.routes(), bills.allowedMethods())
 app.use(vehicle.routes(), vehicle.allowedMethods())
 app.use(login.routes(), login.allowedMethods())
+app.use(handle.routes(), handle.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
