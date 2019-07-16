@@ -15,7 +15,7 @@ const login = require('./src/routes/api/login')
 const handle = require('./src/routes/wx/handle')
 
 
-const logger = require('./src/middleware/logger')
+const xlogger = require('./src/middleware/logger')
 const xmlParse = require('./src/middleware/xmlParse')
 
 // error handler
@@ -56,7 +56,7 @@ app.use(async (ctx, next) => {
 
 
 app.use(cors())
-app.use(logger())
+app.use(xlogger())
 app.use(xmlParse())
 
 app.use(index.routes(), index.allowedMethods())
