@@ -22,13 +22,9 @@ const post = (aurl, data) => {
     })
 }
 
-postModelMsg:(token, data) => {
+exports.postModelMsg = (token, data) => {
     return post('message/template/send?access_token=' + token, data)
 }
-getUserlist:(token) => {
+exports.getUserlist = (token) => {
     return post('/user/get?access_token=', + token)
-}
-module.exports = {
-    postModelMsg,
-    getUserlist
 }
