@@ -27,5 +27,5 @@ exports.postModelMsg = (token, data) => {
     return post('message/template/send?access_token=' + token, data)
 }
 exports.getUserlist = (token) => {
-    return post('/user/get?access_token=', + token)
+    return post('/user/get?access_token=' + token)
 }

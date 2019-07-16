@@ -7,6 +7,7 @@ exports.gethandle = async (ctx, next) => {
     var wechat = new WeChat()
     const config = await wechat.getAccessToken()
     const token = JSON.parse(config)
+    console.log('取到的 token  ===> ' + token.access_token)
 
     var result1 = await dayu.getUserlist(token.access_token)
         console.log('result ' + JSON.stringify(result1) + result1)
