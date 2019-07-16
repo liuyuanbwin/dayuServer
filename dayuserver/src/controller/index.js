@@ -1,9 +1,14 @@
 const wx = require('../helpers/wx')
 const dayu = require('../helpers/dayu')
+const WeChat = require('../helpers/wechat')
 
 exports.gethandle = async (ctx, next) => {
     const result = wx.auth(ctx)
-    var result1 = await dayu.getUserlist()
+    var wechat = new WeChat()
+    const config = await wechat.getAccessToken()
+    const token = JSON.parse(config)
+
+    var result1 = await dayu.getUserlist(token.access_token)
         console.log('result ' + JSON.stringify(result1) + result1)
     if(result){
         ctx.body = ctx.query.echostr
