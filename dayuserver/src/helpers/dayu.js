@@ -1,5 +1,6 @@
 const koa2Req = require('koa2-request')
 const BASE_URL = 'https://api.weixin.qq.com/cgi-bin'
+var request = require('request')
 
 const post = (aurl, data) => {
     let url = BASE_URL + aurl 
