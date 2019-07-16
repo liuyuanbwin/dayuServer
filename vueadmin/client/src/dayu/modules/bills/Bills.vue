@@ -250,6 +250,7 @@
                     option: "edit"
                 }
                 this.form = {
+                    id:row._id,
                     plate_num: row.plate_num,
                     insurant: row.insurant,
                     vehicle_type: row.vehicle_type,
@@ -264,15 +265,15 @@
                     checkcar_date: this.timeRound(row.checkcar_date),
                     customer_tel: row.customer_tel,
                     report_tel: row.report_tel,
-                   remark:row.remark,
-    owner:row.owner,
-    linkman:row.linkman,
-    linkman_tel1:row.linkman_tel1,
-    linkman_tel2:row.linkman_tel2,
-    busi_man:row.busi_man,
-    busi_man_tel:row.busi_man_tel,
-    headquarter:row.headquarter,
-    car_model:row.car_model
+                    remark: row.remark,
+                    owner: row.owner,
+                    linkman: row.linkman,
+                    linkman_tel1: row.linkman_tel1,
+                    linkman_tel2: row.linkman_tel2,
+                    busi_man: row.busi_man,
+                    busi_man_tel: row.busi_man_tel,
+                    headquarter: row.headquarter,
+                    car_model: row.car_model
                 }
             },
             billDelete(index, row) {

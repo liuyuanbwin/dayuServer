@@ -76,7 +76,7 @@
                 </el-form-item>
 
                 <el-form-item label-width="160px" label="联系人" prop="linkman">
-                    <el-input v-model="form.owner"></el-input>
+                    <el-input v-model="form.linkman"></el-input>
                 </el-form-item>
 
                 <el-form-item label-width="160px" label="联系人电话1" prop="linkman_tel1">
@@ -153,7 +153,7 @@
                             // console.log(this.form)
                             let url = this.dialong.option == "add"
                                 ? "add"
-                                : `/edit/${this.form.id}`;
+                                : "update";
                             console.log(this.form)
                             this
                                 .$axios

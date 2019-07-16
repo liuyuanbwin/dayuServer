@@ -3,16 +3,16 @@ const Vehicle = require('../../models/vehicle')
 const proving = require('../../token/proving')
 const path = require('path')
 var fs = require('fs')
+var mongoose = require('mongoose')
 
 router.prefix('/api/vehicles')
 
 router.get('/', async(ctx,next) => {
 
     let token = ctx.request.header.authorization 
-    console.log('>>>>>>' + token)
+
     if(token){
         let res = proving(token)
-        console.log(res + ' token 类型 ==>' + typeof(res))
 
         if(res){
             console.log('判定通过')
@@ -58,60 +58,165 @@ router.get('/', async(ctx,next) => {
     }
 })
 
-router.post('/reload', async(ctx, next) => {
-    var file = path.join(__dirname,'/dayudata_final.json')
+// router.post('/reload', async(ctx, next) => {
+//     var file = path.join(__dirname,'/dayudata_final.json')
 
-    var data = fs.readFileSync(file,'utf-8')
+//     var data = fs.readFileSync(file,'utf-8')
 
-    var vvs = JSON.parse(data)
+//     var vvs = JSON.parse(data)
 
-    let errorCount = 0
-    for(i = 0; i < vvs.length;i++){
-        let v = vvs[i]
-    const vehicle = new Vehicle({
-        plate_num:v.plate_num,
-        insurant:v.insurant,
-        vehicle_type:v.vehicle_type,
-        regist_date:v.regist_date,
-        busi_depart:v.busi_depart,
-        vin_no:v.vin_no,
-        engine_sn:v.engine_sn,
-        insured_is:v.insured_is,
-        cli_expire_date:v.cli_expire_date,
-        gap_expire_date:v.gap_expire_date,
-        gap_content:v.gap_content,
-        checkcar_date:v.checkcar_date,
-        customer_tel:v.customer_tel,
-        report_tel:v.report_tel,
-        remark:v.remark,
-    owner:v.owner,
-    linkman:v.linkman,
-    linkman_tel1:v.linkman_tel1,
-    linkman_tel2:v.linkman_tel2,
-    busi_man:v.busi_man,
-    busi_man_tel:v.busi_man_tel,
-    headquarter:v.headquarter,
-    car_model:v.car_model
-    })
+//     let errorCount = 0
+//     for(i = 0; i < vvs.length;i++){
+//         let v = vvs[i]
+//     const vehicle = new Vehicle({
+//         plate_num:v.plate_num,
+//         insurant:v.insurant,
+//         vehicle_type:v.vehicle_type,
+//         regist_date:v.regist_date,
+//         busi_depart:v.busi_depart,
+//         vin_no:v.vin_no,
+//         engine_sn:v.engine_sn,
+//         insured_is:v.insured_is,
+//         cli_expire_date:v.cli_expire_date,
+//         gap_expire_date:v.gap_expire_date,
+//         gap_content:v.gap_content,
+//         checkcar_date:v.checkcar_date,
+//         customer_tel:v.customer_tel,
+//         report_tel:v.report_tel,
+//         remark:v.remark,
+//     owner:v.owner,
+//     linkman:v.linkman,
+//     linkman_tel1:v.linkman_tel1,
+//     linkman_tel2:v.linkman_tel2,
+//     busi_man:v.busi_man,
+//     busi_man_tel:v.busi_man_tel,
+//     headquarter:v.headquarter,
+//     car_model:v.car_model
+//     })
     
 
-    let code = 0
+//     let code = 0
+
+//     try {
+//         await vehicle.save()
+//         console.log(i)
+//         ctx.body = {
+//             code:0
+//         }  
+//     } catch (err) {
+//         errorCount += 1
+//         console.log(err)
+//         console.log('error >>>>> ' + errorCount)
+//         ctx.body = {
+//             code:-1
+//         }
+//     }
+//     }
+// })
+
+router.post('/update', async(ctx,next) => {
 
     try {
-        await vehicle.save()
-        console.log(i)
+
+        const result = await Vehicle.where({
+            "_id": mongoose.Types.ObjectId(ctx.request.body.id)
+        }).update({
+                plate_num:ctx.request.body.plate_num,
+                insurant:ctx.request.body.insurant,
+                vehicle_type:ctx.request.body.vehicle_type,
+                regist_date:ctx.request.body.regist_date,
+                busi_depart:ctx.request.body.busi_depart,
+                vin_no:ctx.request.body.vin_no,
+                engine_sn:ctx.request.body.engine_sn,
+                insured_is:ctx.request.body.insured_is,
+                cli_expire_date:ctx.request.body.cli_expire_date,
+                gap_expire_date:ctx.request.body.gap_expire_date,
+                gap_content:ctx.request.body.gap_content,
+                checkcar_date:ctx.request.body.checkcar_date,
+                customer_tel:ctx.request.body.customer_tel,
+                report_tel:ctx.request.body.report_tel,
+                remark:ctx.request.body.remark,
+                owner:ctx.request.body.owner,
+                linkman:ctx.request.body.linkman,
+                linkman_tel1:ctx.request.body.linkman_tel1,
+                linkman_tel2:ctx.request.body.linkman_tel2,
+                busi_man:ctx.request.body.busi_man,
+                busi_man_tel:ctx.request.body.busi_man_tel,
+                headquarter:ctx.request.body.headquarter,
+                car_model:ctx.request.body.car_model
+            })
+        
+        
+        
+        // {
+
+        //     plate_num:ctx.request.body.plate_num,
+        //     insurant:ctx.request.body.insurant,
+        //     vehicle_type:ctx.request.body.vehicle_type,
+        //     regist_date:ctx.request.body.regist_date,
+        //     busi_depart:ctx.request.body.busi_depart,
+        //     vin_no:ctx.request.body.vin_no,
+        //     engine_sn:ctx.request.body.engine_sn,
+        //     insured_is:ctx.request.body.insured_is,
+        //     cli_expire_date:ctx.request.body.cli_expire_date,
+        //     gap_expire_date:ctx.request.body.gap_expire_date,
+        //     gap_content:ctx.request.body.gap_content,
+        //     checkcar_date:ctx.request.body.checkcar_date,
+        //     customer_tel:ctx.request.body.customer_tel,
+        //     report_tel:ctx.request.body.report_tel,
+        //     remark:ctx.request.body.remark,
+        //     owner:ctx.request.body.owner,
+        //     linkman:ctx.request.body.linkman,
+        //     linkman_tel1:ctx.request.body.linkman_tel1,
+        //     linkman_tel2:ctx.request.body.linkman_tel2,
+        //     busi_man:ctx.request.body.busi_man,
+        //     busi_man_tel:ctx.request.body.busi_man_tel,
+        //     headquarter:ctx.request.body.headquarter,
+        //     car_model:ctx.request.body.car_model
+            
+        // },(err, doc) => {
+        //     if(err) console.log(err)
+        //     console.log(' doc --- ' + JSON.stringify(doc))
+        // })
+        // }).update({
+        //     plate_num:ctx.request.body.plate_num,
+        //     insurant:ctx.request.body.insurant,
+        //     vehicle_type:ctx.request.body.vehicle_type,
+        //     regist_date:ctx.request.body.regist_date,
+        //     busi_depart:ctx.request.body.busi_depart,
+        //     vin_no:ctx.request.body.vin_no,
+        //     engine_sn:ctx.request.body.engine_sn,
+        //     insured_is:ctx.request.body.insured_is,
+        //     cli_expire_date:ctx.request.body.cli_expire_date,
+        //     gap_expire_date:ctx.request.body.gap_expire_date,
+        //     gap_content:ctx.request.body.gap_content,
+        //     checkcar_date:ctx.request.body.checkcar_date,
+        //     customer_tel:ctx.request.body.customer_tel,
+        //     report_tel:ctx.request.body.report_tel,
+        //     remark:ctx.request.remark,
+        //     owner:ctx.request.body.owner,
+        //     linkman:ctx.request.linkman,
+        //     linkman_tel1:ctx.request.linkman_tel1,
+        //     linkman_tel2:ctx.request.linkman_tel2,
+        //     busi_man:ctx.request.busi_man,
+        //     busi_man_tel:ctx.request.busi_man_tel,
+        //     headquarter:ctx.request.headquarter,
+        //     car_model:ctx.request.car_model
+        // })
+
+        console.log('修改结果 => ' + JSON.stringify(result))
+
         ctx.body = {
             code:0
-        }  
+        }
+
     } catch (err) {
-        errorCount += 1
-        console.log(err)
-        console.log('error >>>>> ' + errorCount)
+        
         ctx.body = {
             code:-1
         }
     }
-    }
+    
 })
 
 router.post('/add', async(ctx,next) => {
@@ -133,14 +238,14 @@ router.post('/add', async(ctx,next) => {
         customer_tel:ctx.request.body.customer_tel,
         report_tel:ctx.request.body.report_tel,
         remark:ctx.request.remark,
-    owner:ctx.request.body.owner,
-    linkman:ctx.request.linkman,
-    linkman_tel1:ctx.request.linkman_tel1,
-    linkman_tel2:ctx.request.linkman_tel2,
-    busi_man:ctx.request.busi_man,
-    busi_man_tel:ctx.request.busi_man_tel,
-    headquarter:ctx.request.headquarter,
-    car_model:ctx.request.car_model
+        owner:ctx.request.body.owner,
+        linkman:ctx.request.linkman,
+        linkman_tel1:ctx.request.linkman_tel1,
+        linkman_tel2:ctx.request.linkman_tel2,
+        busi_man:ctx.request.busi_man,
+        busi_man_tel:ctx.request.busi_man_tel,
+        headquarter:ctx.request.headquarter,
+        car_model:ctx.request.car_model
     })
     
 
@@ -159,5 +264,7 @@ router.post('/add', async(ctx,next) => {
     }
 
 })
+
+
 
 module.exports = router
