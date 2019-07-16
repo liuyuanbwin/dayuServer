@@ -4,21 +4,58 @@ const User = require('../../models/user')
 router.prefix('/api/users')
 
 router.get('/', async(ctx, next) => {
-    const result = await User.findOne({
-        name:ctx.params.name
-    })
 
-    const results = await User.find({
-    
-    })
+    let token = ctx.request.header.authorization 
 
-    console.log(result)
+    if(token){
+        let res = proving(token)
 
-    ctx.body = {
-        code: 0,
-        result,
-        results
+        if(res){
+            console.log('判定通过')
+        }else{
+            console.log('判定没通过')
+        }
+
+        if(!res){
+            ctx.status = 401
+            ctx.body = {
+                message:'token 不是token 无效'
+            }
+            return
+        }
+
+        if(res && res.exp <= new Date()/1000){
+
+            ctx.status = 401
+            ctx.body = {
+                messag:'token 过期 无效'
+            }
+            
+           
+        }else{
+            const result = await User.findOne({
+                name:ctx.params.name
+            })
+        
+            const results = await User.find({
+            
+            })
+        
+            console.log(result)
+        
+            ctx.body = {
+                code: 0,
+                result,
+                results
+            }
+        }
+    }else{
+        ctx.status = 401
+            ctx.body = {
+                messag:'token 没有 无效'
+            }
     }
+    
 })
 
 router.post('/register', async(ctx, next) => {
