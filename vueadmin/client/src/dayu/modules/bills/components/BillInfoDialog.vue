@@ -161,7 +161,7 @@
                                 .then(res => {
                                     this.$message({type: "success", message: "数据添加成功"}),
                                     (this.dialong.show = false);
-                                    this.$emit("BillData");
+                                    //this.$emit("BillData");
                                     //清空内容
                                     this.form = "";
                                 });
