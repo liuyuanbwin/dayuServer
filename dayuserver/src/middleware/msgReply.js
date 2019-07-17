@@ -3,7 +3,7 @@ module.exports = () => {
         console.log('====================================');
         console.log(ctx.req.body);
         console.log('====================================');
-        ctx.body = ctx.req.body
+       // ctx.body = ctx.req.body
 
         var xml = ctx.req.body.xml
         var msgType = xml.MsgType[0]
