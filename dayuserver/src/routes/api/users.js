@@ -83,7 +83,6 @@ router.post('/register', async(ctx, next) => {
 })
 
 router.delete('/delete/:id',async(ctx,next) => {
-    console.log('要删除的是 ' + ctx.params.id)
     let code = 0
     try {
         await User.deleteOne({_id:ctx.params.id},function(err,doc){

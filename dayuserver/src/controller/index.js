@@ -9,7 +9,7 @@ exports.gethandle = async (ctx, next) => {
     const token = JSON.parse(config)
 
     var result1 = await dayu.getUserlist(token.access_token)
-        console.log('result ' + JSON.stringify(result1) + result1)
+        
     if(result){
         ctx.body = ctx.query.echostr
         
@@ -21,13 +21,16 @@ exports.gethandle = async (ctx, next) => {
 }
 
 
-exports.postHandle = (ctx, next) => {
+exports.postHandle = async (ctx, next) => {
     let msg,
         MsgType,
         result
 
-    msg = ctx.req.body ? ctx.req.body.xml : ''
+    
 
+    console.log('   -----   postHandle ----------')
+    await next()
+    msg = ctx.req.body ? ctx.req.body.xml : ''
     if (!msg) {
         ctx.body = 'error request.'
         return;

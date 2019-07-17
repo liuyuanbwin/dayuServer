@@ -16,7 +16,6 @@ exports.POST = function(url, data) {
             if(error){
                 reject(error)
             }
-            console.log('body ' + JSON.stringify(body) + '    ===   ' + JSON.stringify(response))
             resolve(response)
         })
     })

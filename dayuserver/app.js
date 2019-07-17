@@ -19,6 +19,8 @@ const WeChat = require('./src/helpers/wechat')
 const xlogger = require('./src/middleware/logger')
 const xmlParse = require('./src/middleware/xmlParse')
 
+const msgReply = require('./src/middleware/msgReply')
+
 // error handler
 onerror(app)
 
@@ -42,30 +44,27 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
-//app.use(cors())
-
 app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
 
-// logger
-app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
+
 
 
 app.use(cors())
 app.use(xlogger())
-app.use(xmlParse())
+
 
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(vehicle.routes(), vehicle.allowedMethods())
 app.use(login.routes(), login.allowedMethods())
 app.use(handle.routes(), handle.allowedMethods())
+app.use(xmlParse())
+app.use(msgReply())
+
+
+
 
 // error-handling
 app.on('error', (err, ctx) => {

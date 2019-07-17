@@ -57,9 +57,7 @@ class WeChat{
         return new Promise(async (resolve, reject) => {
             var appId = this.appId
             var appSecret = this.appSecret
-            console.log('wechat ' + WxApi.accessToken + "&appid=" + appId + "&secret=" + appSecret)
             var res = await koa2Req(WxApi.accessToken + "&appid=" + appId + "&secret=" + appSecret)
-            console.log('请求到的 token ' + res.body)
             var data = JSON.parse(res.body)
             data.expires_in = new Date().getTime() + (data.expires_in - 20) * 1000
             resolve(data)

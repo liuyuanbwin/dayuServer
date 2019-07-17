@@ -104,7 +104,6 @@ router.post('/update', async(ctx,next) => {
 })
 
 router.post('/add', async(ctx,next) => {
-    console.log(ctx.request.body)
 
     const vehicle = new Vehicle({
         plate_num:ctx.request.body.plate_num,
