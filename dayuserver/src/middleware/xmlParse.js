@@ -3,7 +3,7 @@ const xml = require('../helpers/xml')
 module.exports = () => {
     return async (ctx, next) => {
 
-        console.log('   ------   xmlParse ----------')
+        console.log('   -----   xmlParse ----------')
         
         if (ctx.method == 'POST' && ctx.is('text/xml')) {
 

@@ -29,7 +29,7 @@ exports.message = {
                 FromUserName: msg.ToUserName,
                 CreateTime: Date.now(),
                 MsgType: msg.MsgType,
-                Content: content
+                Content: content + "skfjahksjfh "
             }
         })
     }
