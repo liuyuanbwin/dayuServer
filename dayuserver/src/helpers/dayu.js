@@ -28,8 +28,8 @@ const post = (aurl, method, data) => {
 
 exports.postModelMsg =async (data) => {
     var wechat = new WeChat()
-var token = await wechat.getAccessToken()
-    console.log('token = ' + token)
+    var token = await wechat.getAccessToken()
+    console.log('token = ' + token.access_token)
     return post('/message/template/send?access_token=' + token.access_token,'post' ,data)
 }
 exports.getUserlist = (token) => {
