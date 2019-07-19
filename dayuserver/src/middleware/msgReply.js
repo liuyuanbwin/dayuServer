@@ -44,7 +44,7 @@ module.exports = () => {
                     }
                 }
             }).then(res => {
-                console.log('模板消息返回 --> ' + JSON.stringify(res))
+                
             })
         }
        
