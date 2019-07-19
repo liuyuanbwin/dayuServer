@@ -25,11 +25,11 @@ module.exports = () => {
                     color:"#778899"
                 },
                 keynote1:{
-                    value:result.cli_expire_date,
+                    value:moment(result.cli_expire_date).format('YYYY-MM-DD'),
                     color:'#005500'
                 },
                 keynote2:{
-                    value:result.cli_expire_date,
+                    value:moment(result.cli_expire_date).format('YYYY-MM-DD'),
                     color:'#000077'
                 },
                 remark:{
