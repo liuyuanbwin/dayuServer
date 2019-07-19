@@ -4,8 +4,7 @@ var request = require('request')
 const WeChat = require('../helpers/wechat')
 
 var wechat = new WeChat()
-    var token = await wechat.getAccessToken()
-    var tkstr = JSON.parse(token)
+    
 
 const post = (aurl, method, data) => {
     let url = BASE_URL + aurl 
@@ -29,9 +28,12 @@ const post = (aurl, method, data) => {
 }
 
 exports.postModelMsg = async (data) => {
-    
+    var token = await wechat.getAccessToken()
+    var tkstr = JSON.parse(token)
     return post('/message/template/send?access_token=' +tkstr.access_token,'post' ,data)
 }
 exports.getUserlist = async () => {
+    var token = await wechat.getAccessToken()
+    var tkstr = JSON.parse(token)
     return post('/user/get?access_token=' + tkstr.access_token,'get')
 }
