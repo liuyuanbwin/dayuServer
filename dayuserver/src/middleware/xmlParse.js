@@ -23,7 +23,7 @@ module.exports = () => {
             })
 
             await promise.then((result) => {
-                console.log(' 互动消息  ---> ' + result)
+                console.log(' 互动消息  ---> ' + JSON.stringify(result))
                     ctx.req.body = result
                 })
                 .catch((e) => {
