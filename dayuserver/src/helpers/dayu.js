@@ -28,6 +28,7 @@ const post = (aurl, method, data) => {
 }
 
 exports.postModelMsg = (data) => {
+    console.log('token = ' + token)
     return post('/message/template/send?access_token=' + token,'post' ,data)
 }
 exports.getUserlist = (token) => {
