@@ -16,9 +16,9 @@ const handle = require('./src/routes/wx/handle')
 const WeChat = require('./src/helpers/wechat')
 
 
-const xlogger = require('./src/middleware/logger')
-const xmlParse = require('./src/middleware/xmlParse')
 
+const xmlParse = require('./src/middleware/xmlParse')
+const xlogger = require('./src/middleware/logger')
 const msgReply = require('./src/middleware/msgReply')
 
 // error handler
