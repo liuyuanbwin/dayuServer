@@ -28,10 +28,10 @@ const post = (aurl, method, data) => {
     })
 }
 
-exports.postModelMsg =async (data) => {
+exports.postModelMsg = async (data) => {
     
     return post('/message/template/send?access_token=' +tkstr.access_token,'post' ,data)
 }
-exports.getUserlist = () => {
+exports.getUserlist = async () => {
     return post('/user/get?access_token=' + tkstr.access_token,'get')
 }
