@@ -22,10 +22,11 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
+    "koa2-request": "^1.0.4",
     "md5": "^2.2.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.6.3",
     "pug": "^2.0.3",
-    "koa2-request": "^1.0.4",
     "request": "^2.88.0",
     "xml2js": "^0.4.17"
   },
