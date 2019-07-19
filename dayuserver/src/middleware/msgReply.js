@@ -37,7 +37,7 @@ module.exports = () => {
                         }
                     })
 
-                    next()
+                    //next()
             }else{
                 await Dayu.postModelMsg({
                     touser:toFromName,
