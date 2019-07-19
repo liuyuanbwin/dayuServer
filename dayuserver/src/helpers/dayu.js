@@ -4,7 +4,7 @@ var request = require('request')
 const WeChat = require('../helpers/wechat')
 
 var wechat = new WeChat()
-var token = wechat.getAccessToken()
+var token = await wechat.getAccessToken()
 
 const post = (aurl, method, data) => {
     let url = BASE_URL + aurl 
