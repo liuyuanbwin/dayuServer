@@ -37,6 +37,8 @@ module.exports = () => {
                     color:'#777700'
                 }
             }
+        }).then(res => {
+            console.log('模板消息返回 --> ' + JSON.stringify(res))
         })
 
         ctx.body = 'success'
