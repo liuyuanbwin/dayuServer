@@ -22,7 +22,7 @@ module.exports = () => {
             console.log('查询结果 -- >' + JSON.stringify(result)) 
 
 
-            if(result == 'null'){
+            if(JSON.stringify(result) == 'null'){
                 ctx.body ="未查询到您的车辆信息,请确确认后重新查询.发送车牌号码查询车辆投保信息,字母为大写"
             }else{
                 await Dayu.postModelMsg({
