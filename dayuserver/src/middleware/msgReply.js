@@ -19,7 +19,7 @@ module.exports = () => {
                 plate_num:{$regex:content}
             })
 
-            console.log('查询结果' -- > JSON.stringify(result)) 
+            console.log('查询结果 -- >' + JSON.stringify(result)) 
     
             Dayu.postModelMsg({
                 touser:toFromName,
