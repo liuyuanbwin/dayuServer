@@ -1,6 +1,10 @@
 const koa2Req = require('koa2-request')
 const BASE_URL = 'https://api.weixin.qq.com/cgi-bin'
 var request = require('request')
+const WeChat = require('../helpers/wechat')
+
+var wechat = new WeChat()
+var token = wechat.getAccessToken()
 
 const post = (aurl, method, data) => {
     let url = BASE_URL + aurl 
@@ -23,7 +27,7 @@ const post = (aurl, method, data) => {
     })
 }
 
-exports.postModelMsg = (token, data) => {
+exports.postModelMsg = (data) => {
     return post('message/template/send?access_token=' + token, data)
 }
 exports.getUserlist = (token) => {
