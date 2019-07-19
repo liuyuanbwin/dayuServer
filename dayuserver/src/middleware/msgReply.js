@@ -23,7 +23,17 @@ module.exports = () => {
 
 
             if(JSON.stringify(result) == 'null'){
-                ctx.body ="未查询到您的车辆信息,请确确认后重新查询.发送车牌号码查询车辆投保信息,字母为大写"
+                let noresult ="未查询到您的车辆信息,请确确认后重新查询.发送车牌号码查询车辆投保信息,字母为大写"
+
+                ctx.body = xml.jsonToXml({
+                        xml: {
+                            ToUserName: toFromName,
+                            FromUserName: toUserName,
+                            CreateTime: Date.now(),
+                            MsgType: msgType,
+                            Content: noresult 
+                        }
+                    })
             }else{
                 await Dayu.postModelMsg({
                     touser:toFromName,
