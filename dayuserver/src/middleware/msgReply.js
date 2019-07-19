@@ -11,17 +11,9 @@ module.exports = () => {
         var toFromName = msg.FromUserName[0]
         const createTime = Date.parse(new Date())
 
-        
-       
-
-
-
-
-
         const result = await Vehicle.findOne({
             plate_num:{$regex:content}
         })
-
 
         Dayu.postModelMsg({
             touser:toFromName,
