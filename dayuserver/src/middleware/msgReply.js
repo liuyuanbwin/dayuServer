@@ -36,6 +36,8 @@ module.exports = () => {
                             Content: noresult 
                         }
                     })
+
+                    next()
             }else{
                 await Dayu.postModelMsg({
                     touser:toFromName,
@@ -70,7 +72,7 @@ module.exports = () => {
         }
        
 
-        ctx.body = 'success'
+       // ctx.body = 'success'
 
         // ctx.body = xml.jsonToXml({
         //     xml: {
