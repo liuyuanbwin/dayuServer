@@ -10,42 +10,34 @@ exports.xmlReply = async (ctx, next) => {
             var msg = ctx.req.body.xml
             var msgType = msg.MsgType[0]
     
-    
+            
             if(msgType == 'text'){
                 var content = msg.Content[0]
                 var toUserName = msg.ToUserName[0]
                 var toFromName = msg.FromUserName[0]
                 const createTime = Date.parse(new Date())
         
+                //ctx.body = 'success'
                 const result = await Vehicle.findOne({
                     plate_num:{$regex:content}
                 })
-    
+                //let result 
                 console.log('查询结果 -- >' + JSON.stringify(result)) 
-    
+                
     
                 if(JSON.stringify(result) == 'null'){
                     console.log('判断了没结果 -- >' + JSON.stringify(result)) 
     
                     let noresult ="未查询到您的车辆信息,请确确认后重新查询.发送车牌号码查询车辆投保信息,字母为大写"
 
-                    console.log('回复的是 >>>>> ' +  xml.jsonToXml({
-                        xml: {
-                            ToUserName: toFromName,
-                            FromUserName: toUserName,
-                            CreateTime: Date.now(),
-                            MsgType: msgType,
-                            Content: noresult 
-                        }
-                    }))
-
-                    ctx.body = '<xml>'+
-                    '<ToUserName><![CDATA['+ toFromName +']]></ToUserName>'+
-                    '<FromUserName><![CDATA['+ toUserName +']]></FromUserName>'+
-                    '<CreateTime>'+Date.now()+'</CreateTime>'+
-                    '<MsgType><![CDATA[text]]></MsgType>'+
-                    '<Content><![CDATA[终于等到你，还好我没放弃]]></Content>'+
-                    '</xml>'
+                    
+                    // ctx.body = '<xml>'+
+                    // '<ToUserName><![CDATA['+ toFromName +']]></ToUserName>'+
+                    // '<FromUserName><![CDATA['+ toUserName +']]></FromUserName>'+
+                    // '<CreateTime>'+Date.now()+'</CreateTime>'+
+                    // '<MsgType><![CDATA[text]]></MsgType>'+
+                    // '<Content><![CDATA[终于等到你，还好我没放弃]]></Content>'+
+                    // '</xml>'
 
     
 
@@ -60,7 +52,7 @@ exports.xmlReply = async (ctx, next) => {
                             }
                         })
 
-                        ctx.body = 'success' 
+                    //     ctx.body = 'success' 
     
                         //next()
                 }else{
@@ -98,10 +90,12 @@ exports.xmlReply = async (ctx, next) => {
                 }
         
                 
+            }else{
+                console.log(' 不是  text')
+            ctx.body = 'success'
             }
            
-    
-            ctx.body = 'success'
+            
     
             // ctx.body = xml.jsonToXml({
             //     xml: {
