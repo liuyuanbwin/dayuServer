@@ -63,7 +63,7 @@ app.use(keyword.routes(), keyword.allowedMethods())
 app.use(login.routes(), login.allowedMethods())
 app.use(handle.routes(), handle.allowedMethods())
 app.use(xmlParse())
-app.use(msgReply())
+//app.use(msgReply())
 
 
 
