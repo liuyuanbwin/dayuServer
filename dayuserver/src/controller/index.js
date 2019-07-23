@@ -25,11 +25,9 @@ exports.gethandle = async (ctx, next) => {
 exports.postHandle = async (ctx, next) => {
 
     await XmlParse.xmlToJson(ctx, next).then(async (result) => {
-        console.log(' 互动消息  ---> ' + JSON.stringify(result))
         ctx.req.body = result
         await Replyer.xmlReply(ctx, next)
     }).catch((e) => {
-        console.log('e ----------> ' + JSON.stringify(e))
         e.status = 400
     })
 
