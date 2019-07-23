@@ -39,7 +39,17 @@ exports.xmlReply = async (ctx, next) => {
                         }
                     }))
 
+                    ctx.body = '<xml>'+
+                    '<ToUserName><![CDATA['+ toFromName +']]></ToUserName>'+
+                    '<FromUserName><![CDATA['+ toUserName +']]></FromUserName>'+
+                    '<CreateTime>'+Date.now()+'</CreateTime>'+
+                    '<MsgType><![CDATA[text]]></MsgType>'+
+                    '<Content><![CDATA[终于等到你，还好我没放弃]]></Content>'+
+                    '</xml>'
+
     
+
+
                     ctx.body = xml.jsonToXml({
                             xml: {
                                 ToUserName: toFromName,
