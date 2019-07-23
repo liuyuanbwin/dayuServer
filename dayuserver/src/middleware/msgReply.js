@@ -28,6 +28,17 @@ exports.xmlReply = async (ctx, next) => {
                     console.log('判断了没结果 -- >' + JSON.stringify(result)) 
     
                     let noresult ="未查询到您的车辆信息,请确确认后重新查询.发送车牌号码查询车辆投保信息,字母为大写"
+
+                    console.log('回复的是 >>>>> ' +  xml.jsonToXml({
+                        xml: {
+                            ToUserName: toFromName,
+                            FromUserName: toUserName,
+                            CreateTime: Date.now(),
+                            MsgType: msgType,
+                            Content: noresult 
+                        }
+                    }))
+
     
                     ctx.body = xml.jsonToXml({
                             xml: {
@@ -38,6 +49,8 @@ exports.xmlReply = async (ctx, next) => {
                                 Content: noresult 
                             }
                         })
+
+                        ctx.body = 'success' 
     
                         //next()
                 }else{
@@ -78,7 +91,7 @@ exports.xmlReply = async (ctx, next) => {
             }
            
     
-           // ctx.body = 'success'
+            ctx.body = 'success'
     
             // ctx.body = xml.jsonToXml({
             //     xml: {
