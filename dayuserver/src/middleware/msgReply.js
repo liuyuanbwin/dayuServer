@@ -6,6 +6,7 @@ const moment = require('moment')
 
 exports.xmlReply = async (ctx, next) => {
 
+    console.log('解析完成后的 >>>> ' + JSON.stringify(ctx.req.body))
             var msg = ctx.req.body.xml
             var msgType = msg.MsgType[0]
     
