@@ -7,7 +7,7 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      redirect: "index"
+      redirect: "listuser"
     },
     {
       path: "/index",
@@ -33,6 +33,11 @@ const router = new Router({
           name: "listuser",
           component: () => import("./dayu/modules/bills/Bills"),
           meta: { title: "信息列表" }
+        },
+        {
+          path:"/keywords",
+          name:"keywords",
+          component: () => import("./dayu/modules/keyword/Keywords")
         },
         {
           path: "/fundList",
@@ -117,8 +122,8 @@ const router = new Router({
       name: "Nofind",
       component: () => import("./views/404")
     }
-  ]
-  // mode: "history"
+  ],
+  mode: "history"
 });
 
 // 路由守卫

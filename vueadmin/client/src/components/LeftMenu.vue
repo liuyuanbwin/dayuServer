@@ -31,6 +31,10 @@ export default {
           icon: "el-icon-mobile-phone",
           name: "信息列表",
           path: "/listuser"
+        },{
+          icon: "el-icon-mobile-phone",
+          name: "关键字设置",
+          path: "/keywords"
         }]
       // items: [
       //   {
