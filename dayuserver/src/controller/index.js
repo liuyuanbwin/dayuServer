@@ -2,6 +2,7 @@ const wx = require('../helpers/wx')
 const dayu = require('../helpers/dayu')
 const WeChat = require('../helpers/wechat')
 const Replyer = require('../middleware/msgReply')
+const XmlParse = require('../middleware/xmlParse')
 
 exports.gethandle = async (ctx, next) => {
     const result = wx.auth(ctx)
@@ -22,6 +23,14 @@ exports.gethandle = async (ctx, next) => {
 }
 
 exports.postHandle = async (ctx, next) => {
-    next()
-    Replyer.xmlParse(ctx, next)
+
+    await XmlParse.xmlToJson(ctx, next).then((result) => {
+        console.log(' 互动消息  ---> ' + JSON.stringify(result))
+        ctx.req.body = result
+        Replyer.xmlReply(ctx, next)
+    }).catch((e) => {
+        e.status = 400
+    })
+
+    
 }

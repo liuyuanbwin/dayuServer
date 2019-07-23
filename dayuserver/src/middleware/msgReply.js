@@ -4,7 +4,7 @@ const Dayu = require('../helpers/dayu')
 const moment = require('moment')
 
 
-exports.xmlParse = async (ctx, next) => {
+exports.xmlReply = async (ctx, next) => {
 
             var msg = ctx.req.body.xml
             var msgType = msg.MsgType[0]

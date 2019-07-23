@@ -1,15 +1,13 @@
 const xml = require('../helpers/xml')
-
-module.exports = () => {
-    return async (ctx, next) => {
+exports.xmlToJson = async (ctx, next) => {
 
         console.log('   |-----   xmlParse ----------|')
         
-        if (ctx.method == 'POST' && ctx.is('text/xml')) {
+        //if (ctx.method == 'POST' && ctx.is('text/xml')) {
 
             console.log(' ----- 这是  xml  -----')
 
-            let promise = new Promise(function (resolve, reject) {
+            return new Promise(function (resolve, reject) {
                 let buf = ''
                 ctx.req.setEncoding('utf8')
                 ctx.req.on('data', (chunk) => {
@@ -23,17 +21,15 @@ module.exports = () => {
                 })
             })
 
-            await promise.then((result) => {
-                console.log(' 互动消息  ---> ' + JSON.stringify(result))
-                    ctx.req.body = result
-                })
-                .catch((e) => {
-                    e.status = 400
-                })
+            // return await promise.then((result) => {
+            //     console.log(' 互动消息  ---> ' + JSON.stringify(result))
+            //         ctx.req.body = result
+            //     })
+            //     .catch((e) => {
+            //         e.status = 400
+            //     })
 
-            await next()
-        } else {
-            await next()
-        }
-    }
+      
+       // }
+    //}
 }
