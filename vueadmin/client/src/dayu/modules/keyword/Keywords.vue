@@ -43,6 +43,26 @@ export default {
                 reply:'4001008888'
             }]
         }
+    },
+    methods: {
+        getKeywordList(){
+
+            console.log(' <<<<<<<<<---------->>>>>>>>>>>')
+            this
+            .$axios
+            .get('/api/keywordReply')
+            .then(res => {
+
+                console.log(' 关键字  ---->>>> ' + JSON.stringify(res))
+                if(res.data.status === 1){
+                    const data = res.data.results
+                    this.keywords = data
+                }
+            })
+        }
+    },
+    created(){
+        this.getKeywordList()
     }
 }
 </script>

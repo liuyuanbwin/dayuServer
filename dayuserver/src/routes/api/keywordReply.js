@@ -32,13 +32,14 @@ router.get('/', async (ctx, next) => {
     //             message:'token 过期或无效,请重新登录' 
     //         }
     //     }else{
-            const resutls = await KeywordReply.find({
+            const results = await KeywordReply.find({
 
             })
 
             ctx.body = {
                 code:0,
-                resutls
+                results,
+                status:1
             }
         // }
     // }else{
