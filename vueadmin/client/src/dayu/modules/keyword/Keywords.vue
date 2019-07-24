@@ -1,5 +1,13 @@
 <template>
     <div class="staff">
+        <div class="staff-top">
+            <el-form  :inline="true">
+                <el-form-item class="btnRight">
+                    <el-button type="primary" @click="addKeyword()" style="margin-right:10px">创建</el-button>
+                </el-form-item>
+            </el-form>
+            
+        </div>
        <div class="list">
            <el-table :data="keywords" stripe>
                <el-table-column
@@ -18,36 +26,27 @@
                </el-table-column>
            </el-table>
        </div>
+       <KeywordDialog :dialog="dialog" :form="form" @keywords = "getKeywordList"></KeywordDialog>  
     </div>
 </template>
 
 <script>
+    import KeywordDialog from "./components/KeywordDialog"
 export default {
     name:'list',
     data(){
         return {
-            keywords:[{
-                keyword:'平安保险',
-                reply:'4001008888'
+            keywords:[],
+            dialog:{
+                show:false,
+                title:"",
+                option:"edit"
             },
-            {
-                keyword:'平安保险',
-                reply:'4001008888'
-            },
-            {
-                keyword:'平安保险',
-                reply:'4001008888'
-            },
-            {
-                keyword:'平安保险',
-                reply:'4001008888'
-            }]
+            form:{}
         }
     },
     methods: {
         getKeywordList(){
-
-            console.log(' <<<<<<<<<---------->>>>>>>>>>>')
             this
             .$axios
             .get('/api/keywordReply')
@@ -59,10 +58,22 @@ export default {
                     this.keywords = data
                 }
             })
+        },
+        addKeyword(){
+        
+            this.dialog = {
+                title:"添加关键字自动回复",
+                show:true,
+                option: "add"   
+            }
+            this.form = {}
         }
     },
     created(){
         this.getKeywordList()
+    },
+    components:{
+        KeywordDialog
     }
 }
 </script>

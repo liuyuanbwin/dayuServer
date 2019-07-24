@@ -1,5 +1,6 @@
 const xml = require('../helpers/xml')
 const Vehicle = require('../models/vehicle')
+const Keyword = require('../models/keywordReply')
 const Dayu = require('../helpers/dayu')
 const moment = require('moment')
 
@@ -19,7 +20,19 @@ exports.xmlReply = async (ctx, next) => {
 
         if (JSON.stringify(result) == 'null') {
 
-            let noresult = "未查询到您的车辆信息,请确确认后重新查询.发送车牌号码查询车辆投保信息,字母为大写"
+            const keywordReply = await Keyword.findOne({
+                keyword:{
+                    $regex: content
+                }
+            })
+
+            var noresult = "未能识别您的信息,请确确认后重新查询.发送车牌号码查询车辆投保信息,字母为大写,发送保险公司名称,查询客服电话."
+
+            
+            if(JSON.stringify(keywordReply) != 'null'){
+                console.log('reply ' + JSON.stringify(keywordReply))
+                noresult = keywordReply.reply
+            }
 
             ctx.body = xml.jsonToXml({
                 xml: {
