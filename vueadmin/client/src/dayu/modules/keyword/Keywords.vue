@@ -24,6 +24,16 @@
                    label="回复"
                    >
                </el-table-column>
+               <el-table-column
+                   label="操作">
+                   <template slot-scope="scope">
+                       <el-button type="primary" size="mini" @click="">编辑</el-button>
+                       <el-button type="danger" size="mini" @click="deletKeyword(scope.$index, scope.row)">删除</el-button>
+                       
+                       
+                   </template>
+               </el-table-column>
+               
            </el-table>
        </div>
        <KeywordDialog :dialog="dialog" :form="form" @keywords = "getKeywordList"></KeywordDialog>  
@@ -67,6 +77,26 @@ export default {
                 option: "add"   
             }
             this.form = {}
+        },
+        deletKeyword(index, row){
+            console.log('index --->>> ' + index + '  row --->>> ' + JSON.stringify(row))
+
+            this.$confirm('删除关键字 ' + row.keyword +" 是否继续 ?", '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                console.log(' ----  发送了 ----')
+                this
+                .$axios
+                .get(`/api/keywordReply/delete/${row._id}`)
+                .then(res => {
+                    this.$message({type:'success', message:"删除成功!"})
+                })
+                this.getKeywordList()
+            }).catch((e) => {
+                  this.$message({type: "info", message: e + "已取消删除"});
+            });
         }
     },
     created(){

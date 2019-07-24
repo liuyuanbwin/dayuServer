@@ -16,8 +16,8 @@ function endLoading() {
   //使用Element loading-close 方法
   loading.close();
 }
-//axios.defaults.baseURL = 'http://www.bl1000.cn'
-axios.defaults.baseURL = 'http://localhost'
+axios.defaults.baseURL = 'http://www.bl1000.cn'
+//axios.defaults.baseURL = 'http://localhost'
 //axios.defaults.headers.common['Authorization'] = 'Bearer 5' + localStorage.getItem('token')
 // 请求拦截  设置统一header
 axios.interceptors.request.use(

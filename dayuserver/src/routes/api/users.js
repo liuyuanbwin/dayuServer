@@ -82,7 +82,7 @@ router.post('/register', async(ctx, next) => {
    }
 })
 
-router.delete('/delete/:id',async(ctx,next) => {
+router.delete('/delete',async(ctx,next) => {
     let code = 0
     try {
         await User.deleteOne({_id:ctx.params.id},function(err,doc){

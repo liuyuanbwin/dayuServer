@@ -72,4 +72,24 @@ router.post('/add', async (ctx, next) => {
     }
 })
 
+router.get('/delete/:id',async(ctx,next) => {
+    console.log ( '<<<< delete keyword >>>')
+    let code = 0
+    try {
+        let result = await KeywordReply.deleteOne({_id:ctx.params.id}, function(err, doc){
+
+        })
+
+        console.log('数据库删除结果 ' + JSON.stringify(result))
+
+        code = 0
+    } catch (err) {
+        console.log('err ---==== >>>' + err)
+        code = -1
+    }
+    ctx.body = {
+        code
+    }
+})
+
 module.exports = router

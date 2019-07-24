@@ -34,6 +34,8 @@ exports.xmlReply = async (ctx, next) => {
                 noresult = keywordReply.reply
             }
 
+            console.log
+
             ctx.body = xml.jsonToXml({
                 xml: {
                     ToUserName: toFromName,
