@@ -37,7 +37,14 @@ const router = new Router({
         {
           path:"/keywords",
           name:"keywords",
-          component: () => import("./dayu/modules/keyword/Keywords")
+          component: () => import("./dayu/modules/keyword/Keywords"),
+          meta:{title:"关键字管理"}
+        },
+        {
+          path:"/clients",
+          name:"clients",
+          component: () => import("./dayu/modules/clients/Clients"),
+          meta:{title:"关键字管理"}
         },
         {
           path: "/fundList",

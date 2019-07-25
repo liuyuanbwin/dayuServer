@@ -47,7 +47,7 @@ export default {
 	top: 71px;
 	left: 0;
 	min-height: 100%;
-	background-color: #324057;
+	background-color: #36737e;
 	z-index: 99;
 	}
 
@@ -88,7 +88,7 @@ export default {
 	display: none !important;
 	}
 	a {
-	color: #ccc;
+	color: #36737e;
 	text-decoration: none;
 	}
 </style>

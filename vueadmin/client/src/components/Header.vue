@@ -162,9 +162,9 @@ export default {
 .header-nav {
   width: 100%;
   height: 60px;
-  background: #f8f8f6;
+  background: #36737e;
   color: rgb(20, 20, 24);
-  border-bottom: 1px solid #ebedf0;
+  border-bottom: 1px solid #36737e;
   overflow: hidden;
   padding: 5px 0;
 }

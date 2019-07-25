@@ -7,7 +7,7 @@
           class="el-menu-vertical-demo"
           :collapse="collapse"
           :default-active="$route.path"
-          background-color="#f8f8f6"
+          background-color="#36737e"
           text-color="#fff"
         >
           <Menu :items="items"/>
@@ -35,6 +35,11 @@ export default {
           icon: "el-icon-mobile-phone",
           name: "关键字设置",
           path: "/keywords"
+        },
+        {
+          icon:"el-icon-tickets",
+          name:"客户管理",
+          path:'/clients'
         }]
       // items: [
       //   {
@@ -153,7 +158,7 @@ export default {
   top: 71px;
   left: 0;
   min-height: 100%;
-  background-color: #f8f8f6;
+  background-color: #36737e;
   z-index: 99;
 }
 .sidebar {
