@@ -130,7 +130,7 @@ const router = new Router({
       component: () => import("./views/404")
     }
   ],
-  mode: "history"
+  //mode: "history"
 });
 
 // 路由守卫
