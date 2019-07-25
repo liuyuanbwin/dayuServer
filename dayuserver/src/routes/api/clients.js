@@ -5,6 +5,14 @@ const Dayu = require('../../helpers/dayu')
 
 router.prefix('/api/clients')
 
+router.get('/', async (ctx, next) => {
+    let results = Client.find({})
+    ctx.body = {
+        code:0,
+        results,
+        status:1
+    }
+})
 router.get('/reload', async (ctx, next) => {
     let result = await Dayu.getUserlist()
     // .then((res, req) => {     console.log('userlist ' + JSON.stringify(res)) })
