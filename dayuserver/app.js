@@ -12,8 +12,14 @@ const index = require('./src/routes/index')
 const users = require('./src/routes/api/users')
 const vehicle = require('./src/routes/api/vehicles')
 const keyword = require('./src/routes/api/keywordReply')
+const client = require('./src/routes/api/clients')
 const login = require('./src/routes/api/login')
 const handle = require('./src/routes/wx/handle')
+
+
+
+
+
 const WeChat = require('./src/helpers/wechat')
 
 
@@ -60,6 +66,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(vehicle.routes(), vehicle.allowedMethods())
 app.use(keyword.routes(), keyword.allowedMethods())
+app.use(client.routes(), client.allowedMethods())
 app.use(login.routes(), login.allowedMethods())
 app.use(handle.routes(), handle.allowedMethods())
 //app.use(xmlParse())

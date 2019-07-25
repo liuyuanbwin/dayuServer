@@ -77,11 +77,7 @@ exports.xmlReply = async (ctx, next) => {
 
             ctx.body = 'success'
 
-            Dayu
-                .getUserlist()
-                .then((res, req) => {
-                    console.log('userlist ' + JSON.stringify(res))
-                })
+            
         }
 
     } else {
