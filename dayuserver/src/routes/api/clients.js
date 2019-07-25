@@ -7,6 +7,8 @@ router.prefix('/api/clients')
 
 router.get('/', async (ctx, next) => {
     let results = Client.find({})
+    console.log('result ' + JSON.stringify(results))
+    ctx.status = 200
     ctx.body = {
         code:0,
         results,
