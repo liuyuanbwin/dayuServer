@@ -6,7 +6,8 @@ const Dayu = require('../../helpers/dayu')
 router.prefix('/api/clients')
 
 router.get('/', async (ctx, next) => {
-    let results = Client.find({})
+    var results = Client.find({})
+    console.log('result  ' + results)
     console.log('result ' + JSON.stringify(results))
     ctx.status = 200
     ctx.body = {
