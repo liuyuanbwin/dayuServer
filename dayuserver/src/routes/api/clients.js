@@ -31,7 +31,7 @@ router.get('/reload', async (ctx, next) => {
 router.get('/loadbaseinfo', async (ctx, next) => {
     const result = await Client.find({})
     result.forEach(async element => {
-        var baseinfo = await Dayu.getClientBaseInfo(element._id)
+        var baseinfo = await Dayu.getClientBaseInfo(element.openid)
 
         console.log('baseinfo ---> ' + JSON.stringify(baseinfo))
     });
