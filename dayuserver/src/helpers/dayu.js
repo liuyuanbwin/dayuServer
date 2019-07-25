@@ -37,3 +37,9 @@ exports.getUserlist = async () => {
     var tkstr = JSON.parse(token)
     return post('/user/get?access_token=' + tkstr.access_token,'get')
 }
+
+exports.getClientBaseInfo = async (openid) => {
+    var token = await wechat.getAccessToken()
+    var tkstr = JSON.parse(token)
+    return post('/user/info?access_token=' + tkstr.access_token + '&openid=' + openid + '&lang=zh_CN', 'get')
+}

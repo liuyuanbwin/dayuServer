@@ -5,7 +5,7 @@ const Dayu = require('../../helpers/dayu')
 
 router.prefix('/api/clients')
 
-router.get('/', async (ctx, next) => {
+router.get('/reload', async (ctx, next) => {
     let result = await Dayu.getUserlist()
                 // .then((res, req) => {
                 //     console.log('userlist ' + JSON.stringify(res))
@@ -25,9 +25,13 @@ router.get('/', async (ctx, next) => {
             console.log('err ' + err )
         }
     });
-
-
     ctx.body = JSON.stringify(result)
 })
+
+router.get('/loadbaseinfo', async (ctx, next) => {
+    const result = await Client.find({})
+    console.log('client base info ' + JSON.stringify(result))
+})
+
 
 module.exports = router
