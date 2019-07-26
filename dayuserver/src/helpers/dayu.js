@@ -70,7 +70,10 @@ exports.getWebToken = async (code) => {
     return webRequest('/oauth2/access_token?appid=' + config.wx.appid + '&secret=' + config.wx.appSecret + '&code=' + code + '&grant_type=authorization_code')
 }
 
-
 exports.checkWebToken = async (token, openid) => {
     return webRequest('/auth?access_token=' + token + '&openid=' + openid)
+}
+
+exports.webGetUserinfo = async (token, openid) => {
+    return webRequest('/userinfo?access_token=' + token + '&openid=' + openid + '&lang=zh_CN')
 }

@@ -38,4 +38,7 @@ exports.webHandle = async (ctx, next) => {
     let result = await dayu.getWebToken(ctx.query.code)
     let tokenResult = await dayu.checkWebToken(result.body.access_token, result.body.openid)
     console.log('请求token 结果 --->' + JSON.stringify(tokenResult))
+
+    let userinfo = await dayu.webGetUserinfo(result.body.access_token, result.body.openid)
+    console.log('用户信息 ---> ' + JSON.stringify(userinfo))
 }
