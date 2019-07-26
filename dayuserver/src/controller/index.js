@@ -36,5 +36,6 @@ exports.postHandle = async (ctx, next) => {
 exports.webHandle = async (ctx, next) => {
     console.log('get ->>> ' + JSON.stringify(ctx.query))
     let result = await dayu.getWebToken(ctx.query.code)
-    console.log('请求token 结果 --->' + JSON.stringify(result))
+    let tokenResult = await dayu.checkWebToken(result.body.access_token, result.body.openid)
+    console.log('请求token 结果 --->' + JSON.stringify(tokenResult))
 }

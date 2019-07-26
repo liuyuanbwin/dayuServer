@@ -1,6 +1,6 @@
 const koa2Req = require('koa2-request')
 const BASE_URL = 'https://api.weixin.qq.com/cgi-bin'
-const WEB_BASE_URL = 'https://api.weixin.qq.com/sns/oauth2'
+const WEB_BASE_URL = 'https://api.weixin.qq.com/sns'
 var request = require('request')
 const WeChat = require('../helpers/wechat')
 const config = require('../helpers/config')
@@ -67,5 +67,10 @@ exports.getClientBaseInfo = async (openid) => {
 }
 
 exports.getWebToken = async (code) => {
-    return webRequest('/access_token?appid=' + config.wx.appid + '&secret=' + config.wx.appSecret + '&code=' + code + '&grant_type=authorization_code')
+    return webRequest('/oauth2/access_token?appid=' + config.wx.appid + '&secret=' + config.wx.appSecret + '&code=' + code + '&grant_type=authorization_code')
+}
+
+
+exports.checkWebToken = async (token, openid) => {
+    return webRequest('/auth?access_token=' + token + '&openid=' + openid)
 }
