@@ -30,6 +30,10 @@ exports.postHandle = async (ctx, next) => {
     }).catch((e) => {
         e.status = 400
     })
-
     
+}
+
+exports.webHandle = async (ctx, next) => {
+    console.log('get ->>> ' + JSON.stringify(ctx.query))
+    ctx.body = "YES"
 }
