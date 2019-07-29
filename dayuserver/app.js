@@ -49,7 +49,10 @@ app.use(Wechat({
   isSafeModel:false,
   encodingAESKey:''
 },async function(next){
-  await next()
+  this.reply =async replyHandler(next){
+    await next();
+  }
+  
 }))
 
 // middlewares
