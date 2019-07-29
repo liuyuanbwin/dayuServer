@@ -2,10 +2,7 @@ const koa2Req = require('koa2-request')
 const BASE_URL = 'https://api.weixin.qq.com/cgi-bin'
 const WEB_BASE_URL = 'https://api.weixin.qq.com/sns'
 var request = require('request')
-const WeChat = require('../helpers/wechat')
 const config = require('../helpers/config')
-
-var wechat = new WeChat()
     
 const webRequest = (wurl, method, data)=> {
     let url = WEB_BASE_URL + wurl
@@ -49,21 +46,18 @@ const post = (aurl, method, data) => {
     })
 }
 
-exports.postModelMsg = async (data) => {
-    var token = await wechat.getAccessToken()
-    var tkstr = JSON.parse(token)
-    return post('/message/template/send?access_token=' +tkstr.access_token,'post' ,data)
+exports.postModelMsg = async (token, data) => {
+
+    return post('/message/template/send?access_token=' + token,'post' ,data)
 }
-exports.getUserlist = async () => {
-    var token = await wechat.getAccessToken()
-    var tkstr = JSON.parse(token)
-    return post('/user/get?access_token=' + tkstr.access_token,'get')
+exports.getUserlist = async (token) => {
+
+    return post('/user/get?access_token=' + token,'get')
 }
 
-exports.getClientBaseInfo = async (openid) => {
-    var token = await wechat.getAccessToken()
-    var tkstr = JSON.parse(token)
-    return post('/user/info?access_token=' + tkstr.access_token + '&openid=' + openid + '&lang=zh_CN', 'get')
+exports.getClientBaseInfo = async (token, openid) => {
+
+    return post('/user/info?access_token=' + token + '&openid=' + openid + '&lang=zh_CN', 'get')
 }
 
 exports.getWebToken = async (code) => {

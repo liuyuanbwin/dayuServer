@@ -19,7 +19,7 @@
                 <el-input v-model="form.vehicle_type"></el-input> </el-form-item> -->
                 <el-form-item label-width="160px" label="汽车类型" prop="vehicle_type">
                     <el-select v-model="form.vehicle_type" placeholder="请选择汽车类型">
-                        <el-option value="under5" label="5人以下客车"></el-option>
+                        <el-option value="under5" label="5人以下轿车"></el-option>
                         <el-option value="beyond5" label="5人以上轿车"></el-option>
                         <el-option value="trunk" label="货车"></el-option>
                         <el-option value="other" label="其他"></el-option>

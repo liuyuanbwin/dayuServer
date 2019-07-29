@@ -15,12 +15,9 @@ const keyword = require('./src/routes/api/keywordReply')
 const client = require('./src/routes/api/clients')
 const login = require('./src/routes/api/login')
 const handle = require('./src/routes/wx/handle')
+const config = require('./src/helpers/config')
 
-
-
-
-
-const WeChat = require('./src/helpers/wechat')
+var Wechat = require('koa-easywechat')
 
 
 
@@ -31,7 +28,7 @@ const msgReply = require('./src/middleware/msgReply')
 // error handler
 onerror(app)
 
-new WeChat()
+
 //config
 const db = require('./config/keys').mongoURI
 
@@ -43,6 +40,17 @@ mongoose
 .catch(err => {
   console.log(err)
 })
+
+
+app.use(Wechat({
+  appID:config.wx.appid,
+  appsecret:config.wx.appSecret,
+  token:config.wx.token,
+  isSafeModel:false,
+  encodingAESKey:''
+},async function(next){
+  await next()
+}))
 
 // middlewares
 app.use(bodyparser({
