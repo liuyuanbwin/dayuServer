@@ -40,11 +40,11 @@ exports.webHandle = async (ctx, next) => {
     console.log('请求token 结果 --->' + JSON.stringify(tokenResult))
 
     let userinfo = await dayu.webGetUserinfo(result.body.access_token, result.body.openid)
-    console.log('用户信息 ---> ' + JSON.stringify(userinfo))
+    console.log('用户信息 ---> ' + JSON.stringify(userinfo) + userinfo.body)
 
     await ctx.render('index',{
         title:'大宇车友',
-        headimg:userinfo.body.headimgrul,
+        headimg:userinfo.body.headimgurl,
         nick:userinfo.body.nickname
     })
 }
