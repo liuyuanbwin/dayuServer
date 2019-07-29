@@ -18,9 +18,7 @@
         <h1 class="demos-title">创建提醒</h1>
         <div class="wechatinfo">
             <img class="wechatImg" src="<%=headimg%>" alt="">
-            <div class="wechatnick"><%=nick%></div>
         </div>
-
 
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
@@ -28,7 +26,23 @@
                     <label class="weui-label">车牌号</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" pattern="^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$" placeholder="请输入车牌号">
+                    <input
+                        class="weui-input"
+                        type="text"
+                        disabled="disabled"
+                        value="<%=nick%>">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">车牌号</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input
+                        class="weui-input"
+                        type="number"
+                        pattern="^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$"
+                        placeholder="请输入车牌号">
                 </div>
             </div>
             <div class="weui-cell">
@@ -59,16 +73,13 @@
                 <div class="weui-cell__hd">
                     <label for="" class="weui-label">商险到期日期</label>
                 </div>
-                <div class="weui-cell__bd"  style="margin-left:10px">
+                <div class="weui-cell__bd" style="margin-left:10px">
                     <input class="weui-input" type="date" value="">
                 </div>
             </div>
-            
-            
-           
+
         </div>
         <div class="weui-cells__tips">本服务由涿州车友提供技术支持</div>
-
 
         <!-- body 最后 -->
         <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>

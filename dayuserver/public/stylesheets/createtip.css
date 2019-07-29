@@ -6,16 +6,11 @@
     margin: 0 15%;
 }
 .wechatinfo {
-    width: 100px;
-    height:120px;
+    width: 80px;
+    height:80px;
     margin: auto;
 }
 .wechatImg {
-    width: 100px;
-    height: 100px;
-}
-
-.wechatnick {
-    width: 100px;
-    height: 20px;
+    width: 80px;
+    height: 80px;
 }
