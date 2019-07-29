@@ -43,6 +43,8 @@ exports.webHandle = async (ctx, next) => {
     console.log('用户信息 ---> ' + JSON.stringify(userinfo))
 
     await ctx.render('index',{
-        title:'大宇车友'
+        title:'大宇车友',
+        headimg:userinfo.body.headimgrul,
+        nick:userinfo.body.nickname
     })
 }
