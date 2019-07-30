@@ -17,7 +17,6 @@ const login = require('./src/routes/api/login')
 const handle = require('./src/routes/wx/handle')
 const config = require('./src/helpers/config')
 
-var Wechat = require('koa-easywechat')
 
 
 
@@ -41,20 +40,6 @@ mongoose
   console.log(err)
 })
 
-
-app.use(Wechat({
-  appID:config.wx.appid,
-  appsecret:config.wx.appSecret,
-  token:config.wx.token,
-  isSafeModel:false,
-  encodingAESKey:''
-},async function (next){
-  this.reply={
-      type:"text",
-      content:"回复一段文字吧"
-    }
-  }
-));
 
 // middlewares
 app.use(bodyparser({
