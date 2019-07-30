@@ -17,9 +17,9 @@ const login = require('./src/routes/api/login')
 const handle = require('./src/routes/wx/handle')
 const config = require('./src/helpers/config')
 
-import weixinJSSDK from './src/helpers/koa-wx-sdk'
+// import weixinJSSDK from './src/helpers/koa-wx-sdk'
 const TokenHelper = require('./src/helpers/WXTokenHelper')
-
+const weixinJSSDK = require('koa-weixin-jssdk')
 
 
 
