@@ -43,7 +43,17 @@ mongoose
   console.log(err)
 })
 
+app.use(require('koa-weixin-token')({
+  appid: config.wx.appid,
+  secret: config.wx.secret
+}));
 
+app.use(funciton* (){
+  this.body = {
+    token: this.weixinToken,
+    jsapiTicket: this.weixinJsApiTicket
+  };
+});
 app.use(weixinJSSDK({
   appId:config.wx.appid,
   secret:config.wx.secret,
