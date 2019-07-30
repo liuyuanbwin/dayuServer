@@ -17,6 +17,9 @@ const login = require('./src/routes/api/login')
 const handle = require('./src/routes/wx/handle')
 const config = require('./src/helpers/config')
 
+const weixinJSSDK = require('koa-weixin-jssdk')
+const TokenHelper = require('./src/helpers/WXTokenHelper')
+
 
 
 
@@ -40,6 +43,27 @@ mongoose
   console.log(err)
 })
 
+
+app.use(weixinJSSDK({
+  appId:config.wx.appid,
+  secret:config.wx.secret,
+  async onGetToken(url){
+    return await TokenHelper.getAsync('ACCESS_TOKEN')
+  },
+  async onSetToken(token, expiresIn){
+    return await TokenHelper.setSync('ACCESS_TOKEN', token, expiresIn)
+  },
+  async onGetTicket(url) {
+    return await TokenHelper.getAsync('TICKET')
+},
+async onSetTicket(ticket, expiresIn) {
+  return await TokenHelper.setSync('TICKET', ticket, expiresIn)
+},
+  onError :(err, ctx, next) => {
+    console.log(err)
+    ctx.body = 'error'
+  }
+}))
 
 // middlewares
 app.use(bodyparser({
