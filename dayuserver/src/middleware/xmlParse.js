@@ -11,6 +11,7 @@ exports.xmlToJson = async (ctx, next) => {
                 let buf = ''
                 ctx.req.setEncoding('utf8')
                 ctx.req.on('data', (chunk) => {
+                    console.log('req.on ' + ctx.req.on)
                     buf += chunk
                 })
 
