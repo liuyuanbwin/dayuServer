@@ -20,6 +20,9 @@ exports.xmlReply = async (ctx, next) => {
             }
         })
 
+
+console.log('搜索了数据库 ++++++++++')
+
         if (JSON.stringify(result) == 'null') {
 
             const keywordReply = await Keyword.findOne({
@@ -36,7 +39,7 @@ exports.xmlReply = async (ctx, next) => {
                 noresult = keywordReply.reply
             }
 
-            console.log
+            console.log('要恢复了 +++++++++')
 
             ctx.body = xml.jsonToXml({
                 xml: {
@@ -47,6 +50,8 @@ exports.xmlReply = async (ctx, next) => {
                     Content: noresult
                 }
             })
+        
+            console.log('回复晚了 +++++++++++=')
 
         } else {
             await Dayu
