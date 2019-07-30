@@ -48,9 +48,13 @@ app.use(Wechat({
   token:config.wx.token,
   isSafeModel:false,
   encodingAESKey:''
-},async function(next){
-  await next()
-}))
+},async function (next){
+  this.reply={
+      type:"text",
+      content:"回复一段文字吧"
+    }
+  }
+));
 
 // middlewares
 app.use(bodyparser({
