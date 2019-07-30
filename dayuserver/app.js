@@ -19,8 +19,6 @@ const config = require('./src/helpers/config')
 
 // import weixinJSSDK from './src/helpers/koa-wx-sdk'
 const TokenHelper = require('./src/helpers/WXTokenHelper')
-const weixinJSSDK = require('koa-weixin-jssdk')
-const harmonize = require('harmonize')()
 
 
 
@@ -44,37 +42,6 @@ mongoose
   console.log(err)
 })
 
-app.use(require('koa-weixin-token')({
-  appid: config.wx.appid,
-  secret: config.wx.secret
-}));
-
-app.use(funciton* (){
-  this.body = {
-    token: this.weixinToken,
-    jsapiTicket: this.weixinJsApiTicket
-  };
-});
-app.use(weixinJSSDK({
-  appId:config.wx.appid,
-  secret:config.wx.secret,
-  async onGetToken(url){
-    return await TokenHelper.getAsync('ACCESS_TOKEN')
-  },
-  async onSetToken(token, expiresIn){
-    return await TokenHelper.setSync('ACCESS_TOKEN', token, expiresIn)
-  },
-  async onGetTicket(url) {
-    return await TokenHelper.getAsync('TICKET')
-},
-async onSetTicket(ticket, expiresIn) {
-  return await TokenHelper.setSync('TICKET', ticket, expiresIn)
-},
-  onError :(err, ctx, next) => {
-    console.log(err)
-    ctx.body = 'error'
-  }
-}))
 
 // middlewares
 app.use(bodyparser({
