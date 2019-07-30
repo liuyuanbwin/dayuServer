@@ -20,7 +20,7 @@ const config = require('./src/helpers/config')
 // import weixinJSSDK from './src/helpers/koa-wx-sdk'
 const TokenHelper = require('./src/helpers/WXTokenHelper')
 const weixinJSSDK = require('koa-weixin-jssdk')
-const hormonize = require('hor')
+const harmonize = require('harmonize')()
 
 
 
