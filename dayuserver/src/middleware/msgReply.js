@@ -5,6 +5,8 @@ const Dayu = require('../helpers/dayu')
 const moment = require('moment')
 
 exports.xmlReply = async (ctx, next) => {
+
+    console.log('xmlReply  +++++++++++++' + JSON.stringify(ctx.req.body))
     var msg = ctx.req.body.xml
     var msgType = msg.MsgType[0]
     if (msgType == 'text') {
