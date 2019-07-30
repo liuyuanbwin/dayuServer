@@ -49,7 +49,10 @@ app.use(Wechat({
   isSafeModel:false,
   encodingAESKey:''
 },async function(next){
-  next()
+  this.reply={
+    type:"text",
+    content:"回复一段文字吧"
+  }
 }))
 
 // middlewares
