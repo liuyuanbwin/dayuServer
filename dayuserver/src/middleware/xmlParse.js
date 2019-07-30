@@ -5,7 +5,7 @@ exports.xmlToJson = async (ctx, next) => {
         
         //if (ctx.method == 'POST' && ctx.is('text/xml')) {
 
-            console.log(' ----- 这是  xml  -----')
+            console.log(' ----- 这是  xml  -----' + JSON.stringify(ctx.message))
 
             return new Promise(function (resolve, reject) {
                 let buf = ''
