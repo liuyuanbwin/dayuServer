@@ -54,6 +54,7 @@ const isValidAccessToken = (data) => {
     if(!data || !data.token || !data.expires_in){
         return false;
     }
+    console.log(' ---- *** 比较 ***  -----' + new Date().getTime() + '----' + data.expires_in)
     return new Date().getTime() < data.expires_in ?  true : false;
 }
 const updateAccessToken = async () =>{
@@ -64,7 +65,7 @@ const updateAccessToken = async () =>{
         var res = await koa2Req(WxApi.accessToken+"&appid="+config.wx.appid+"&secret="+config.wx.appSecret);
         var data=JSON.parse(res.body);
         console.log(' ---- *** '+ data+' ***  -----')
-        data.expires_in=new Date().getTime() + (data.expires_in-20);
+        data.expires_in=new Date().getTime() + (data.expires_in-20) * 1000;
         resolve(data);    
     });
 }
