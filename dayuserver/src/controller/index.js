@@ -74,7 +74,7 @@ exports.webHandle = async (ctx, next) => {
           ctx.render('index', { 
             title: '微信分享JSSDK',
             appid: config.wx.appid,
-            sign: JSON.stringify(sign(jsapi_ticket,url))
+            sign: JSON.stringify(sign(jsapi_ticket,'http://www.bl1000.cn/webHandle'))
           });
         }
       });
