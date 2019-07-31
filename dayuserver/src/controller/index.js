@@ -82,7 +82,7 @@ exports.webHandle = async (ctx, next) => {
 
     console.log('token --->>> ' + token +'获取到的ticket ' + JSON.stringify(result))
 
-    ctx.render('index', { 
+    await ctx.render('index', { 
         title: '微信分享JSSDK',
         appid: config.wx.appid,
         sign: JSON.stringify(sign(result.ticket,'http://www.bl1000.cn/webHandle'))
