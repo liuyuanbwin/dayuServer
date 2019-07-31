@@ -63,6 +63,7 @@ const updateAccessToken = async () =>{
         // var appSecret=this.appSecret;
         var res = await koa2Req(WxApi.accessToken+"&appid="+config.wx.appid+"&secret="+config.wx.appSecret);
         var data=JSON.parse(res.body);
+        console.log(' ---- *** '+ data+' ***  -----')
         data.expires_in=new Date().getTime() + (data.expires_in-20);
         resolve(data);    
     });
@@ -112,7 +113,7 @@ exports.getToken = async () => {
         }
     }else{
         data = await updateAccessToken()
-        console.log(' ----  更新  -----')
+        console.log(' ----  更新  -----' + data)
     }
     await setSync('token', data.access_token, data.expires_in)
     console.log(' 返回的token ' + JSON.stringify(data))
