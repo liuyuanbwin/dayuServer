@@ -57,8 +57,8 @@ var getTiket = async (ctx,token,url) => {
 exports.webHandle = async (ctx, next) => {
     console.log('get ->>> ' + JSON.stringify(ctx.query))
     let result = await dayu.getWebToken(ctx.query.code)
-    let tokenResult = await dayu.checkWebToken(result.body.access_token, result.body.openid)
-    console.log('请求token 结果 --->' + JSON.stringify(tokenResult))
+    // let tokenResult = await dayu.checkWebToken(result.body.access_token, result.body.openid)
+    console.log('请求token 结果 --->' + JSON.stringify(result))
 
     result = await dayu.webGetTicket(result.body.access_token)
 
