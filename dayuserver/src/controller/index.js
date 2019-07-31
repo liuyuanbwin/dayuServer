@@ -60,10 +60,11 @@ exports.webHandle = async (ctx, next) => {
     // // let tokenResult = await dayu.checkWebToken(result.body.access_token, result.body.openid)
     // console.log('请求token 结果 --->' + JSON.stringify(result))
 
-    const token = Token.getToken('token')
-    result = await dayu.webGetTicket(token.token)
+    const tokens = Token.getToken('token')
+    const token = tokens.token
+    result = await dayu.webGetTicket(token)
 
-    console.log('获取到的ticket ' + JSON.stringify(result))
+    console.log('token --->>> ' + token +'获取到的ticket ' + JSON.stringify(result))
 
     ctx.render('index', { 
         title: '微信分享JSSDK',

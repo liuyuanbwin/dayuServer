@@ -96,5 +96,6 @@ exports.webGetUserinfo = async (token, openid) => {
 }
 
 exports.webGetTicket = async (token) => {
-    return post('/ticket/getticket?access_token='+ token +'&type=jsapi')
+    console.log('tick 请求 >>> ' + '/ticket/getticket?access_token='+ token +'&type=jsapi')
+    return post('/ticket/getticket?access_token='+ token +'&type=jsapi','get')
 }
