@@ -49,7 +49,7 @@ var sign = function (jsapi_ticket, url) {
     };
     var string = raw(ret);
    
-    ret.signature = sha1(str)
+    ret.signature = sha1(string)
     ret.appId = config.wx.appid
 
     return ret;
