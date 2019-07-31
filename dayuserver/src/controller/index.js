@@ -63,30 +63,30 @@ exports.webHandle = async (ctx, next) => {
     const tokens = await Token.getToken('token')
     const token = tokens.token
 
-    var tiket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+token+'&type=jsapi';
+    // var tiket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+token+'&type=jsapi';
   
-      await request(tiket_url, function(error, response, body){
-        if(!error && response.statusCode == 200){
-          var data = JSON.parse(body);
-          console.log('ticket 返回 ' + JSON.stringify(data))
+    //   await request(tiket_url, function(error, response, body){
+    //     if(!error && response.statusCode == 200){
+    //       var data = JSON.parse(body);
+    //       console.log('ticket 返回 ' + JSON.stringify(data))
   
-          let jsapi_ticket = data.ticket;
-          ctx.render('index', { 
-            title: '微信分享JSSDK',
-            appid: config.wx.appid,
-            sign: JSON.stringify(sign(jsapi_ticket,'http://www.bl1000.cn/webHandle'))
-          });
-        }
-      });
-    // result = await dayu.webGetTicket(token)
-
-    // console.log('token --->>> ' + token +'获取到的ticket ' + JSON.stringify(result))
-
-    // ctx.render('index', { 
-    //     title: '微信分享JSSDK',
-    //     appid: config.wx.appid,
-    //     sign: JSON.stringify(sign(result.ticket,url))
+    //       let jsapi_ticket = data.ticket;
+    //       ctx.render('index', { 
+    //         title: '微信分享JSSDK',
+    //         appid: config.wx.appid,
+    //         sign: JSON.stringify(sign(jsapi_ticket,'http://www.bl1000.cn/webHandle'))
+    //       });
+    //     }
     //   });
+    result = await dayu.webGetTicket(token)
+
+    console.log('token --->>> ' + token +'获取到的ticket ' + JSON.stringify(result))
+
+    ctx.render('index', { 
+        title: '微信分享JSSDK',
+        appid: config.wx.appid,
+        sign: JSON.stringify(sign(result.ticket,url))
+      });
 
 
     // let userinfo = await dayu.webGetUserinfo(result.body.access_token, result.body.openid)
