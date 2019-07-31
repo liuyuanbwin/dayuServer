@@ -95,21 +95,60 @@
                   ]
                 });
         </script>
-        <script>
-            $.ajax({
-                type:"get",
-                url:"http://www.bl1000.cn/wx/jsSign?url=http://www.bl1000.cn/share",
-                data:{},
-                success:(result) => {
-                    console.log('sign == ' + JSON.stringify(result))
-                }
-            })
-        </script>
+       
 
         <!-- 如果使用了某些拓展插件还需要额外的JS -->
         <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
         <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
         <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+        <script>
+                $.ajax({
+                    type:"get",
+                    url:"http://www.bl1000.cn/wx/jsSign?url=http://www.bl1000.cn/share",
+                    data:{},
+                    success:(result) => {
+                        console.log('sign == ' + JSON.stringify(result))
+                        wx.config({
+                            debug:true,
+                            appId:'wxf5a4243b7b09ffc0',
+                            timestamp:""+result.timestamp,
+                            nonceStr:result.nonceStr,
+                            signature:result.signature,
+                            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
+                        })
+
+
+                        wx.ready(function(){
+            // 分享给好友
+            wx.onMenuShareAppMessage({
+                title:'馨悦名邸 全屋整装',// 分享标题
+                desc:'庆祝全筑e家入驻馨悦名邸，大师设计为你而来',// 分享描述
+                link:window.location.href,// 分享链接
+                imgUrl:'https://huodong.quanzhuejia.com/h5_share_03.jpg',// 分享图标
+                success: function(){
+                    doShareDone()
+                },
+                cancel:function(){
+                    doShareCancel()
+                }
+            })
+            // 分享到朋友圈
+            wx.onMenuShareTimeline({
+                title:'馨悦名邸',// 分享标题
+                link:window.location.href,// 分享链接
+                imgUrl:'https://huodong.quanzhuejia.com/h5_share_03.jpg',// 分享图标
+                success:function(){
+                    doShareDone()
+                },
+                cancel:function(){
+                doShareCancel()
+                }
+            })
+        });
+                        
+                    }
+                })
+            </script>
         
     </body>
 </html>
