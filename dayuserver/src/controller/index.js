@@ -62,7 +62,7 @@ exports.getSign  = async (ctx, next) => {
 
     console.log('token --->>> ' + token +'获取到的ticket ' + JSON.stringify(result))
 
-    ctx.body = sign(result.ticket,ctx.query.url)
+    ctx.body = sign(result.body.ticket,ctx.query.url)
   
 }
 
