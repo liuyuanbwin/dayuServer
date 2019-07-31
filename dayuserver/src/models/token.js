@@ -8,4 +8,4 @@ let tokenSchema = new mongoose.Schema({
     _id:true
 })
 
-module.exports = mongoose.model('Token',tokenSchema)
+module.exports = mongoose.model('Token',tokenSchema,'token')
