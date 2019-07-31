@@ -70,11 +70,11 @@ exports.webHandle = async (ctx, next) => {
           var data = JSON.parse(body);
           console.log('ticket 返回 ' + JSON.stringify(data))
   
-          cache.jsapi_ticket = data.ticket;
+          let jsapi_ticket = data.ticket;
           ctx.render('index', { 
             title: '微信分享JSSDK',
             appid: config.wx.appid,
-            sign: JSON.stringify(sign(cache.jsapi_ticket,url))
+            sign: JSON.stringify(sign(jsapi_ticket,url))
           });
         }
       });
