@@ -7,10 +7,10 @@ exports.gethandle = async (ctx, next) => {
     const result = wx.auth(ctx)
     
 
-    var wechat = ctx.wechat
-    var token = await wechat.getAccessToken()
+    // var wechat = ctx.wechat
+    // var token = await wechat.getAccessToken()
 
-    var result1 = await dayu.getUserlist(token)
+    // var result1 = await dayu.getUserlist(token)
         
     if(result){
         ctx.body = ctx.query.echostr
