@@ -67,6 +67,7 @@ const updateAccessToken = async () =>{
     });
 }
 const getAsync = async (type) => {
+    console.log('getAsync type -- ' + type)
     let result = await Token.findOne({
         type
     })
@@ -76,6 +77,8 @@ const getAsync = async (type) => {
 }
 
 const setSync = async (type, token, expires_in) => {
+
+    console.log('type -- ' + type + ' token -- ' + token + ' expires_in ' + expires_in)
     let result = await Token.where({
         type
     }).update({
@@ -87,14 +90,17 @@ const setSync = async (type, token, expires_in) => {
 }
 exports.getToken = async () => {
     let data = await getAsync('token')
-
+    console.log(' 第一次读到的token ' + JSON.stringify(data))
     if(data && data.length != 0){
         if(!isValidAccessToken(data)){
+            console.log(' ----  无效  -----')
             data = await updateAccessToken()
         }
     }else{
         data = await updateAccessToken()
+        console.log(' ----  更新  -----')
     }
     await setSync('token', data.access_token, data.expires_in)
+    console.log(' 返回的token ' + JSON.stringify(data))
     return data;
 }
