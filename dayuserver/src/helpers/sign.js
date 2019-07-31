@@ -1,3 +1,13 @@
+const crypto = require('crypto')
+const config = require('../helpers/config')
+
+function sha1(str) {
+    let shasum = crypto.createHash("sha1")
+    shasum.update(str)
+    str = shasum.digest("hex")
+    return str
+}
+
 var createNonceStr = function () {
     return Math.random().toString(36).substr(2, 15);
 };
@@ -38,9 +48,9 @@ var sign = function (jsapi_ticket, url) {
         url: url
     };
     var string = raw(ret);
-    jsSHA = require('jssha');
-    shaObj = new jsSHA(string, 'TEXT');
-    ret.signature = shaObj.getHash('SHA-1', 'HEX');
+   
+    ret.signature = sha1(str)
+    ret.appId = config.wx.appid
 
     return ret;
 
