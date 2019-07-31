@@ -92,7 +92,7 @@ const setSync = async (type, token, expires_in) => {
         if(err){
             console.log('Error: ' + err)
         }else{
-            console.log('Res: ' + res)
+            console.log('Res: ' + JSON.stringify(res))
         }
     })
 
