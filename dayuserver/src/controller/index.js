@@ -54,47 +54,14 @@ var getTiket = async (ctx,token,url) => {
    
   };
 
-exports.webHandle = async (ctx, next) => {
-    // console.log('get ->>> ' + JSON.stringify(ctx.query))
-    // let result = await dayu.getWebToken(ctx.query.code)
-    // // let tokenResult = await dayu.checkWebToken(result.body.access_token, result.body.openid)
-    // console.log('请求token 结果 --->' + JSON.stringify(result))
+exports.getSign  = async (ctx, next) => {
 
     const tokens = await Token.getToken('token')
     const token = tokens.token
-
-    // var tiket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+token+'&type=jsapi';
-  
-    //   await request(tiket_url, function(error, response, body){
-    //     if(!error && response.statusCode == 200){
-    //       var data = JSON.parse(body);
-    //       console.log('ticket 返回 ' + JSON.stringify(data))
-  
-    //       let jsapi_ticket = data.ticket;
-    //       ctx.render('index', { 
-    //         title: '微信分享JSSDK',
-    //         appid: config.wx.appid,
-    //         sign: JSON.stringify(sign(jsapi_ticket,'http://www.bl1000.cn/webHandle'))
-    //       });
-    //     }
-    //   });
     result = await dayu.webGetTicket(token)
 
     console.log('token --->>> ' + token +'获取到的ticket ' + JSON.stringify(result))
 
-    await ctx.render('index', { 
-        title: '微信分享JSSDK',
-        appid: config.wx.appid,
-        sign: JSON.stringify(sign(result.ticket,'http://www.bl1000.cn/webHandle'))
-      });
-
-
-    // let userinfo = await dayu.webGetUserinfo(result.body.access_token, result.body.openid)
-    // console.log('用户信息 ---> ' + JSON.stringify(userinfo) + userinfo.body)
-
-    // await ctx.render('index',{
-    //     title:'大宇车友',
-    //     headimg:userinfo.body.headimgurl,
-    //     nick:userinfo.body.nickname
-    // })
+    ctx.body = sign(result.ticket,ctx.query.url)
+  
 }
