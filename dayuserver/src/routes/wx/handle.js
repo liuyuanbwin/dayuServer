@@ -5,5 +5,6 @@ router.get('/wx/handle', controller.gethandle)
       .post('/wx/handle', controller.postHandle)
     //  .get('/webHandle',controller.webHandle)
       .get('/wx/jsSign', controller.getSign)
+      .get('/wx/share',controller.share)
 
 module.exports = router

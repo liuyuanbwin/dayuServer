@@ -65,3 +65,9 @@ exports.getSign  = async (ctx, next) => {
     ctx.body = sign(result.ticket,ctx.query.url)
   
 }
+
+exports.share = async (ctx, next) => {
+  ctx.render('index', { 
+    title: '微信分享JSSDK',
+  });
+}
