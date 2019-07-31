@@ -112,7 +112,7 @@
                 success: (result) => {
                     console.log('sign == ' + JSON.stringify(result))
                     wx.config({
-                        debug: true,
+                        debug: false,
                         appId: 'wxf5a4243b7b09ffc0',
                         timestamp: "" + result.timestamp,
                         nonceStr: result.nonceStr,
@@ -125,7 +125,7 @@
                         wx.onMenuShareAppMessage({
                             title: '涿州车友', // 分享标题
                             desc: '加入涿州车友,验车不错过,车险享优惠', // 分享描述
-                            link: window.location.href, // 分享链接
+                            link: 'http://www.bl1000.cn/wx/share', // 分享链接
                             imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
                             success: function () {
                                 //doShareDone()
@@ -137,7 +137,7 @@
                         // 分享到朋友圈
                         wx.onMenuShareTimeline({
                             title: '涿州车友', // 分享标题
-                            link: window.location.href, // 分享链接
+                            link: 'http://www.bl1000.cn/wx/share', // 分享链接
                             imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
                             success: function () {
                                 doShareDone()
