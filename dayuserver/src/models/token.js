@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 let tokenSchema = new mongoose.Schema({
     type:String,
     token:String,
-    expires:Number
+    expires_in:Number
 },{
     _id:true
 })

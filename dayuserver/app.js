@@ -42,6 +42,8 @@ mongoose
   console.log(err)
 })
 
+console.log('获取token ' + JSON.stringify(TokenHelper.getToken()))
+
 
 // middlewares
 app.use(bodyparser({
