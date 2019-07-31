@@ -51,7 +51,7 @@ const WxApi={
 //     }
 // }
 const isValidAccessToken = (data) => {
-    if(!data || !data.access_token || !data.expires_in){
+    if(!data || !data.token || !data.expires_in){
         return false;
     }
     return new Date().getTime() < data.expires_in ?  true : false;
