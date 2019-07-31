@@ -86,7 +86,7 @@ const setSync = async (type, token, expires_in) => {
     //     expires_in:expires_in
     // })
 
-    let find = await Token.find({type:'token'})
+    let find = await Token.find({})
     console.log('find result ' + JSON.stringify(find))
     let result = await Token.updateOne({type:'token'},{
         'token':token,
