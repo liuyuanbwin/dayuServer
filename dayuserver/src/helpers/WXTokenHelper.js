@@ -111,12 +111,14 @@ exports.getToken = async () => {
         if(!isValidAccessToken(data)){
             console.log(' ----  无效  -----')
             data = await updateAccessToken()
+            await setSync('token', data.access_token, data.expires_in)
         }
     }else{
         data = await updateAccessToken()
+        await setSync('token', data.access_token, data.expires_in)
         console.log(' ----  更新  -----' + data)
     }
-    await setSync('token', data.access_token, data.expires_in)
+    
     console.log(' 返回的token ' + JSON.stringify(data))
     return data;
 }
