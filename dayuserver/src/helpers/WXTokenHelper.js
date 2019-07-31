@@ -79,11 +79,21 @@ const getAsync = async (type) => {
 const setSync = async (type, token, expires_in) => {
 
     console.log('type -- ' + type + ' token -- ' + token + ' expires_in ' + expires_in)
-    let result = await Token.where({
-        'type':type
-    }).updateOne({
-        token:token,
-        expires_in:expires_in
+    // let result = await Token.where({
+    //     'type':type
+    // }).updateOne({
+    //     token:token,
+    //     expires_in:expires_in
+    // })
+    let result = Token.updateOne({type:'token'},{
+        token,
+        expires_in
+    },(err, res) => {
+        if(err){
+            console.log('Error: ' + err)
+        }else{
+            console.log('Res: ' + res)
+        }
     })
 
     console.log('保存结果token ' +  JSON.stringify(result))
