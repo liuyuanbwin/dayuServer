@@ -67,7 +67,7 @@ exports.getSign  = async (ctx, next) => {
 }
 
 exports.share = async (ctx, next) => {
-  ctx.render('index', { 
+  await ctx.render('index', { 
     title: '微信分享JSSDK',
   });
 }
