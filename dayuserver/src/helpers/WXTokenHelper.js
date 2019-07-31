@@ -88,7 +88,7 @@ const setSync = async (type, token, expires_in) => {
 
     console.log('保存结果token ' +  JSON.stringify(result))
 }
-exports.getToken = async () => {
+exports.getToken = () => {
     let data = await getAsync('token')
     console.log(' 第一次读到的token ' + JSON.stringify(data))
     if(data && data.length != 0){

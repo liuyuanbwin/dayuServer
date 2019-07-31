@@ -41,7 +41,7 @@ mongoose
 .catch(err => {
   console.log(err)
 })
-var tokenresult = await TokenHelper.getToken()
+var tokenresult = TokenHelper.getToken()
 console.log('获取token ' + JSON.stringify(tokenresult))
 
 
