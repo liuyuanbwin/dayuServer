@@ -57,6 +57,7 @@ const isValidAccessToken = (data) => {
     return new Date().getTime() < data.expires_in ?  true : false;
 }
 const updateAccessToken = async () =>{
+    console.log(' ---- *** 刷新 ***  -----')
     return new Promise(async (resolve,reject)=>{
         // var appId=this.appId;
         // var appSecret=this.appSecret;
