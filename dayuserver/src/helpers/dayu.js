@@ -96,5 +96,5 @@ exports.webGetUserinfo = async (token, openid) => {
 }
 
 exports.webGetTicket = async (token) => {
-    return webRequest('/ticket/getticket?access_token='+ token +'&type=jsapi')
+    return post('/ticket/getticket?access_token='+ token +'&type=jsapi')
 }
