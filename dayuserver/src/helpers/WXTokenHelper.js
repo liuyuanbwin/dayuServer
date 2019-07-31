@@ -85,7 +85,7 @@ const setSync = async (type, token, expires_in) => {
     //     token:token,
     //     expires_in:expires_in
     // })
-    let result = Token.updateOne({type:'token'},{
+    let result = await Token.updateOne({type:'token'},{
         token,
         expires_in
     },(err, res) => {
