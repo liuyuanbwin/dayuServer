@@ -83,7 +83,7 @@ const setSync = async (type, token, expires_in) => {
         expires_in
     })
 
-    console.log('保存结果token ' +  JSON.stringify(resultl))
+    console.log('保存结果token ' +  JSON.stringify(result))
 }
 exports.getToken = async () => {
     let data = await getAsync('token')
