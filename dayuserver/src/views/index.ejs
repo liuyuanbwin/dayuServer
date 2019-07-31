@@ -5,18 +5,22 @@
         <meta
             name="viewport"
             content="width=device-width,initial-scale=1,user-scalable=0">
-        <title><%- title %></title>
-        <link
-            rel="stylesheet"
-            href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
-        <link
-            rel="stylesheet"
-            href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
-        <link rel="stylesheet" href="../stylesheets/createtip.css">
-    </head>
-    <body>
-            <div>微信config信息: <br><span id="info">999</span></div>
-        <h3 class="demos-title">创建提醒</h3>
+        <title>
+            <%- title %>
+            </title>
+            <link
+                rel="stylesheet"
+                href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+            <link
+                rel="stylesheet"
+                href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+            <link rel="stylesheet" href="../stylesheets/createtip.css">
+        </head>
+        <body>
+            <div>微信config信息:
+                <br>
+                <span id="info">999</span></div>
+            <h3 class="demos-title">创建提醒</h3>
 
             <div class="weui-cell">
                 <div class="weui-cell__hd">
@@ -39,15 +43,15 @@
                 </div>
             </div>
             <div class="weui-cell">
-                    <div class="weui-cell__hd">
-                        <label for="" class="weui-label">车辆类型</label>
-                    </div>
-                    <div class="weui-cell__bd" style="margin-left:10px">
-                        <input class="weui-input"  value="5人以下轿车" id="cartype">
-                       
-                    </div>
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">车辆类型</label>
                 </div>
-          
+                <div class="weui-cell__bd" style="margin-left:10px">
+                    <input class="weui-input" value="5人以下轿车" id="cartype">
+
+                </div>
+            </div>
+
             <div class="weui-loadmore weui-loadmore_line">
                 <span class="weui-loadmore__tips">以下为选填</span>
             </div>
@@ -85,70 +89,68 @@
         <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 
         <script>
-                $("#cartype").picker({
-                  title: "请选择您的车型",
-                  cols: [
+            $("#cartype").picker({
+                title: "请选择您的车型",
+                cols: [
                     {
-                      textAlign: 'center',
-                      values: ['5人以下轿车', '5人以上轿车', '货车', '其他']
+                        textAlign: 'center',
+                        values: ['5人以下轿车', '5人以上轿车', '货车', '其他']
                     }
-                  ]
-                });
+                ]
+            });
         </script>
-       
 
         <!-- 如果使用了某些拓展插件还需要额外的JS -->
         <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
         <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
         <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
         <script>
-                $.ajax({
-                    type:"get",
-                    url:"http://www.bl1000.cn/wx/jsSign?url=http://www.bl1000.cn/wx/share",
-                    data:{},
-                    success:(result) => {
-                        console.log('sign == ' + JSON.stringify(result))
-                        wx.config({
-                            debug:true,
-                            appId:'wxf5a4243b7b09ffc0',
-                            timestamp:""+result.timestamp,
-                            nonceStr:result.nonceStr,
-                            signature:result.signature,
-                            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
+            $.ajax({
+                type: "get",
+                url: "http://www.bl1000.cn/wx/jsSign?url=http://www.bl1000.cn/wx/share",
+                data: {},
+                success: (result) => {
+                    console.log('sign == ' + JSON.stringify(result))
+                    wx.config({
+                        debug: true,
+                        appId: 'wxf5a4243b7b09ffc0',
+                        timestamp: "" + result.timestamp,
+                        nonceStr: result.nonceStr,
+                        signature: result.signature,
+                        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+                    })
+
+                    wx.ready(function () {
+                        // 分享给好友
+                        wx.onMenuShareAppMessage({
+                            title: '涿州车友', // 分享标题
+                            desc: '加入涿州车友,验车不错过,车险享优惠', // 分享描述
+                            link: window.location.href, // 分享链接
+                            imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
+                            success: function () {
+                                //doShareDone()
+                            },
+                            cancel: function () {
+                                //doShareCancel()
+                            }
                         })
+                        // 分享到朋友圈
+                        wx.onMenuShareTimeline({
+                            title: '涿州车友', // 分享标题
+                            link: window.location.href, // 分享链接
+                            imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
+                            success: function () {
+                                doShareDone()
+                            },
+                            cancel: function () {
+                                //doShareCancel()
+                            }
+                        })
+                    });
 
-
-                        wx.ready(function(){
-            // 分享给好友
-            wx.onMenuShareAppMessage({
-                title:'馨悦名邸 全屋整装',// 分享标题
-                desc:'庆祝全筑e家入驻馨悦名邸，大师设计为你而来',// 分享描述
-                link:window.location.href,// 分享链接
-                imgUrl:'https://huodong.quanzhuejia.com/h5_share_03.jpg',// 分享图标
-                success: function(){
-                    doShareDone()
-                },
-                cancel:function(){
-                    doShareCancel()
                 }
             })
-            // 分享到朋友圈
-            wx.onMenuShareTimeline({
-                title:'馨悦名邸',// 分享标题
-                link:window.location.href,// 分享链接
-                imgUrl:'https://huodong.quanzhuejia.com/h5_share_03.jpg',// 分享图标
-                success:function(){
-                    doShareDone()
-                },
-                cancel:function(){
-                doShareCancel()
-                }
-            })
-        });
-                        
-                    }
-                })
-            </script>
-        
+        </script>
+
     </body>
 </html>
