@@ -41,8 +41,8 @@ mongoose
 .catch(err => {
   console.log(err)
 })
-
-console.log('获取token ' + JSON.stringify((await TokenHelper.getToken()))
+var tokenresult = await TokenHelper.getToken()
+console.log('获取token ' + JSON.stringify(tokenresult))
 
 
 // middlewares
