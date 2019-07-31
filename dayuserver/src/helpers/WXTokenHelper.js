@@ -64,7 +64,7 @@ const updateAccessToken = async () =>{
         // var appSecret=this.appSecret;
         var res = await koa2Req(WxApi.accessToken+"&appid="+config.wx.appid+"&secret="+config.wx.appSecret);
         var data=JSON.parse(res.body);
-        console.log(' ---- *** '+ data+' ***  -----')
+        console.log(' ---- *** '+ JSON.stringify(data)+' ***  -----')
         data.expires_in=new Date().getTime() + (data.expires_in-20) * 1000;
         resolve(data);    
     });
