@@ -86,8 +86,8 @@ const setSync = async (type, token, expires_in) => {
     //     expires_in:expires_in
     // })
     let result = await Token.updateOne({type:'token'},{
-        token,
-        expires_in
+        'token':token,
+        'expires_in':expires_in
     },(err, res) => {
         if(err){
             console.log('Error: ' + err)
