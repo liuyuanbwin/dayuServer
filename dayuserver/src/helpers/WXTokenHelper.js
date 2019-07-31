@@ -1,5 +1,6 @@
 const Token = require('../models/token')
 const config = require('./config')
+const koa2Req = require('koa2-request')
 const baseUrl="https://api.weixin.qq.com/";
 const WxApi={
     accessToken:baseUrl+"cgi-bin/token?grant_type=client_credential"
