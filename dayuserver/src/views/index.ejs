@@ -110,8 +110,10 @@
             var rurl = "http://www.bl1000.cn/wx/jsSign?url=" + burl
             $.ajax({
                 type: "get",
-                url: rurl,
-                data: {},
+                url: "http://www.bl1000.cn/wx/jsSign",
+                data: {
+                    url:burl
+                },
                 success: (result) => {
                     console.log('sign == ' + JSON.stringify(result))
                     wx.config({
