@@ -105,9 +105,10 @@
         <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
         <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
         <script>
+            var url = encodeURI(location.href.split('#')[0]);
             $.ajax({
                 type: "get",
-                url: "http://www.bl1000.cn/wx/jsSign?url=http://www.bl1000.cn/wx/share",
+                url: "http://www.bl1000.cn/wx/jsSign?url=" + url,
                 data: {},
                 success: (result) => {
                     console.log('sign == ' + JSON.stringify(result))
