@@ -81,7 +81,7 @@ const setSync = async (type, token, expires_in) => {
     console.log('type -- ' + type + ' token -- ' + token + ' expires_in ' + expires_in)
     let result = await Token.where({
         type
-    }).update({
+    }).updateOne({
         token,
         expires_in
     })
