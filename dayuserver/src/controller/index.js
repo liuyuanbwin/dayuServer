@@ -60,7 +60,7 @@ exports.webHandle = async (ctx, next) => {
     // // let tokenResult = await dayu.checkWebToken(result.body.access_token, result.body.openid)
     // console.log('请求token 结果 --->' + JSON.stringify(result))
 
-    const tokens = Token.getToken('token')
+    const tokens = await Token.getToken('token')
     const token = tokens.token
     result = await dayu.webGetTicket(token)
 
