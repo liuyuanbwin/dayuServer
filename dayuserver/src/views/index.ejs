@@ -5,7 +5,7 @@
         <meta
             name="viewport"
             content="width=device-width,initial-scale=1,user-scalable=0">
-        <title>涿州车友</title>
+        <title><%- title %>><%- appid %></title>
         <link
             rel="stylesheet"
             href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
@@ -17,7 +17,7 @@
     <body>
             <div>微信config信息: <br><span id="info"><%- sign %></span></div>
         <h3 class="demos-title">创建提醒</h3>
-        <div class="wechatinfo">
+        <!-- <div class="wechatinfo">
             <img class="wechatImg" src="<%=headimg%>" alt="">
         </div>
 
@@ -29,7 +29,7 @@
                 <div class="weui-cell__bd">
                     <input class="weui-input" type="text" disabled="disabled" value="<%=nick%>">
                 </div>
-            </div>
+            </div> -->
             <div class="weui-cell">
                 <div class="weui-cell__hd">
                     <label class="weui-label">车牌号</label>
