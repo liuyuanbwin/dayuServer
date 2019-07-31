@@ -46,6 +46,29 @@ const post = (aurl, method, data) => {
     })
 }
 
+const getAsync = async (type) => {
+
+    let result = await Token.findOne({
+        type
+    })
+    return result
+}
+
+const setSync = async (type, token, expires_in) => {
+
+    let find = await Token.find({})
+    let result = await Token.updateOne({type:type},{
+        'token':token,
+        'expires_in':expires_in
+    },{upsert: true, new: true, setDefaultsOnInsert: true},(err, res) => {
+        if(err){
+            //console.log('Error: ' + err)
+        }else{
+            //console.log('Res: ' + JSON.stringify(res))
+        }
+    })
+}
+
 exports.postModelMsg = async (token, data) => {
 
     return post('/message/template/send?access_token=' + token,'post' ,data)
@@ -70,4 +93,8 @@ exports.checkWebToken = async (token, openid) => {
 
 exports.webGetUserinfo = async (token, openid) => {
     return webRequest('/userinfo?access_token=' + token + '&openid=' + openid + '&lang=zh_CN')
+}
+
+exports.webGetTicket = async (token) => {
+    return webRequest('/ticket/getticket?access_token='+ token +'&type=jsapi')
 }
