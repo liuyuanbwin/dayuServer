@@ -7,6 +7,9 @@ const sign = require('../helpers/sign')
 const request = require('request')
 const config = require('../helpers/config')
 
+const Client = require('../models/client')
+const Vehicle = require('../models/vehicle')
+
 exports.gethandle = async (ctx, next) => {
     const result = wx.auth(ctx)
     if (result) {
@@ -51,7 +54,19 @@ exports.share = async (ctx, next) => {
 
 exports.registClient = async (ctx, next) => {
     console.log('接受到' + JSON.stringify(ctx.request.body))
+    var userinfo = ctx.request.body.userinfo
+    const result = await Client.findOneAndUpdate({openid:userinfo.openid},{
+      openid:userinfo.openid,
+      nickname:userinfo.nickname,
+      sex:userinfo.sex,
+      city:userinfo.city,
+      province:userinfo.province,
+      headimgurl:userinfo.headimgurl,
+    },{
+      upsert:true
+    })
+   
     ctx.body = {
-      ok:"ok"
+      ok:JSON.stringify(result)
     }
 }
