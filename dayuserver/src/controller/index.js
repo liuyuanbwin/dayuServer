@@ -55,6 +55,13 @@ exports.share = async (ctx, next) => {
     });
 }
 
+exports.success = async (ctx, next) => {
+
+  await ctx.render('success', {
+      title: '设置成功',
+  });
+}
+
 exports.registClient = async (ctx, next) => {
     console.log('接受到' + JSON.stringify(ctx.request.body))
     var userinfo = ctx.request.body.userinfo
