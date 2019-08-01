@@ -1,5 +1,11 @@
 const mongoose = require('mongoose')
 
+
+var clientSchema = new mongoose.Schema({
+    clientid:String
+})
+
+
 let vehicleSchema = new mongoose.Schema({
     plate_num:String,
     insurant:String,
@@ -23,7 +29,8 @@ let vehicleSchema = new mongoose.Schema({
     busi_man:String,
     busi_man_tel:String,
     headquarter:String,
-    car_model:String
+    car_model:String,
+    clients:[clientSchema]
 },{
     _id:true
 })
