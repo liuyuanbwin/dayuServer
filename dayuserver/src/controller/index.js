@@ -39,7 +39,7 @@ exports.getSign = async (ctx, next) => {
 exports.share = async (ctx, next) => {
 
     let webtoken = await dayu.getWebToken(ctx.query.code)
-    let userinfo = await dayu.webGetUserinfo(webtoken.body.access_token, result.body.openid)
+    let userinfo = await dayu.webGetUserinfo(webtoken.body.access_token, webtoken.body.openid)
     await ctx.render('index', {
       title: '涿州车友',
       headimg:userinfo.body.headimg,
