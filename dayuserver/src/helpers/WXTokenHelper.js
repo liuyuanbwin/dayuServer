@@ -87,7 +87,7 @@ exports.getTicket = async () => {
             data = await updateTicket()
             await setSync('ticket', data.body.ticket, data.expires_in)
             data = {
-                ticket:data.body.ticket,
+                token:data.body.ticket,
                 expires_in:data.body.expires_in
             }
         }
@@ -96,7 +96,7 @@ exports.getTicket = async () => {
             await setSync('ticket', data.body.ticket, data.expires_in)
             console.log(' ----  更新 ticket  -----' + data)
             data = {
-                ticket:data.body.ticket,
+                token:data.body.ticket,
                 expires_in:data.body.expires_in
             }
     }
