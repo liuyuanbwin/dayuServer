@@ -14,6 +14,10 @@ const isValidAccessToken = (data) => {
     console.log(' ---- *** 比较 ***  -----' + new Date().getTime() + '----' + data.expires_in)
     return new Date().getTime() < data.expires_in ?  true : false;
 }
+const updateWebtoken = async (code) => {
+    const token = await Dayu.getWebToken(code)
+    return token
+}
 const updateTicket = async () => {
     const token = await this.getToken('token')
     let result = await Dayu.webGetTicket(token.token)
@@ -41,7 +45,18 @@ const getAsync = async (type) => {
     return result
 }
 
-const setSync = async (type, token, expires_in) => {
+const getWebTokenSync = async (openid) => {
+    let result = await Token.findOne({
+        type:'webtoken',
+        openid,
+    })
+
+    console.log('getWebTokenSync ---> ' + JSON.stringify(result))
+    
+    return result
+}
+
+const setSync = async (type, token, expires_in, openid) => {
 
     console.log('type -- ' + type + ' token -- ' + token + ' expires_in ' + expires_in)
 
@@ -49,7 +64,8 @@ const setSync = async (type, token, expires_in) => {
     console.log('find result ' + JSON.stringify(find))
     let result = await Token.updateOne({type:type},{
         'token':token,
-        'expires_in':expires_in
+        'expires_in':expires_in,
+        openid
     },(err, res) => {
         if(err){
             console.log('Error: ' + err)
@@ -101,5 +117,29 @@ exports.getTicket = async () => {
             }
     }
     console.log(' 返回的 Ticket ' + JSON.stringify(data))
+    return data;
+}
+exports.getWebToken = async (ctx, next) => {
+    let data = await getAsync('webtoken')
+    console.log('第一次读到的 webtoken ' + JSON.stringify(data))
+    if(data && data.length != 0){
+        if(!isValidAccessToken(data)){
+            console.log(' ----  ticket 无效  -----')
+            data = await updateWebtoken(ctx.query.code)
+            await setSync('webtoken', data.body.access_token, data.body.expires_in)
+            data = {
+                token:data.body.access_token,
+                expires_in:data.body.expires_in
+            }
+        }
+    }else{
+        data = await updateWebtoken(ctx.query.code)
+        await setSync('webtoken', data.body.access_token, data.body.expires_in)
+        data = {
+            token:data.body.access_token,
+            expires_in:data.body.expires_in
+        }
+    }
+    console.log(' 返回的 webtoken ' + JSON.stringify(data))
     return data;
 }

@@ -17,146 +17,156 @@
             <link rel="stylesheet" href="../stylesheets/createtip.css">
         </head>
         <body>
-            <div>微信config信息:
-                <br>
-                <span id="info">999</span></div>
+
             <h3 class="demos-title">创建提醒</h3>
-
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">车牌号</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <input
-                        class="weui-input"
-                        type="number"
-                        pattern="^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$"
-                        placeholder="请输入车牌号">
-                </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label for="" class="weui-label">首次登记日期</label>
-                </div>
-                <div class="weui-cell__bd" style="margin-left:10px">
-                    <input class="weui-input" type="date" value="">
-                </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label for="" class="weui-label">车辆类型</label>
-                </div>
-                <div class="weui-cell__bd" style="margin-left:10px">
-                    <input class="weui-input" value="5人以下轿车" id="cartype">
-
-                </div>
+            <div class="wechatinfo">
+                <img class="wechatImg" src="<%=headimg%>" alt="">
             </div>
 
-            <div class="weui-loadmore weui-loadmore_line">
-                <span class="weui-loadmore__tips">以下为选填</span>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label for="" class="weui-label">交强到期日期</label>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">微信用户</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" disabled="disabled" value="<%=nick%>">
+                    </div>
                 </div>
-                <div class="weui-cell__bd" style="margin-left:10px">
-                    <input class="weui-input" type="date" value="">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">车牌号</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input
+                            class="weui-input"
+                            type="number"
+                            pattern="^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$"
+                            placeholder="请输入车牌号">
+                    </div>
                 </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label for="" class="weui-label">商险到期日期</label>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">首次登记日期</label>
+                    </div>
+                    <div class="weui-cell__bd" style="margin-left:10px">
+                        <input class="weui-input" type="date" value="">
+                    </div>
                 </div>
-                <div class="weui-cell__bd" style="margin-left:10px">
-                    <input class="weui-input" type="date" value="">
-                </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">手机号</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" placeholder="请输入手机号">
-                </div>
-            </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">车辆类型</label>
+                    </div>
+                    <div class="weui-cell__bd" style="margin-left:10px">
+                        <input class="weui-input" value="5人以下轿车" id="cartype">
 
-        </div>
-        <div class="weui-cells__tips">本服务由涿州车友提供技术支持</div>
+                    </div>
+                </div>
 
-        <!-- body 最后 -->
-        <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
-        <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
-        <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+                <div class="weui-loadmore weui-loadmore_line">
+                    <span class="weui-loadmore__tips">以下为选填</span>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">交强到期日期</label>
+                    </div>
+                    <div class="weui-cell__bd" style="margin-left:10px">
+                        <input class="weui-input" type="date" value="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">商险到期日期</label>
+                    </div>
+                    <div class="weui-cell__bd" style="margin-left:10px">
+                        <input class="weui-input" type="date" value="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">手机号</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="tel" placeholder="请输入手机号">
+                    </div>
+                </div>
 
-        <script>
-            $("#cartype").picker({
-                title: "请选择您的车型",
-                cols: [
-                    {
-                        textAlign: 'center',
-                        values: ['5人以下轿车', '5人以上轿车', '货车', '其他']
+            </div>
+            <div class="weui-cells__tips">本服务由涿州车友提供技术支持</div>
+
+            <!-- body 最后 -->
+            <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+            <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+            <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+
+            <script>
+                $("#cartype").picker({
+                    title: "请选择您的车型",
+                    cols: [
+                        {
+                            textAlign: 'center',
+                            values: ['5人以下轿车', '5人以上轿车', '货车', '其他']
+                        }
+                    ]
+                });
+            </script>
+
+            <!-- 如果使用了某些拓展插件还需要额外的JS -->
+            <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+            <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+            <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+            <script>
+                var burl = encodeURI(location.href.split('#')[0]);
+                console.log('burl ' + burl)
+                var rurl = "http://www.bl1000.cn/wx/jsSign?url=" + burl
+                $.ajax({
+                    type: "get",
+                    url: "http://www.bl1000.cn/wx/jsSign",
+                    data: {
+                        url: burl
+                    },
+                    success: (result) => {
+                        console.log('sign == ' + JSON.stringify(result))
+                        wx.config({
+                            debug: true,
+                            appId: 'wxf5a4243b7b09ffc0',
+                            timestamp: "" + result.timestamp,
+                            nonceStr: result.nonceStr,
+                            signature: result.signature,
+                            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+                        })
+
+                        wx.ready(function () {
+                            // 分享给好友
+                            wx.onMenuShareAppMessage({
+                                title: '涿州车友', // 分享标题
+                                desc: '加入涿州车友,验车不错过,车险享优惠', // 分享描述
+                                link: 'http://www.bl1000.cn/wx/share', // 分享链接
+                                imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
+                                type: 'link',
+                                success: function () {
+                                    //doShareDone()
+                                },
+                                cancel: function () {
+                                    //doShareCancel()
+                                }
+                            })
+                            // 分享到朋友圈
+                            wx.onMenuShareTimeline({
+                                title: '涿州车友', // 分享标题
+                                link: 'http://www.bl1000.cn/wx/share', // 分享链接
+                                imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
+                                success: function () {
+                                    //doShareDone()
+                                },
+                                cancel: function () {
+                                    //doShareCancel()
+                                }
+                            })
+                        });
+
                     }
-                ]
-            });
-        </script>
+                })
+            </script>
 
-        <!-- 如果使用了某些拓展插件还需要额外的JS -->
-        <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
-        <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
-        <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
-        <script>
-            var burl = encodeURI(location.href.split('#')[0]);
-            console.log('burl ' + burl)
-            var rurl = "http://www.bl1000.cn/wx/jsSign?url=" + burl
-            $.ajax({
-                type: "get",
-                url: "http://www.bl1000.cn/wx/jsSign",
-                data: {
-                    url:burl
-                },
-                success: (result) => {
-                    console.log('sign == ' + JSON.stringify(result))
-                    wx.config({
-                        debug: true,
-                        appId: 'wxf5a4243b7b09ffc0',
-                        timestamp: "" + result.timestamp,
-                        nonceStr: result.nonceStr,
-                        signature: result.signature,
-                        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
-                    })
-
-                    wx.ready(function () {
-                        // 分享给好友
-                        wx.onMenuShareAppMessage({
-                            title: '涿州车友', // 分享标题
-                            desc: '加入涿州车友,验车不错过,车险享优惠', // 分享描述
-                            link: 'http://www.bl1000.cn/wx/share', // 分享链接
-                            imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
-                            type:'link',
-                            success: function () {
-                                //doShareDone()
-                            },
-                            cancel: function () {
-                                //doShareCancel()
-                            }
-                        })
-                        // 分享到朋友圈
-                        wx.onMenuShareTimeline({
-                            title: '涿州车友', // 分享标题
-                            link: 'http://www.bl1000.cn/wx/share', // 分享链接
-                            imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
-                            success: function () {
-                                //doShareDone()
-                            },
-                            cancel: function () {
-                                //doShareCancel()
-                            }
-                        })
-                    });
-
-                }
-            })
-        </script>
-
-    </body>
-</html>
+        </body>
+    </html>
