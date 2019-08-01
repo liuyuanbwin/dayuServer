@@ -11,7 +11,8 @@ let clientSchema = new mongoose.Schema({
     remark:String,
     groupid:Number,
     tagid_list:[Number],
-    subscribe_scene:String
+    subscribe_scene:String,
+    tel:String
 },{
     _id:true
 })

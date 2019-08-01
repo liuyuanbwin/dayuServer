@@ -63,6 +63,7 @@ exports.registClient = async (ctx, next) => {
       city:userinfo.city,
       province:userinfo.province,
       headimgurl:userinfo.headimgurl,
+      tel:ctx.request.body.tel
     }
   },{
       new:true,
