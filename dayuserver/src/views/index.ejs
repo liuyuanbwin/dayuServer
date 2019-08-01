@@ -184,7 +184,8 @@
                         return
                     }
 
-                    var car_type = $("#car_type").val()
+                    var car_type = $("#cartype").val()
+                    car_type = str2cartype(car_type)
 
                     var tel = $("#tel").val()
                     if(!isTelNumber(tel)){
@@ -214,6 +215,21 @@
                     console.log(
                         plate_num + regist_date + car_type + tel + cli_date + gap_date
                     )
+                }
+                function str2cartype(str){
+                    var types = ['5人以下轿车', '5人以上轿车', '货车', '其他']
+                    if(str == '5人以下轿车'){
+                        return 'under5'
+                    }
+                    if(str == '5人以上轿车'){
+                        return 'beyond5'
+                    }
+                    if(str == '货车'){
+                        return 'trunk'
+                    }
+                    if(str == '其他'){
+                        return 'other'
+                    }
                 }
                 function isVehicleNumber(vehicleNumber) {
                     var result = false;

@@ -75,16 +75,43 @@ exports.registClient = async (ctx, next) => {
         upsert: true
     })
 
-    const addCarresult = await Vehicle.update({
-      plate_num:ctx.request.body.plate_num
-    },{
-      $addToSet:{
-        clients:userinfo.openid
-      }
-    },{
-      new:true,
-      upsert:true
-    })
+    const vehicle = new Vehicle({
+      plate_num:ctx.request.body.plate_num,
+      vehicle_type:ctx.request.body.car_type,
+      regist_date:ctx.request.body.regist_date,
+      cli_expire_date:ctx.request.body.cli_date,
+      gap_expire_date:ctx.request.body.gap_date,
+      source:2,
+      clients:[userinfo.openid]
+  })
+
+  let code = 0
+
+    try {
+        await vehicle.save()
+        ctx.body = {
+            code:0
+        }  
+    } catch (err) {
+        console.log(err)
+        ctx.body = {
+            code:-1
+        }
+    }
+
+    // const addCarresult = await Vehicle.update({
+    //   plate_num:ctx.request.body.plate_num
+    // },{
+    //   $addToSet:{
+    //     clients:userinfo.openid,
+    //     source:2,
+    //     regist_date:ctx.request.body.regist_date,
+
+    //   }
+    // },{
+    //   new:true,
+    //   upsert:true
+    // })
 
     console.log('更新结果 ' + JSON.stringify(result) + '  搞车结果 ' + JSON.stringify(addCarresult))
 
