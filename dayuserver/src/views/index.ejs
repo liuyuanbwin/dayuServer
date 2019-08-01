@@ -37,7 +37,8 @@
                     </div>
                     <div class="weui-cell__bd">
                         <input
-                            class="weui-input" id="plate_num"
+                            class="weui-input"
+                            id="plate_num"
                             type="number"
                             pattern="^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$"
                             placeholder="请输入车牌号">
@@ -56,18 +57,18 @@
                         <label for="" class="weui-label">车辆类型</label>
                     </div>
                     <div class="weui-cell__bd" style="margin-left:10px">
-                        <input class="weui-input" id="car_type" value="5人以下轿车" id="cartype">
+                        <input class="weui-input" id="cartype" value="5人以下轿车">
 
                     </div>
                 </div>
                 <div class="weui-cell">
-                        <div class="weui-cell__hd">
-                            <label class="weui-label">手机号</label>
-                        </div>
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="tel"type="tel" placeholder="收入手机号码获取更好服务">
-                        </div>
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">手机号</label>
                     </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" id="tel" type="tel" placeholder="收入手机号码获取更好服务">
+                    </div>
+                </div>
 
                 <div class="weui-loadmore weui-loadmore_line">
                     <span class="weui-loadmore__tips">以下为选填</span>
@@ -85,13 +86,13 @@
                         <label for="" class="weui-label">商险到期日期</label>
                     </div>
                     <div class="weui-cell__bd" style="margin-left:10px">
-                        <input class="weui-input" id="gap_date'' type="date" value="">
+                        <input class="weui-input" id="gap_date" type="date" value="">
                     </div>
                 </div>
-                
+
                 <div class="weui-btn-area">
                     <button class="weui-btn weui-btn_primary" onclick="submit()">订阅</button>
-                      </div>
+                </div>
 
             </div>
             <div class="weui-cells__tips">本服务由涿州车友提供技术支持</div>
@@ -169,17 +170,68 @@
 
                     }
                 })
-                
-                function submit(){
-                    var plate_num = $("#plate_num").val()
-                    var regist_date = $("#regist_date").val()
-                    var car_type = $("#car_type").val()
-                    var tel = $("#tel").val()
-                    var cli_date = $("#cli_date").val()
-                    var gap_date = $("#gap_date").val()
 
-                    console.log(plate_num + regist_date + car_type + tel + cli_date + gap_date)
+                function submit() {
+
+                    var plate_num = $("#plate_num").val()
+                    if(!isVehicleNumber(plate_num)){
+                        $.toptip('请正确填写车牌号', 'warning');
+                        return
+                    }
+
+                    var regist_date = $("#regist_date").val()
+                    if(!isValidDate(regist_date)){
+                        $.toptip('请选择车辆注册日期','warning')
+                        return
+                    }
+
+                    var car_type = $("#car_type").val()
+
+                    var tel = $("#tel").val()
+                    if(!isTelNumber(tel)){
+                        $.toptip('请正确填写手机号码','warning')
+                        return
+                    }
+                    var cli_date = $("#cli_date").val()
+                    if(!isValidDate(cli_date)){
+                        $.toptip('请选择交强到期日期','warning')
+                        return
+                    }
+
+
+                    var gap_date = $("#gap_date").val()
+                    if(!isValidDate(gap_date)){
+                        $.toptip('请选择商险到期日期','warning')
+                        return
+                    }
+
+                    console.log(
+                        plate_num + regist_date + car_type + tel + cli_date + gap_date
+                    )
                 }
-           </script>
+                function isVehicleNumber(vehicleNumber) {
+                    var result = false;
+                    if (vehicleNumber.length == 7) {
+                        var express = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
+                        result = express.test(vehicleNumber);
+                    }
+                    return result;
+                }
+                function isTelNumber(tel) {
+                    var result = false;
+                    if (tel.length == 11) {
+                        var express = /^1\d[10]/;
+                        result = express.test(tel);
+                    }
+                    return result;
+                }
+                function isValidDate(date){
+                    var result = false
+                    if(date.length > 0){
+                        result = true
+                    }
+                    return result
+                }
+            </script>
         </body>
     </html>
