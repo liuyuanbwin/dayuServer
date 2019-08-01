@@ -89,9 +89,9 @@ exports.registClient = async (ctx, next) => {
 
     try {
         await vehicle.save()
-        ctx.body = {
-            code:0
-        }  
+        // ctx.body = {
+        //     code:0
+        // }  
     } catch (err) {
         console.log(err)
         ctx.body = {
