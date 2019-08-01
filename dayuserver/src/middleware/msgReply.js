@@ -58,7 +58,7 @@ console.log('搜索了数据库 ++++++++++')
             let token = await Token.getToken('token')
             console.log('token  >>>> ' + token)
             await Dayu
-                .postModelMsg(token,{
+                .postModelMsg(token.token,{
                     touser: toFromName,
                     template_id: 'IIFWNAzKrk_ZXpR92NA3D-VQoBDGVIsyDAQRKpCjVJc',
                     topcolor: "#FF0000",
