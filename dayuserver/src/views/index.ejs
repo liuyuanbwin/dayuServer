@@ -123,7 +123,7 @@
                 var rurl = "http://www.bl1000.cn/wx/jsSign?url=" + burl
                 $.ajax({
                     type: "get",
-                    url: "./wx/jsSign",//"http://www.bl1000.cn/wx/jsSign",
+                    url: "./jsSign",//"http://www.bl1000.cn/wx/jsSign",
                     data: {
                         url: burl
                     },
@@ -196,7 +196,7 @@
                     
                     $.ajax({
                         type: "post",
-                        url: "./wx/registClient",
+                        url: "./registClient",
                         data: {
                             userinfo:JSON.parse(userinfoStr),
                             plate_num,
