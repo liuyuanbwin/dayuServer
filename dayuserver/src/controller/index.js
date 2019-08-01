@@ -44,7 +44,7 @@ exports.share = async (ctx, next) => {
     console.log('userinfo ---> ' + JSON.stringify(userinfo))
     await ctx.render('index', {
       title: '涿州车友',
-      headimg:userinfo.body.headimg,
+      headimg:userinfo.body.headimgurl,
       nick:userinfo.body.nickname
     });
 }
