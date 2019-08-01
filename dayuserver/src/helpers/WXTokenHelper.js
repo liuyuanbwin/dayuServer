@@ -86,11 +86,19 @@ exports.getTicket = async () => {
             console.log(' ----  ticket 无效  -----')
             data = await updateTicket()
             await setSync('ticket', data.body.ticket, data.expires_in)
+            data = {
+                ticket:data.body.ticket,
+                expires_in:data.body.expires_in
+            }
         }
     }else{
             data = await updateTicket()
             await setSync('ticket', data.body.ticket, data.expires_in)
             console.log(' ----  更新 ticket  -----' + data)
+            data = {
+                ticket:data.body.ticket,
+                expires_in:data.body.expires_in
+            }
     }
     console.log(' 返回的 Ticket ' + JSON.stringify(data))
     return data;
