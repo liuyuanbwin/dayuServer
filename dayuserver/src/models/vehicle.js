@@ -24,6 +24,7 @@ let vehicleSchema = new mongoose.Schema({
     busi_man_tel:String,
     headquarter:String,
     car_model:String,
+    source:Number,
     clients:[String]
 },{
     _id:true

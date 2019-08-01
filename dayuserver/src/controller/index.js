@@ -42,37 +42,53 @@ exports.getSign = async (ctx, next) => {
 exports.share = async (ctx, next) => {
 
     let webtoken = await dayu.getWebToken(ctx.query.code)
-    let userinfo = await dayu.webGetUserinfo(webtoken.body.access_token, webtoken.body.openid)
-  
+    let userinfo = await dayu.webGetUserinfo(
+        webtoken.body.access_token,
+        webtoken.body.openid
+    )
+
     await ctx.render('index', {
-      title: '涿州车友',
-      headimg:userinfo.body.headimgurl,
-      nick:userinfo.body.nickname,
-      userinfo:userinfo.body
+        title: '涿州车友',
+        headimg: userinfo.body.headimgurl,
+        nick: userinfo.body.nickname,
+        userinfo: userinfo.body
     });
 }
 
 exports.registClient = async (ctx, next) => {
     console.log('接受到' + JSON.stringify(ctx.request.body))
     var userinfo = ctx.request.body.userinfo
-    const result = await Client.findOneAndUpdate({openid:userinfo.openid},{
-      $set:{
-      openid:userinfo.openid,
-      nickname:userinfo.nickname,
-      sex:userinfo.sex,
-      city:userinfo.city,
-      province:userinfo.province,
-      headimgurl:userinfo.headimgurl,
-      tel:ctx.request.body.tel
-    }
-  },{
+    const result = await Client.findOneAndUpdate({
+        openid: userinfo.openid
+    }, {
+        $set: {
+            openid: userinfo.openid,
+            nickname: userinfo.nickname,
+            sex: userinfo.sex,
+            city: userinfo.city,
+            province: userinfo.province,
+            headimgurl: userinfo.headimgurl,
+            tel: ctx.request.body.tel
+        }
+    }, {
+        new: true,
+        upsert: true
+    })
+
+    const addCarresult = await Vehicle.update({
+      plate_num:ctx.request.body.plate_num
+    },{
+      $addToSet:{
+        clients:userinfo.openid
+      }
+    },{
       new:true,
       upsert:true
     })
 
-    console.log('更新结果 ' + JSON.stringify(result))
-   
+    console.log('更新结果 ' + JSON.stringify(result) + '  搞车结果 ' + JSON.stringify(addCarresult))
+
     ctx.body = {
-      ok:JSON.stringify(result)
+        ok: JSON.stringify(addCarresult)
     }
 }
