@@ -88,6 +88,9 @@
                         <input class="weui-input" type="tel" placeholder="请输入手机号">
                     </div>
                 </div>
+                <div class="weui-btn-area">
+                        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+                      </div>
 
             </div>
             <div class="weui-cells__tips">本服务由涿州车友提供技术支持</div>
@@ -115,10 +118,7 @@
             <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
             <script>
                 var userinfoStr = '<%- JSON.stringify(userinfo) %>'
-
-                console.log('userinfo ' + userinfoStr)
                 var burl = encodeURI(location.href.split('#')[0]);
-                console.log('burl ' + burl)
                 var rurl = "http://www.bl1000.cn/wx/jsSign?url=" + burl
                 $.ajax({
                     type: "get",
@@ -168,7 +168,7 @@
 
                     }
                 })
-            </script>
-
+                
+           </script>
         </body>
     </html>

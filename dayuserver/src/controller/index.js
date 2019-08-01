@@ -46,6 +46,6 @@ exports.share = async (ctx, next) => {
       title: '涿州车友',
       headimg:userinfo.body.headimgurl,
       nick:userinfo.body.nickname,
-      userinfo:userinfo
+      userinfo:userinfo.body
     });
 }
