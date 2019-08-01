@@ -50,7 +50,7 @@ exports.share = async (ctx, next) => {
 }
 
 exports.registClient = async (ctx, next) => {
-    console.log('接受到' + JSON.stringify(ctx.req.body))
+    console.log('接受到' + JSON.stringify(ctx.request.body))
     ctx.body = {
       ok:"ok"
     }
