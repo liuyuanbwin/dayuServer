@@ -219,7 +219,7 @@
                 function isTelNumber(tel) {
                     var result = false;
                     if (tel.length == 11) {
-                        var express = /^1\d[10]/;
+                        var express = /^1{\d}[10]/;
                         result = express.test(tel);
                     }
                     return result;
