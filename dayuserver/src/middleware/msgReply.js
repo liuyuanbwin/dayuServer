@@ -3,6 +3,7 @@ const Vehicle = require('../models/vehicle')
 const Keyword = require('../models/keywordReply')
 const Dayu = require('../helpers/dayu')
 const moment = require('moment')
+const Token = require('../helpers/WXTokenHelper')
 
 exports.xmlReply = async (ctx, next) => {
 
@@ -55,7 +56,7 @@ console.log('搜索了数据库 ++++++++++')
 
         } else {
             await Dayu
-                .postModelMsg({
+                .postModelMsg(Token.getToken(),{
                     touser: toFromName,
                     template_id: 'IIFWNAzKrk_ZXpR92NA3D-VQoBDGVIsyDAQRKpCjVJc',
                     topcolor: "#FF0000",
