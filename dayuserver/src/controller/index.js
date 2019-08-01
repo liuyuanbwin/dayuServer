@@ -56,15 +56,20 @@ exports.registClient = async (ctx, next) => {
     console.log('接受到' + JSON.stringify(ctx.request.body))
     var userinfo = ctx.request.body.userinfo
     const result = await Client.findOneAndUpdate({openid:userinfo.openid},{
+      $set:{
       openid:userinfo.openid,
       nickname:userinfo.nickname,
       sex:userinfo.sex,
       city:userinfo.city,
       province:userinfo.province,
       headimgurl:userinfo.headimgurl,
-    },{
+    }
+  },{
+      new:true,
       upsert:true
     })
+
+    console.log('更新结果 ' + JSON.stringify(result))
    
     ctx.body = {
       ok:JSON.stringify(result)
