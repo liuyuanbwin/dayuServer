@@ -17,7 +17,6 @@
             <link rel="stylesheet" href="../stylesheets/createtip.css">
         </head>
         <body>
-            <span id="userinfo"><% userinfo %></span>
             <h3 class="demos-title">创建提醒</h3>
             <div class="wechatinfo">
                 <img class="wechatImg" src="<%=headimg%>" alt="">
@@ -115,6 +114,9 @@
             <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
             <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
             <script>
+                var userinfoStr = '<%- JSON.stringify(userinfo) %>'
+
+                console.log('userinfo ' + userinfoStr)
                 var burl = encodeURI(location.href.split('#')[0]);
                 console.log('burl ' + burl)
                 var rurl = "http://www.bl1000.cn/wx/jsSign?url=" + burl
