@@ -85,11 +85,11 @@ exports.getTicket = async () => {
         if(!isValidAccessToken(data)){
             console.log(' ----  ticket 无效  -----')
             data = await updateTicket()
-            await setSync('ticket', data.ticket, data.expires_in)
+            await setSync('ticket', data.body.ticket, data.expires_in)
         }
     }else{
             data = await updateTicket()
-            await setSync('ticket', data.ticket, data.expires_in)
+            await setSync('ticket', data.body.ticket, data.expires_in)
             console.log(' ----  更新 ticket  -----' + data)
     }
     console.log(' 返回的 Ticket ' + JSON.stringify(data))
