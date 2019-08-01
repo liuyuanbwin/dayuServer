@@ -123,7 +123,7 @@
                 var rurl = "http://www.bl1000.cn/wx/jsSign?url=" + burl
                 $.ajax({
                     type: "get",
-                    url: "http://www.bl1000.cn/wx/jsSign",
+                    url: "/jsSign",//"http://www.bl1000.cn/wx/jsSign",
                     data: {
                         url: burl
                     },
@@ -192,17 +192,24 @@
                         return
                     }
                     var cli_date = $("#cli_date").val()
-                    if(!isValidDate(cli_date)){
-                        $.toptip('请选择交强到期日期','warning')
-                        return
-                    }
-
-
                     var gap_date = $("#gap_date").val()
-                    if(!isValidDate(gap_date)){
-                        $.toptip('请选择商险到期日期','warning')
-                        return
-                    }
+                    
+                    $.$.ajax({
+                        type: "post",
+                        url: "./registClient",
+                        data: {
+                            userinfo:JSON.parse(userinfoStr),
+                            plate_num,
+                            regist_date,
+                            car_type,
+                            tel,
+                            cli_date,
+                            gap_date
+                        },
+                        success: function (response) {
+                            console.log(JSON.stringify(response))
+                        }
+                    });
 
                     console.log(
                         plate_num + regist_date + car_type + tel + cli_date + gap_date

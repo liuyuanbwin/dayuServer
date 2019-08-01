@@ -39,7 +39,6 @@ exports.getSign = async (ctx, next) => {
 exports.share = async (ctx, next) => {
 
     let webtoken = await dayu.getWebToken(ctx.query.code)
-  
     let userinfo = await dayu.webGetUserinfo(webtoken.body.access_token, webtoken.body.openid)
   
     await ctx.render('index', {
@@ -48,4 +47,11 @@ exports.share = async (ctx, next) => {
       nick:userinfo.body.nickname,
       userinfo:userinfo.body
     });
+}
+
+exports.registClient = async (ctx, next) => {
+    console.log('接受到' + JSON.stringify(ctx.req.body))
+    ctx.body = {
+      ok:"ok"
+    }
 }
