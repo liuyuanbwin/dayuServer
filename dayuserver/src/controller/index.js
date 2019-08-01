@@ -88,10 +88,10 @@ exports.registClient = async (ctx, next) => {
   let code = 0
 
     try {
-      const addCarresult = await vehicle.save()
-        // ctx.body = {
-        //     code:0
-        // }  
+        await vehicle.save()
+        ctx.body = {
+            code:0
+        }  
     } catch (err) {
         console.log(err)
         ctx.body = {
@@ -113,9 +113,9 @@ exports.registClient = async (ctx, next) => {
     //   upsert:true
     // })
 
-    console.log('更新结果 ' + JSON.stringify(result) + '  搞车结果 ' + JSON.stringify(addCarresult))
+    // console.log('更新结果 ' + JSON.stringify(result) + '  搞车结果 ' + JSON.stringify(addCarresult))
 
-    ctx.body = {
-        ok: JSON.stringify(addCarresult)
-    }
+    // ctx.body = {
+    //     ok: JSON.stringify(addCarresult)
+    // }
 }
