@@ -56,6 +56,7 @@ console.log('搜索了数据库 ++++++++++')
 
         } else {
             let token = await Token.getToken('token')
+            console.log('token  >>>> ' + token)
             await Dayu
                 .postModelMsg(token,{
                     touser: toFromName,
