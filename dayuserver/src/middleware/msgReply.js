@@ -55,8 +55,9 @@ console.log('搜索了数据库 ++++++++++')
             console.log('回复晚了 +++++++++++=')
 
         } else {
+            let token = await Token.getToken('token')
             await Dayu
-                .postModelMsg(Token.getToken('token'),{
+                .postModelMsg(token,{
                     touser: toFromName,
                     template_id: 'IIFWNAzKrk_ZXpR92NA3D-VQoBDGVIsyDAQRKpCjVJc',
                     topcolor: "#FF0000",
