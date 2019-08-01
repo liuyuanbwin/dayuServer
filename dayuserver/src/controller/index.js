@@ -45,6 +45,7 @@ exports.share = async (ctx, next) => {
     await ctx.render('index', {
       title: '涿州车友',
       headimg:userinfo.body.headimgurl,
-      nick:userinfo.body.nickname
+      nick:userinfo.body.nickname,
+      userinfo:userinfo
     });
 }
