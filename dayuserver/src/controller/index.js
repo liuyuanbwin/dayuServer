@@ -56,14 +56,13 @@ var getTiket = async (ctx,token,url) => {
 
 exports.getSign  = async (ctx, next) => {
 
-    const tokens = await Token.getToken('token')
-    const token = tokens.token
-    result = await dayu.webGetTicket(token)
+    // const tokens = await Token.getToken('token')
+    // const token = tokens.token
+    // result = await dayu.webGetTicket(token)
 
-    console.log('token --->>> ' + token +'获取到的ticket ' + JSON.stringify(result))
-
-    ctx.body = sign(result.body.ticket,ctx.query.url)
-  
+    // console.log('token --->>> ' + token +'获取到的ticket ' + JSON.stringify(result))
+    const ticket = await Token.getTicket()
+    ctx.body = sign(ticket.token,ctx.query.url)
 }
 
 exports.share = async (ctx, next) => {

@@ -2,60 +2,22 @@ const Token = require('../models/token')
 const config = require('./config')
 const koa2Req = require('koa2-request')
 const baseUrl="https://api.weixin.qq.com/";
+const Dayu = require('./dayu')
 const WxApi={
     accessToken:baseUrl+"cgi-bin/token?grant_type=client_credential"
 }
-// class WeChat{
-//     constructor(opts){
-//         this.appId=opts.appId;
-//         this.appSecret=opts.appSecret;
-//         this.getAccessToken=opts.getAccessToken;
-//         this.saveAccessToken=opts.saveAccessToken;
-//         this.init();//初始化
-//     }
 
-//     async init(){
-//         //获取access_token
-//         let data=await this.getAccessToken();
-//         //判断读取的内容是否存在、是否为空字符串，如果是的话进行更新
-//         if(data && data.length!=0){
-//             data=JSON.parse(data);
-//             //判断是否合法
-//             if(!this.isValidAccessToken(data)){
-//                 data=await this.updateAccessToken();
-//             }
-//         }else{
-//             data=await this.updateAccessToken();
-//         }
-//         this.access_token=data.access_token;
-//         this.expires_in=data.expires_in;
-//         this.saveAccessToken(JSON.stringify(data));
-//     }
-
-//     isValidAccessToken(data){
-//         if(!data || !data.access_token || !data.expires_in){
-//             return false;
-//         }
-//         return new Date().getTime() < data.expires_in ?  true : false;
-//     }
-
-//     updateAccessToken(){
-//         return new Promise(async (resolve,reject)=>{
-//             var appId=this.appId;
-//             var appSecret=this.appSecret;
-//             var res = await koa2Req(WxApi.accessToken+"&appid="+appId+"&secret="+appSecret);
-//             var data=JSON.parse(res.body);
-//             data.expires_in=new Date().getTime() + (data.expires_in-20)*1000;
-//             resolve(data);    
-//         });
-//     }
-// }
 const isValidAccessToken = (data) => {
     if(!data || !data.token || !data.expires_in){
         return false;
     }
     console.log(' ---- *** 比较 ***  -----' + new Date().getTime() + '----' + data.expires_in)
     return new Date().getTime() < data.expires_in ?  true : false;
+}
+const updateTicket = async () => {
+    const token = await getToken('token')
+    let result = await Dayu.webGetTicket(token.token)
+    return result
 }
 const updateAccessToken = async () =>{
     console.log(' ---- *** 刷新 ***  -----')
@@ -82,12 +44,6 @@ const getAsync = async (type) => {
 const setSync = async (type, token, expires_in) => {
 
     console.log('type -- ' + type + ' token -- ' + token + ' expires_in ' + expires_in)
-    // let result = await Token.where({
-    //     'type':type
-    // }).updateOne({
-    //     token:token,
-    //     expires_in:expires_in
-    // })
 
     let find = await Token.find({})
     console.log('find result ' + JSON.stringify(find))
@@ -120,5 +76,22 @@ exports.getToken = async (type) => {
     }
     
     console.log(' 返回的token ' + JSON.stringify(data))
+    return data;
+}
+exports.getTicket = async () => {
+    let data = await getAsync('ticket')
+    console.log('第一次读到的 ticket ' + JSON.stringify(data))
+    if(data && data.length != 0){
+        if(!isValidAccessToken(data)){
+            console.log(' ----  ticket 无效  -----')
+            data = await updateTicket()
+            await setSync('ticket', data.ticket, data.expires_in)
+        }
+    }else{
+        data = await updateTicket()
+            await setSync('ticket', data.ticket, data.expires_in)
+            console.log(' ----  更新 ticket  -----' + data)
+    }
+    console.log(' 返回的 Ticket ' + JSON.stringify(data))
     return data;
 }
