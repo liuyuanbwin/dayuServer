@@ -15,7 +15,7 @@ const isValidAccessToken = (data) => {
     return new Date().getTime() < data.expires_in ?  true : false;
 }
 const updateTicket = async () => {
-    const token = await getToken('token')
+    const token = await this.getToken('token')
     let result = await Dayu.webGetTicket(token.token)
     return result
 }
@@ -88,7 +88,7 @@ exports.getTicket = async () => {
             await setSync('ticket', data.ticket, data.expires_in)
         }
     }else{
-        data = await updateTicket()
+            data = await updateTicket()
             await setSync('ticket', data.ticket, data.expires_in)
             console.log(' ----  更新 ticket  -----' + data)
     }
