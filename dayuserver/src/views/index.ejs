@@ -136,6 +136,9 @@
                     },
                     success: (result) => {
                         console.log('sign == ' + JSON.stringify(result))
+
+                        $("#fellowus").popup()
+
                         wx.config({
                             debug: false,
                             appId: 'wxf5a4243b7b09ffc0',
