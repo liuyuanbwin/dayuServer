@@ -7,5 +7,6 @@ router.get('/wx/handle', controller.gethandle)
       .get('/wx/share',controller.share)
       .get('/wx/success', controller.success)
       .post('/wx/registClient', controller.registClient)
+      .get('/wx/shareret', controller.shareret)
 
 module.exports = router
