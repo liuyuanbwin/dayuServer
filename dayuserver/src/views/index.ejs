@@ -100,12 +100,12 @@
                 <div class="weui-popup__modal">
                         <div class="weui-cell">
                                 
-                                <div class="weui-cell__bd" style="margin-left:10px">
-                                        <label for="" class="weui-label">关注 涿州车友 以接收提醒服务</label>
+                                <div class="weui-cell__bd">
+                                        <label for="" class="weui-label" style="font-size: 12rpx;width: 120rpx">关注 涿州车友 以接收提醒服务</label>
                                 </div>
                                 <div class="weui-cell__hd">
                                         <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4OTg0MzYxMA==#wechat_redirect" class="weui-btn weui-btn_mini weui-btn_primary">关注</a>
-                                        <button class="weui-btn weui-btn_mini weui-btn_warn" onclick="closePop()">关闭</button>
+                                        <button class="weui-btn weui-btn_mini weui-btn_warn" onclick="closePop()" style="margin-top: 0rpx;">关闭</button>
                                     </div>
                             </div>
                     
@@ -146,8 +146,6 @@
                     },
                     success: (result) => {
                         console.log('sign == ' + JSON.stringify(result))
-
-                        $("#fellowus").popup()
 
                         wx.config({
                             debug: false,
@@ -234,6 +232,7 @@
                         },
                         success: function (response) {
                             console.log(JSON.stringify(response))
+                            $("#fellowus").popup()
                             if(response.code == 0){
                                 self.location.href="./success"
                             }
