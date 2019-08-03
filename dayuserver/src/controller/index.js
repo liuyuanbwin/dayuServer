@@ -38,7 +38,9 @@ exports.getSign = async (ctx, next) => {
     const ticket = await Token.getTicket()
     ctx.body = sign(ticket.token, ctx.query.url)
 }
-
+exports.shareret = async (ctx, next) => {
+    ctx.response.redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf5a4243b7b09ffc0&redirect_uri=http://www.bl1000.cn/wx/share&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect')
+}
 exports.share = async (ctx, next) => {
 
     let webtoken = await dayu.getWebToken(ctx.query.code)
