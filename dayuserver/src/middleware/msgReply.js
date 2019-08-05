@@ -66,6 +66,8 @@ console.log('搜索了数据库 ++++++++++')
                                 color: '#777700'
                             }
                         }
+                    }).then(res => {
+                        console.log('发送了定时消息 ' + JSON.stringify(res))
                     })
                 });
 
