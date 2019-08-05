@@ -6,7 +6,7 @@ const Token = require('../helpers/WXTokenHelper')
 exports.schedule = () => {
     var rule = new schedule.RecurrenceRule()
     rule.minute = 15
-    var j = schedule.scheduleJob(rule, function(){
+    var j = schedule.scheduleJob(rule, async function(){
         let token = await Token.getToken('token')
 
                 var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
