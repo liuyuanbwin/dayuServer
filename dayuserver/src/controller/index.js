@@ -11,6 +11,8 @@ const Client = require('../models/client')
 const Vehicle = require('../models/vehicle')
 var count = 0
 var timelineCount = 0
+var groupCount = 0
+var singleCount = 0
 exports.gethandle = async (ctx, next) => {
     const result = wx.auth(ctx)
     if (result) {
@@ -60,13 +62,21 @@ exports.share = async (ctx, next) => {
 exports.weatherCount = async (ctx, next) => {
     await ctx.render('weathercount',{
         count,
-        timelineCount
+        timelineCount,
+        groupCount,
+        singleCount
     })
 }
 exports.weather = async (ctx, next) => {
     const from = ctx.query.from
     if(from == 'timeline'){
         timelineCount += 1;
+    }
+    if(from == 'groupmessage'){
+        groupCount += 1
+    }
+    if(from == 'singlemessage'){
+        singleCount += 1
     }
   count += 1
   console.log('🚨🏎🏎🏎🏎🏎🏎🏎🏎🏎 ' + count)
