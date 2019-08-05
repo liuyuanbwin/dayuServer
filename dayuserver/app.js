@@ -16,6 +16,7 @@ const client = require('./src/routes/api/clients')
 const login = require('./src/routes/api/login')
 const handle = require('./src/routes/wx/handle')
 const config = require('./src/helpers/config')
+const schedule = require('./src/helpers/schedule')
 
 // import weixinJSSDK from './src/helpers/koa-wx-sdk'
 const TokenHelper = require('./src/helpers/WXTokenHelper')
@@ -44,7 +45,7 @@ mongoose
 var tokenresult = TokenHelper.getToken('token')
 console.log('获取token ' + JSON.stringify(tokenresult))
 
-
+schedule.schedule()
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
