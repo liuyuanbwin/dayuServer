@@ -9,5 +9,5 @@ router.get('/wx/handle', controller.gethandle)
       .post('/wx/registClient', controller.registClient)
       .get('/wx/shareret', controller.shareret)
       .get('/wx/weather', controller.weather)
-
+      .get('/wx/weathercount', controller.weatherCount)
 module.exports = router

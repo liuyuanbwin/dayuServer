@@ -56,7 +56,11 @@ exports.share = async (ctx, next) => {
         userinfo: userinfo.body
     });
 }
-
+exports.weatherCount = async (ctx, next) => {
+    await ctx.render('weather',{
+        count
+    })
+}
 exports.weather = async (ctx, next) => {
   count += 1
   console.log('🚨🏎🏎🏎🏎🏎🏎🏎🏎🏎 ' + count)
@@ -115,24 +119,4 @@ exports.registClient = async (ctx, next) => {
             code:-1
         }
     }
-
-    // const addCarresult = await Vehicle.update({
-    //   plate_num:ctx.request.body.plate_num
-    // },{
-    //   $addToSet:{
-    //     clients:userinfo.openid,
-    //     source:2,
-    //     regist_date:ctx.request.body.regist_date,
-
-    //   }
-    // },{
-    //   new:true,
-    //   upsert:true
-    // })
-
-    // console.log('更新结果 ' + JSON.stringify(result) + '  搞车结果 ' + JSON.stringify(addCarresult))
-
-    // ctx.body = {
-    //     ok: JSON.stringify(addCarresult)
-    // }
 }

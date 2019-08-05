@@ -6,8 +6,6 @@ const moment = require('moment')
 const Token = require('../helpers/WXTokenHelper')
 
 exports.xmlReply = async (ctx, next) => {
-
-    console.log('xmlReply  +++++++++++++' + JSON.stringify(ctx.req.body))
     var msg = ctx.req.body.xml
     var msgType = msg.MsgType[0]
     if (msgType == 'text') {
@@ -20,8 +18,6 @@ exports.xmlReply = async (ctx, next) => {
                 $regex: content
             }
         })
-
-        console.log('搜索了数据库 ++++++++++')
 
         if (JSON.stringify(result) == 'null') {
 
@@ -38,8 +34,6 @@ exports.xmlReply = async (ctx, next) => {
                         noresult = keywordReply.reply
                     }
 
-                    console.log('要恢复了 +++++++++')
-
                     ctx.body = xml.jsonToXml({
                         xml: {
                             ToUserName: toFromName,
@@ -50,11 +44,9 @@ exports.xmlReply = async (ctx, next) => {
                         }
                     })
 
-                    console.log('回复晚了 +++++++++++=')
-
                 } else {
                     let token = await Token.getToken('token')
-                    console.log('token  >>>> ' + token)
+
                     await Dayu
                         .postModelMsg(token.token, {
                             touser: toFromName,
@@ -82,7 +74,6 @@ exports.xmlReply = async (ctx, next) => {
                             }
                         })
                         .then((res, err) => {
-                            console.log('发送了模板消息 ' + JSON.stringify(res))
 
                             if (err) {
                                 console.log('error ' + err);
@@ -93,7 +84,7 @@ exports.xmlReply = async (ctx, next) => {
                     ctx.body = 'success'
 
                 }} else {
-                console.log(' 不是  text')
+                    
                 ctx.body = 'success'
             }
         }

@@ -43,7 +43,6 @@ mongoose
   console.log(err)
 })
 var tokenresult = TokenHelper.getToken('token')
-console.log('获取token ' + JSON.stringify(tokenresult))
 
 schedule.schedule()
 // middlewares
@@ -61,7 +60,7 @@ app.use(views(__dirname + '/src/views', {
 
 
 app.use(cors())
-app.use(xlogger())
+//app.use(xlogger())
 
 
 app.use(index.routes(), index.allowedMethods())
