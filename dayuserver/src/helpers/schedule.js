@@ -11,7 +11,7 @@ exports.schedule = () => {
 
         console.log('schedule ' + "sssss")
         let token = await Token.getToken('token')
-        let clients = await Dayu.getUserlist(token)
+        let clients = await Dayu.getUserlist(token.token)
                 //var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
                // var clients = await Client.find({})
 
