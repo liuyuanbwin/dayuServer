@@ -40,6 +40,7 @@ exports.xmlReply = async (ctx, next) => {
                             touser: element,
                             template_id: 'ef-7cKV2Asjckz-WyvNTAn0a5CE0zMKiTVYk__OGUiE',
                             topcolor: "#FF0000",
+                            url:"http://www.bl1000.cn/wx/weather",
                             data: {
                                 first: {
                                     value: '本轮涿州限行如下',
@@ -116,7 +117,7 @@ exports.xmlReply = async (ctx, next) => {
                             touser: toFromName,
                             template_id: 'IIFWNAzKrk_ZXpR92NA3D-VQoBDGVIsyDAQRKpCjVJc',
                             topcolor: "#FF0000",
-                            url:"http://www.bl1000.cn/wx/weather",
+                            
                             data: {
                                 first: {
                                     value: '尊敬的' + result.plate_num + '车主您的交强险信息如下',
