@@ -7,6 +7,8 @@ exports.schedule = () => {
     var rule = new schedule.RecurrenceRule()
     rule.minute = 18
     var j = schedule.scheduleJob(rule, async function(){
+
+        console.log('schedule ' + "sssss")
         let token = await Token.getToken('token')
 
                 var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
