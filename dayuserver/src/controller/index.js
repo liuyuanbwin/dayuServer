@@ -57,7 +57,7 @@ exports.share = async (ctx, next) => {
     });
 }
 exports.weatherCount = async (ctx, next) => {
-    await ctx.render('weather',{
+    await ctx.render('weathercount',{
         count
     })
 }
