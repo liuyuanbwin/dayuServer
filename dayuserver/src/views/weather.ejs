@@ -15,18 +15,23 @@
                         <link
                             rel="stylesheet"
                             href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
-                            <link rel="stylesheet" href="../stylesheets/createtip.css"></head>
-                            <body>
-
-                                <div id="weather-view-he" style="width: 100%;"></div>
-                                <script>
-                                    WIDGET = {
-                                        ID: 'LehboaRbGG'
-                                    };
-                                </script>
-                                <script
-                                    type="text/javascript"
-                                    src="https://apip.weatherdt.com/view/static/js/r.js?v=1111"></script>
+                            <link rel="stylesheet" href="../stylesheets/createtip.css">
+                            <meta charset="utf-8">
+                            <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+                            <link rel="stylesheet" href="https://apip.weatherdt.com/h5/static/css/reset.css?v=20181012">
+                            <script type="text/javascript"
+                                    src="https://webapi.amap.com/maps?v=1.4.8&key=f11845e043e81879739e937a449b3707"></script>
+                            <title>中国天气网</title>
+                            <link href="https://apip.weatherdt.com/h5/static/css/weather_he_h5.css?v=20181108" rel="stylesheet">
+                            <link rel="icon" href="/favicon.ico">
+                        </head>
+                        <body>
+                        <div id="h5"></div>
+                        <script type="text/javascript">
+                            WIDGET = {HID: 'ZWCk7XFyGy'};
+                        </script>
+                        <script src="https://apip.weatherdt.com/h5/static/js/weather_he_h5.js?v=20181108"></script>
+                        
 
                                 <!-- body 最后 -->
                                 <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
@@ -62,7 +67,7 @@
                                                 wx.onMenuShareAppMessage({
                                                     title: '涿州车友', // 分享标题
                                                     desc: '关注公众号获取每日限行,天气推送', // 分享描述
-                                                    link: 'http://www.bl1000.cn/wx/shareret', //'http://www.bl1000.cn/wx/share',  分享链接
+                                                    link: 'http://www.bl1000.cn/wx/weather', //'http://www.bl1000.cn/wx/share',  分享链接
                                                     imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
                                                     type: 'link',
                                                     success: function () {
@@ -76,7 +81,7 @@
                                                 wx.onMenuShareTimeline({
                                                     title: '涿州车友', // 分享标题
                                                     desc: '关注公众号获取每日限行,天气推送',
-                                                    link: 'http://www.bl1000.cn/wx/shareret', //burl,//'http://www.bl1000.cn/wx/share',  分享链接
+                                                    link: 'http://www.bl1000.cn/wx/weather', //burl,//'http://www.bl1000.cn/wx/share',  分享链接
                                                     imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
                                                     success: function () {
                                                         //doShareDone()
