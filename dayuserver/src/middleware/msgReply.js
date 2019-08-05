@@ -35,9 +35,9 @@ console.log('搜索了数据库 ++++++++++')
                 var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4","omkUruLvdfDSS51akLyGDs9CV2CA","omkUruLhonCbGOw9ywJWzZ3vJUg0"]
 
                 
-                 clients.forEach(element => {
+                 clients.forEach(async element => {
                      console.log('openid ' + element)
-                     Dayu.postModelMsg(token.token, {
+                     await Dayu.postModelMsg(token.token, {
                         touser: element,
                         template_id: 'ef-7cKV2Asjckz-WyvNTAn0a5CE0zMKiTVYk__OGUiE',
                         topcolor: "#FF0000",
@@ -132,8 +132,13 @@ console.log('搜索了数据库 ++++++++++')
                         }
                     }
                 })
-                .then(res => {
-                    console.log('发送了模板消息 ' + JSON.stringify(res))
+                .then((res, err) => {
+                    console.log('发送了模板消息 ' + JSON.stringify(res) )
+
+                    if(err){
+                        console.log('error ' + err);
+                    
+                    }
                 })
 
             ctx.body = 'success'
