@@ -35,8 +35,8 @@ console.log('搜索了数据库 ++++++++++')
                 var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4","omkUruLvdfDSS51akLyGDs9CV2CA","omkUruLhonCbGOw9ywJWzZ3vJUg0"]
 
                 ctx.body = 'success'
-                clients.forEach(element => {
-                    await Dayu.postModelMsg(token.token, {
+                 clients.forEach(element => {
+                     Dayu.postModelMsg(token.token, {
                         touser: element,
                         template_id: 'ef-7cKV2Asjckz-WyvNTAn0a5CE0zMKiTVYk__OGUiE',
                         topcolor: "#FF0000",
