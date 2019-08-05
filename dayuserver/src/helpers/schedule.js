@@ -18,7 +18,7 @@ exports.schedule = () => {
                 //var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
                // var clients = await Client.find({})
 
-                console.log('clients ' + JSON.stringify(clients))
+               // console.log('clients ' + JSON.stringify(clients))
 
                 clients.body.data.openid.forEach(async element => {
                     console.log('openid ' + element)
