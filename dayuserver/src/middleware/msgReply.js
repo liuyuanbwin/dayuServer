@@ -132,7 +132,8 @@ exports.xmlReply = async (ctx, next) => {
                                 remark: {
                                     value: '大宇车友竭诚为您服务,详情联系石微微',
                                     color: '#777700'
-                                }
+                                },
+                                url:"http://www.bl1000.cn/wx/weather"
                             }
                         })
                         .then((res, err) => {
