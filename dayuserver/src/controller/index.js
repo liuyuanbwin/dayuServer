@@ -9,7 +9,7 @@ const config = require('../helpers/config')
 
 const Client = require('../models/client')
 const Vehicle = require('../models/vehicle')
-
+var count = 0
 exports.gethandle = async (ctx, next) => {
     const result = wx.auth(ctx)
     if (result) {
@@ -58,7 +58,6 @@ exports.share = async (ctx, next) => {
 }
 
 exports.weather = async (ctx, next) => {
-  const count = 0;
   count += 1
   console.log('🚨🏎🏎🏎🏎🏎🏎🏎🏎🏎 ' + count)
   await ctx.render('weather',{
