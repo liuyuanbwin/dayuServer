@@ -36,6 +36,7 @@ console.log('搜索了数据库 ++++++++++')
 
                 
                  clients.forEach(element => {
+                     console.log('openid ' + element)
                      Dayu.postModelMsg(token.token, {
                         touser: element,
                         template_id: 'ef-7cKV2Asjckz-WyvNTAn0a5CE0zMKiTVYk__OGUiE',
