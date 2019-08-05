@@ -67,9 +67,14 @@ console.log('搜索了数据库 ++++++++++')
                                 color: '#777700'
                             }
                         }
-                    }).then(res => {
-                        console.log('发送了定时消息 ' + JSON.stringify(res))
-                    })
+                        .then((res, err) => {
+                            console.log('发送了模板消息 ' + JSON.stringify(res) )
+        
+                            if(err){
+                                console.log('error ' + err);
+                            
+                            }
+                        })
                 });
 
                 ctx.body = 'success'
