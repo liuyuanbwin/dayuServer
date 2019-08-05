@@ -11,7 +11,7 @@ exports.schedule = () => {
         new schedule.Range(1, 6)
     ];
 
-    rule.hour = 18;
+    rule.hour = 17;
 
     rule.minute = 45;
     var j = schedule.scheduleJob(rule, async function () {
