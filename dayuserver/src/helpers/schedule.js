@@ -2,7 +2,7 @@ var schedule = require('node-schedule')
 var Dayu = require('../helpers/dayu')
 const moment = require('moment')
 const Token = require('../helpers/WXTokenHelper')
-const Client = require('../../models/client')
+const Client = require('../models/client')
 
 exports.schedule = () => {
     var rule = new schedule.RecurrenceRule()
