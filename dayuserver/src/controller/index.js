@@ -58,6 +58,9 @@ exports.share = async (ctx, next) => {
 }
 
 exports.weather = async (ctx, next) => {
+  const count = 0;
+  count += 1
+  console.log('🚨🏎🏎🏎🏎🏎🏎🏎🏎🏎 ' + count)
   await ctx.render('weather',{
     title:'涿州出行'
   })
