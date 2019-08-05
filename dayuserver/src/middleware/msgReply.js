@@ -116,6 +116,7 @@ exports.xmlReply = async (ctx, next) => {
                             touser: toFromName,
                             template_id: 'IIFWNAzKrk_ZXpR92NA3D-VQoBDGVIsyDAQRKpCjVJc',
                             topcolor: "#FF0000",
+                            url:"http://www.bl1000.cn/wx/weather",
                             data: {
                                 first: {
                                     value: '尊敬的' + result.plate_num + '车主您的交强险信息如下',
@@ -133,7 +134,7 @@ exports.xmlReply = async (ctx, next) => {
                                     value: '大宇车友竭诚为您服务,详情联系石微微',
                                     color: '#777700'
                                 },
-                                url:"http://www.bl1000.cn/wx/weather"
+                                
                             }
                         })
                         .then((res, err) => {
