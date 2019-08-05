@@ -35,44 +35,43 @@ exports.xmlReply = async (ctx, next) => {
 
                 clients.forEach(async element => {
                     console.log('openid ' + element)
-                    await Dayu.postModelMsg(token.token, {
-                        touser: element,
-                        template_id: 'ef-7cKV2Asjckz-WyvNTAn0a5CE0zMKiTVYk__OGUiE',
-                        topcolor: "#FF0000",
-                        data: {
-                            first: {
-                                value: '本轮涿州限行如下',
-                                color: "#778899"
-                            },
-                            keyword1: {
-                                value: moment(new Date()).format('YYYY-MM-DD'),
-                                color: '#005500'
-                            },
-                            keyword2: {
-                                value: '涿州市二环路内（含二环路)',
-                                color: '#005500'
-                            },
-                            keyword3: {
-                                value: '4 和 9',
-                                color: '#005500'
-                            },
-                            keyword4: {
-                                value: '07:00-19:00',
-                                color: '#005500'
-                            },
-                            remark: {
-                                value: '限行详情及近期天气请点击\"详情\"',
-                                color: '#777700'
+                    try {
+                        await Dayu.postModelMsg(token.token, {
+                            touser: element,
+                            template_id: 'ef-7cKV2Asjckz-WyvNTAn0a5CE0zMKiTVYk__OGUiE',
+                            topcolor: "#FF0000",
+                            data: {
+                                first: {
+                                    value: '本轮涿州限行如下',
+                                    color: "#778899"
+                                },
+                                keyword1: {
+                                    value: moment(new Date()).format('YYYY-MM-DD'),
+                                    color: '#005500'
+                                },
+                                keyword2: {
+                                    value: '涿州市二环路内（含二环路)',
+                                    color: '#005500'
+                                },
+                                keyword3: {
+                                    value: '4 和 9',
+                                    color: '#005500'
+                                },
+                                keyword4: {
+                                    value: '07:00-19:00',
+                                    color: '#005500'
+                                },
+                                remark: {
+                                    value: '限行详情及近期天气请点击\"详情\"',
+                                    color: '#777700'
+                                }
                             }
-                        }.then((res, err) => {
-                            console.log('发送了模板消息 ' + JSON.stringify(res))
-
-                            if (err) {
-                                console.log('error ' + err);
-
-                            }
-                        })
-                    });
+                        });
+                    } catch (err) {
+                        console.log('error ' + err);
+                        
+                    }
+                    
                 
                     
                 })
