@@ -26,6 +26,9 @@ exports.xmlReply = async (ctx, next) => {
         if (JSON.stringify(result) == 'null') {
 
             if (content == "sendforbiden") {
+
+
+
                 let token = await Token.getToken('token')
 
                 var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
@@ -71,7 +74,12 @@ exports.xmlReply = async (ctx, next) => {
                         })
                     });
                 
-                    ctx.body = 'success'
+                    
+                }
+                ctx.body = 'success'
+
+
+            }
                 
 
                     const keywordReply = await Keyword.findOne({
