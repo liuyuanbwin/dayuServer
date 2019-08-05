@@ -34,7 +34,7 @@ console.log('搜索了数据库 ++++++++++')
 
                 var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4","omkUruLvdfDSS51akLyGDs9CV2CA","omkUruLhonCbGOw9ywJWzZ3vJUg0"]
 
-                ctx.body = 'success'
+                
                  clients.forEach(element => {
                      Dayu.postModelMsg(token.token, {
                         touser: element,
@@ -71,7 +71,7 @@ console.log('搜索了数据库 ++++++++++')
                     })
                 });
 
-                
+                ctx.body = 'success'
                 
             }
 
