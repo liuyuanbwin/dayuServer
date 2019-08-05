@@ -59,7 +59,7 @@ exports.share = async (ctx, next) => {
 
 exports.weather = async (ctx, next) => {
   await ctx.render('weather',{
-    title:'出行天气'
+    title:'涿州出行'
   })
 }
 
