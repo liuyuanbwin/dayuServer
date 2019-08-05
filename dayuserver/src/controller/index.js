@@ -57,6 +57,12 @@ exports.share = async (ctx, next) => {
     });
 }
 
+exports.weather = async (ctx, next) => {
+  await ctx.render('weather',{
+    title:'出行天气'
+  })
+}
+
 exports.success = async (ctx, next) => {
 
   await ctx.render('success', {

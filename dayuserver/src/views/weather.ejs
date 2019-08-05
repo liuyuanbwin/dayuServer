@@ -1,0 +1,94 @@
+<!-- dayucheyou -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+            <meta
+                name="viewport"
+                content="width=device-width,initial-scale=1,user-scalable=0">
+                <title>
+                    <%- title %>
+                    </title>
+                    <link
+                        rel="stylesheet"
+                        href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+                        <link
+                            rel="stylesheet"
+                            href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+                            <link rel="stylesheet" href="../stylesheets/createtip.css"></head>
+                            <body>
+
+                                <div id="weather-view-he"></div>
+                                <script>
+                                    WIDGET = {
+                                        ID: 'LehboaRbGG'
+                                    };
+                                </script>
+                                <script
+                                    type="text/javascript"
+                                    src="https://apip.weatherdt.com/view/static/js/r.js?v=1111"></script>
+
+                                <!-- body 最后 -->
+                                <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+                                <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+                                <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+
+                                <!-- 如果使用了某些拓展插件还需要额外的JS -->
+                                <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+                                <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+                                <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+                                <script>
+                                    var burl = encodeURI(location.href.split('#')[0]);
+                                    $.ajax({
+                                        type: "get", url: "./jsSign", //"http://www.bl1000.cn/wx/jsSign",
+                                        data: {
+                                            url: burl
+                                        },
+                                        success: (result) => {
+                                            console.log('sign == ' + JSON.stringify(result))
+
+                                            wx.config({
+                                                debug: false,
+                                                appId: 'wxf5a4243b7b09ffc0',
+                                                timestamp: "" + result.timestamp,
+                                                nonceStr: result.nonceStr,
+                                                signature: result.signature,
+                                                jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+                                            })
+
+                                            wx.ready(function () {
+
+                                                // 分享给好友
+                                                wx.onMenuShareAppMessage({
+                                                    title: '涿州车友', // 分享标题
+                                                    desc: '关注公众号获取每日限行,天气推送', // 分享描述
+                                                    link: 'http://www.bl1000.cn/wx/shareret', //'http://www.bl1000.cn/wx/share',  分享链接
+                                                    imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
+                                                    type: 'link',
+                                                    success: function () {
+                                                        //doShareDone()
+                                                    },
+                                                    cancel: function () {
+                                                        //doShareCancel()
+                                                    }
+                                                })
+                                                // 分享到朋友圈
+                                                wx.onMenuShareTimeline({
+                                                    title: '涿州车友', // 分享标题
+                                                    desc: '关注公众号获取每日限行,天气推送',
+                                                    link: 'http://www.bl1000.cn/wx/shareret', //burl,//'http://www.bl1000.cn/wx/share',  分享链接
+                                                    imgUrl: 'http://pic.90sjimg.com/design/00/16/13/58/593501faa65a0.png', // 分享图标
+                                                    success: function () {
+                                                        //doShareDone()
+                                                    },
+                                                    cancel: function () {
+                                                        //doShareCancel()
+                                                    }
+                                                })
+                                            });
+
+                                        }
+                                    })
+                                </script>
+                            </body>
+                        </html>
