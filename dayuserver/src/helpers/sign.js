@@ -48,9 +48,6 @@ var sign = function (jsapi_ticket, url) {
         url: url
     };
     var string = raw(ret);
-
-    //console.log('url ===> ' + url + " ticket ==> " + jsapi_ticket + 'raw string ==>' + string)
-   
     ret.signature = sha1(string)
     ret.appId = config.wx.appid
 

@@ -10,6 +10,9 @@ const config = require('../helpers/config')
 const Client = require('../models/client')
 const Vehicle = require('../models/vehicle')
 var count = 0
+var timelineCount = 0
+var groupCount = 0
+var singleCount = 0
 exports.gethandle = async (ctx, next) => {
     const result = wx.auth(ctx)
     if (result) {
@@ -56,8 +59,25 @@ exports.share = async (ctx, next) => {
         userinfo: userinfo.body
     });
 }
-
+exports.weatherCount = async (ctx, next) => {
+    await ctx.render('weathercount',{
+        count,
+        timelineCount,
+        groupCount,
+        singleCount
+    })
+}
 exports.weather = async (ctx, next) => {
+    const from = ctx.query.from
+    if(from == 'timeline'){
+        timelineCount += 1;
+    }
+    if(from == 'groupmessage'){
+        groupCount += 1
+    }
+    if(from == 'singlemessage'){
+        singleCount += 1
+    }
   count += 1
   console.log('🚨🏎🏎🏎🏎🏎🏎🏎🏎🏎 ' + count)
   await ctx.render('weather',{
@@ -115,24 +135,4 @@ exports.registClient = async (ctx, next) => {
             code:-1
         }
     }
-
-    // const addCarresult = await Vehicle.update({
-    //   plate_num:ctx.request.body.plate_num
-    // },{
-    //   $addToSet:{
-    //     clients:userinfo.openid,
-    //     source:2,
-    //     regist_date:ctx.request.body.regist_date,
-
-    //   }
-    // },{
-    //   new:true,
-    //   upsert:true
-    // })
-
-    // console.log('更新结果 ' + JSON.stringify(result) + '  搞车结果 ' + JSON.stringify(addCarresult))
-
-    // ctx.body = {
-    //     ok: JSON.stringify(addCarresult)
-    // }
 }
