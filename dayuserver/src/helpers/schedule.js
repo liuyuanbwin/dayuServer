@@ -34,12 +34,12 @@ exports.schedule = () => {
         let token = await Token.getToken('token')
         let clients = await Dayu.getUserlist(token.token)
 
-        clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
+       // clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
 
         //console.log('')
 
         clients
-        // .body .data .openid
+         .body .data .openid
             .forEach(async element => {
             console.log('openid ' + element)
             try {

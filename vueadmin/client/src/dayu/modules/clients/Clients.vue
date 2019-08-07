@@ -1,103 +1,140 @@
 <template>
     <div class="staff">
-       <div class="list">
-           <el-table :data="clients" stripe>
-               <el-table-column label="操作">
-      <template slot-scope="scope">
-        <!-- <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
-          <label >{{scope.row.nickname}}</label>
-          <img :src="scope.row.headimgurl" alt="" style="width:30px;height:30px;">
-      </template>
-    </el-table-column>
-               <!-- <el-table-column
-                   label="用户">
-                   <template slot-scope="scope">
-                       <label for="{{scope.row.nickname}}"></label>
-                       <img src="{{scope.row.headimgurl}}" alt="">
-                       
-                   </template>
-               </el-table-column> -->
-               <el-table-column
-                   prop="nickname"
-                   label="昵称"
-                   >
-                   <img src="" alt="">
-               </el-table-column>
-               <el-table-column
-                   prop="sex"
-                   label="性别"
-                   :formatter="formatterSex"
-                   >
-               </el-table-column>
-               <el-table-column
-                   prop="city"
-                   label="城市"
-                   >
-               </el-table-column>
-             <el-table-column
-      fixed="right"
-      label="操作"
-      width="100">
-      <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-        <el-button type="text" size="small">编辑</el-button>
-      </template>
-    </el-table-column>
-           </el-table>
-       </div>
-    </div>
-</template>
+        <div class="list">
+            <el-table :data="tableClients" stripe="stripe">
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-avatar :size="size" :src="scope.row.headimgurl"></el-avatar>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="nickname" label="昵称">
+                    <img src="" alt=""></el-table-column>
+                    <el-table-column prop="sex" label="性别" :formatter="formatterSex"></el-table-column>
+                    <el-table-column prop="city" label="城市"></el-table-column>
+                    <el-table-column fixed="right" label="操作" width="200">
 
-<script>
-export default {
-    name:'list',
-    data(){
-        return {
-            clients:[]
-        }
-    },
-    methods: {
-        getClients(){
-            this
-            .$axios
-            .get('api/clients')
-            .then(res => {
-                console.log('sksh   ' + JSON.stringify(res))
-                if(res.data.status === 1){
-                    const data = res.data.results
-                    this.clients = data
+                        <template slot-scope="scope">
+                            <!-- <el-button @click="handleClick(scope.row)" size="mini"
+                            type="success">查看</el-button> <el-button size="mini">编辑</el-button> -->
+                            <el-dropdown margin-right:10px>
+                                <el-button type="primary" size="mini" icon="el-icon-magic-stick">
+                                    <i class="el-icon-arrow-down el-icon--right"></i>
+                                </el-button>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item>黄金糕</el-dropdown-item>
+                                    <el-dropdown-item>狮子头</el-dropdown-item>
+                                    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                                    <el-dropdown-item>双皮奶</el-dropdown-item>
+                                    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                            <!-- <el-button size="mini" type="primary" icon="el-icon-magic-stick"></el-button> -->
+                            <el-button size="mini" type="primary" icon="el-icon-share"></el-button>
+                            <el-button size="mini" type="primary" icon="el-icon-delete"></el-button>
+
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <el-pagination
+                    @size-change="sizeChange"
+                    @current-change="currentChange"
+                    :current-page="paginations.page_index"
+                    :page-sizes="paginations.page_sizes"
+                    :page-size="paginations.page_size"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="paginations.total"
+                    background="background"></el-pagination>
+
+            </div>
+        </div>
+    </template>
+
+    <script>
+        export default {
+            name: 'list',
+            data() {
+                return {
+                    clients: [],
+                    tableClients: [],
+                    paginations: {
+                        page_index: 1,
+                        total: 0,
+                        page_size: 5,
+                        page_sizes: [5, 10, 15, 20]
+                    }
                 }
-            })
-        },
-        formatterSex:function(row, column){
-            return row.sex === 1 ? '男' : row.sex === 2 ? '女' : '未知'
+            },
+            methods: {
+                sizeChange(page_size) {
+                    this.paginations.page_index = 1
+                    this.paginations.page_size = page_size
+                    this.tableClients = this
+                        .clients
+                        .filter((item, index) => {
+                            return index < page_size
+                        })
+                },
+                currentChange(page) {
+                    let index = this.paginations.page_size * (page - 1)
+                    let allClient = this.paginations.page_size * page
+                    let tablist = []
+                    for (let i = index; i < allClient; i++) {
+                        if (this.clients[i]) {
+                            tablist.push(this.clients[i])
+                        }
+                    }
+                    this.tableClients = tablist
+                },
+                setPaginations() {
+                    this.paginations.total = this.clients.length
+                    this.paginations.page_index = 1
+                    this.paginations.page_size = 10
+                    this.tableClients = this
+                        .clients
+                        .filter((item, index) => {
+                            return index < this.paginations.page_size
+                        })
+                },
+                getClients() {
+                    this
+                        .$axios
+                        .get('api/clients')
+                        .then(res => {
+                            console.log('sksh   ' + JSON.stringify(res))
+                            if (res.data.status === 1) {
+                                const data = res.data.results
+                                this.clients = data
+                                this.setPaginations()
+                            }
+                        })
+                },
+                formatterSex: function (row, column) {
+                    return row.sex === 1
+                        ? '男'
+                        : row.sex === 2
+                            ? '女'
+                            : '未知'
+                }
+            },
+            created() {
+                this.getClients()
+            }
         }
-    },
-    created(){
-        this.getClients()
-    }
-}
-</script>
+    </script>
 
-<style scoped="scoped">
-    .staff {
-        margin: 10px;
-    }
-    .btnRight {
-        float: right;
-    }
-    .list {
-        margin: 20px;
-    }
-    .page {
-        float: right;
-        margin-top: 20px;
-        margin-bottom: 80px;
-    }
-</style>
+    <style scoped="scoped">
+        .staff {
+            margin: 10px;
+        }
+        .btnRight {
+            float: right;
+        }
+        .list {
+            margin: 120px;
+        }
+        .page {
+            float: right;
+            margin-top: 20px;
+            margin-bottom: 80px;
+        }
+    </style>
