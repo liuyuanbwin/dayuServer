@@ -19,14 +19,14 @@ exports.schedule = () => {
 
     rule.hour = 15;
 
-    rule.minute = 25;
+    rule.minute = 26;
     var j = schedule.scheduleJob(rule, async function () {
 
         console.log('schedule sssss')
         let token = await Token.getToken('token')
         let clients = await Dayu.getUserlist(token.token)
 
-        var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4",
+        clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4",
         "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
 
         clients
