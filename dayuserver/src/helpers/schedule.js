@@ -5,15 +5,16 @@ const Token = require('../helpers/WXTokenHelper')
 const Client = require('../models/client')
 
 exports.schedule = () => {
+    var forbiddenNums = ['4,9','5,0','1,6','2,7','3,8']
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = [
         0,
         new schedule.Range(1, 6)
     ];
 
-    rule.hour = 17;
+    rule.hour = 7;
 
-    rule.minute = 55;
+    rule.minute = 00;
     var j = schedule.scheduleJob(rule, async function () {
 
         console.log('schedule sssss')
