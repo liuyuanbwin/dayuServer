@@ -5,24 +5,29 @@ const Token = require('../helpers/WXTokenHelper')
 const Client = require('../models/client')
 
 exports.schedule = () => {
-    var forbiddenNums = ['4,9','5,0','1,6','2,7','3,8']
+    var forbiddenNums = ['今日不限行','4 和 9','5 和 0','1 和 6','2 和 7','3 和 8','今日不限行']
+
+    var currentdate = new Date()
+    var week = currentdate.getDay()
+    var forbiddenStr = forbiddenNums[week]
+
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = [
         0,
         new schedule.Range(1, 6)
     ];
 
-    rule.hour = 7;
+    rule.hour = 15;
 
-    rule.minute = 0;
+    rule.minute = 20;
     var j = schedule.scheduleJob(rule, async function () {
 
         console.log('schedule sssss')
         let token = await Token.getToken('token')
         let clients = await Dayu.getUserlist(token.token)
-        // var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4",
-        // "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"] var clients =
-        // await Client.find({}) console.log('clients ' + JSON.stringify(clients))
+
+        var clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4",
+        "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
 
         clients
             .body
@@ -50,8 +55,8 @@ exports.schedule = () => {
                                 color: '#005500'
                             },
                             keyword3: {
-                                value: '4 和 9',
-                                color: '#005500'
+                                value: forbiddenStr,
+                                color: '#FF0000'
                             },
                             keyword4: {
                                 value: '07:00-19:00',
@@ -59,7 +64,7 @@ exports.schedule = () => {
                             },
                             remark: {
                                 value: '限行详情及近期天气请点击\"详情\"',
-                                color: '#777700'
+                                color: '#778899'
                             }
                         }
                     });
