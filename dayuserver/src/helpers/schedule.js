@@ -27,7 +27,7 @@ exports.schedule = () => {
 
     rule.hour = 16;
 
-    rule.minute = 41;
+    rule.minute = 54;
     var j = schedule.scheduleJob(rule, async function () {
 
         console.log('schedule sssss')
@@ -39,6 +39,7 @@ exports.schedule = () => {
         clients.body.data.openid =  ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
 
         //console.log('')
+        console.log('dirname ' + __dirname)
 
         clients
          .body .data .openid
