@@ -26,9 +26,9 @@ exports.schedule = () => {
         new schedule.Range(1, 6)
     ];
 
-    rule.hour = 17;
+    rule.hour = 7;
 
-    rule.minute = 23;
+    rule.minute = 0;
     var j = schedule.scheduleJob(rule, async function () {
 
         console.log('schedule sssss')
@@ -37,8 +37,7 @@ exports.schedule = () => {
 
         console.log('clenit ' + JSON.stringify(clients))
 
-        clients.body.data.openid =  ["omkUruH6_g0dovrbmjMM5VdtHAe4",
-         "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
+        //clients.body.data.openid =  ["omkUruH6_g0dovrbmjMM5VdtHAe4","omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
         console.log('dirname ' + __dirname)
         var myDate = new Date();
         var mytime = myDate.toLocaleTimeString();
