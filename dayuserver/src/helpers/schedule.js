@@ -25,16 +25,16 @@ exports.schedule = () => {
         new schedule.Range(1, 6)
     ];
 
-    rule.hour = 15;
+    rule.hour = 16;
 
-    rule.minute = 29;
+    rule.minute = 25;
     var j = schedule.scheduleJob(rule, async function () {
 
         console.log('schedule sssss')
         let token = await Token.getToken('token')
         let clients = await Dayu.getUserlist(token.token)
 
-       // clients = ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
+        clients.body.data.openid =  ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
 
         //console.log('')
 
