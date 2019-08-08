@@ -34,6 +34,8 @@ exports.schedule = () => {
         let token = await Token.getToken('token')
         let clients = await Dayu.getUserlist(token.token)
 
+        console.log('clenit ' + JSON.stringify(clients))
+
         clients.body.data.openid =  ["omkUruH6_g0dovrbmjMM5VdtHAe4", "omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
 
         //console.log('')
