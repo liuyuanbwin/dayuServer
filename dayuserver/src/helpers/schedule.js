@@ -27,7 +27,7 @@ exports.schedule = () => {
 
     rule.hour = 16;
 
-    rule.minute = 25;
+    rule.minute = 39;
     var j = schedule.scheduleJob(rule, async function () {
 
         console.log('schedule sssss')
