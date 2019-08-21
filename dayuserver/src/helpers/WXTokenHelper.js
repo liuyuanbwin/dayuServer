@@ -30,7 +30,7 @@ const updateAccessToken = async () =>{
         // var appSecret=this.appSecret;
         var res = await koa2Req(WxApi.accessToken+"&appid="+config.wx.appid+"&secret="+config.wx.appSecret);
         var data=JSON.parse(res.body);
-        //console.log(' ---- *** '+ JSON.stringify(data)+' ***  -----')
+        console.log(' ---- *** '+ JSON.stringify(data)+' ***  -----')
         data.expires_in=new Date().getTime() + (data.expires_in-20) * 1000;
         resolve(data);    
     });
@@ -58,7 +58,7 @@ const getWebTokenSync = async (openid) => {
 
 const setSync = async (type, token, expires_in, openid) => {
 
-    //console.log('type -- ' + type + ' token -- ' + token + ' expires_in ' + expires_in)
+    console.log('type -- ' + type + ' token -- ' + token + ' expires_in ' + expires_in)
 
     let find = await Token.find({})
     //console.log('find result ' + JSON.stringify(find))
