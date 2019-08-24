@@ -10,4 +10,5 @@ router.get('/wx/handle', controller.gethandle)
       .get('/wx/shareret', controller.shareret)
       .get('/wx/weather', controller.weather)
       .get('/wx/weathercount', controller.weatherCount)
+      .get('/wx/upload',controller.uploadMeterail)
 module.exports = router
