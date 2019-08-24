@@ -87,6 +87,9 @@ exports.getMenuInfo = async (token) => {
     return post('/get_current_selfmenu_info?access_token=' + token)
 }
 
+exports.createMenu = async (token, data) => {
+    return post('/menu/create?access_token=' + token, 'post', data)
+}
 exports.getWebToken = async (code) => {
     return webRequest('/oauth2/access_token?appid=' + config.wx.appid + '&secret=' + config.wx.appSecret + '&code=' + code + '&grant_type=authorization_code')
 }
