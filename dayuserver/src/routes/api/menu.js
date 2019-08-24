@@ -20,12 +20,12 @@ router.post('/create', async(ctx, next) => {
               {	
                   "type":"media_id",
                   "name":"交罚款",
-                  "url":"http://www.soso.com/"
+                  "media_id": "MEDIA_ID1"
                },
                {	
                 "type":"media_id",
                 "name":"罚款缴费",
-                "url":"http://www.soso.com/"
+                "media_id": "MEDIA_ID1"
              }]
           },
           
@@ -36,6 +36,11 @@ router.post('/create', async(ctx, next) => {
             "appid":"wx122013c737c2033f",
             "pagepath":"pages/lunar/index"
         },
+        {	
+            "type":"view",
+            "name":"今日限行",
+            "url":"http://www.bl1000.cn/wx/weather"
+         }
         
         
         ]
