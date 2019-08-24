@@ -12,7 +12,7 @@ router.get('/', async(ctx, next) => {
 
 router.post('/create', async(ctx, next) => {
     let token = await Token.getToken('token')
-    let resutl = await Dayu.createMenu(token.token, {
+    let result = await Dayu.createMenu(token.token, {
         "button":[
          {
               "name":"交通违章",
@@ -40,7 +40,7 @@ router.post('/create', async(ctx, next) => {
         
         ]
     })
-
+    console.log('menu ' + JSON.stringify(result))
     ctx.body = result
 })
 
