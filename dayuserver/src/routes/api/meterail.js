@@ -1,6 +1,6 @@
 const router = require('koa-router')()
 const Token = require('../../helpers/WXTokenHelper')
-
+var request = require('request')
 router.prefix('/api/material')
 
 function addMaterail(accessToken, type, ctx) {
