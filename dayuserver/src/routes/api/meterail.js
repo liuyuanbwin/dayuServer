@@ -1,7 +1,7 @@
 const router = require('koa-router')()
 const Token = require('../../helpers/WXTokenHelper')
 
-router.prefix('/api/meterail')
+router.prefix('/api/meterial')
 
 function addMaterail(accessToken, type, ctx) {
     var url = `https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=${accessToken}&type=${type}`
@@ -20,6 +20,7 @@ function addMaterail(accessToken, type, ctx) {
     })
 }
 router.post('/add',async (ctx, next) => {
+    console.log('---- upload add ---- ')
     var token = await Token.getToken('token')
     var meterailRes = await addMaterail(token.token, "image", ctx)
     ctx.body = meterailRes
