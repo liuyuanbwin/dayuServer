@@ -1,10 +1,12 @@
 const router = require('koa-router')()
+const Dayu = require('../../helpers/dayu')
+const Token = require('../../helpers/WXTokenHelper')
 router.prefix('/api/menu')
 
 router.get('/', async(ctx, next) => {
-    ctx.body ={
-        msg:"kfskkfkskf"
-    }
+    let token = await Token.getToken('token')
+    let result = await Dayu.getMenuInfo(token.token)
+    ctx.body = result
 })
 
 module.exports = router

@@ -83,6 +83,10 @@ exports.getClientBaseInfo = async (token, openid) => {
     return post('/user/info?access_token=' + token + '&openid=' + openid + '&lang=zh_CN', 'get')
 }
 
+exports.getMenuInfo = async (token) => {
+    return post('/get_current_selfmenu_info?access_token=' + token)
+}
+
 exports.getWebToken = async (code) => {
     return webRequest('/oauth2/access_token?appid=' + config.wx.appid + '&secret=' + config.wx.appSecret + '&code=' + code + '&grant_type=authorization_code')
 }
