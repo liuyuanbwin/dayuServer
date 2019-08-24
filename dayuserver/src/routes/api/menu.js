@@ -32,10 +32,10 @@ router.post('/create', async(ctx, next) => {
           
           {
             "type":"miniprogram",
-            "name":"💳同城卡券",
+            "name":"💳同城3卡券",
             "url":"http://www.bl1000.cn/wx/weather",
             "appid":"wx122013c737c2033f",
-            "pagepath":"/yzkq_sun/pages/home/home"
+            "pagepath":"pages/home/home"
         },
         {	
             "type":"view",
