@@ -67,6 +67,11 @@ exports.weatherCount = async (ctx, next) => {
         singleCount
     })
 }
+exports.uploadMeterail = async (ctx, next) =>{
+    await ctx.render('uploadMeterail',{
+        
+    })
+}
 exports.weather = async (ctx, next) => {
     const from = ctx.query.from
     if(from == 'timeline'){
