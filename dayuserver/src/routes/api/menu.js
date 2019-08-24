@@ -14,33 +14,34 @@ router.post('/create', async(ctx, next) => {
     let token = await Token.getToken('token')
     let resutl = await Dayu.createMenu(token.token, {
         "button":[
-        {	
-             "type":"click",
-             "name":"今日歌曲",
-             "key":"V1001_TODAY_MUSIC"
-         },
          {
-              "name":"菜单",
+              "name":"交通违章",
               "sub_button":[
               {	
-                  "type":"view",
-                  "name":"搜索",
+                  "type":"media_id",
+                  "name":"交罚款",
                   "url":"http://www.soso.com/"
                },
-               {
-                    "type":"miniprogram",
-                    "name":"wxa",
-                    "url":"http://mp.weixin.qq.com",
-                    "appid":"wx286b93c14bbf93aa",
-                    "pagepath":"pages/lunar/index"
-                },
-               {
-                  "type":"click",
-                  "name":"赞一下我们",
-                  "key":"V1001_GOOD"
-               }]
-          }]
+               {	
+                "type":"media_id",
+                "name":"罚款缴费",
+                "url":"http://www.soso.com/"
+             }]
+          },
+          
+          {
+            "type":"miniprogram",
+            "name":"wxa",
+            "url":"http://www.bl1000.cn/wx/weather",
+            "appid":"wx122013c737c2033f",
+            "pagepath":"pages/lunar/index"
+        },
+        
+        
+        ]
     })
+
+    ctx.body = result
 })
 
 
