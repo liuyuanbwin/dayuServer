@@ -15,25 +15,31 @@ router.post('/create', async(ctx, next) => {
     let result = await Dayu.createMenu(token.token, {
         "button":[
          {
-              "name":"交通违章",
+              "name":"🚘交通违章",
               "sub_button":[
+                {	
+                    "type":"media_id",
+                    "name":"🔍违章查询",
+                    "media_id": "9mDA4XPsO5S964M3J-mq_XkEsWlz0k7lDd5TtmkaKa0"
+                 },
                {	
                 "type":"media_id",
-                "name":"罚款缴费",
+                "name":"💰罚款缴费",
                 "media_id": "9mDA4XPsO5S964M3J-mq_YlLDcA67PPlY5jFVflLV1M"
-             }]
+             },
+            ]
           },
           
           {
             "type":"miniprogram",
-            "name":"wxa",
+            "name":"💳同城卡券",
             "url":"http://www.bl1000.cn/wx/weather",
             "appid":"wx122013c737c2033f",
-            "pagepath":"pages/lunar/index"
+            "pagepath":"pages/index/index"
         },
         {	
             "type":"view",
-            "name":"今日限行",
+            "name":"🈲今日限行",
             "url":"http://www.bl1000.cn/wx/weather"
          }
         
