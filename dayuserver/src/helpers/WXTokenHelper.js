@@ -3,6 +3,7 @@ const config = require('./config')
 const koa2Req = require('koa2-request')
 const baseUrl="https://api.weixin.qq.com/";
 const Dayu = require('./dayu')
+var fs = require('fs')
 const WxApi={
     accessToken:baseUrl+"cgi-bin/token?grant_type=client_credential"
 }
@@ -78,12 +79,31 @@ const setSync = async (type, token, expires_in, openid) => {
 }
 exports.getToken = async (type) => {
     let data = await getAsync(type)
+
+    var myDate = new Date();
+    var mytime = myDate.toLocaleTimeString();
+    fs.appendFile(
+        __dirname + '/log.txt',
+        mytime + ' 第一次读到的token ' + JSON.stringify(data) + '\n',
+        function (err) {
+            console.log('log 写入出错' + err)
+        }
+    )
     //console.log(' 第一次读到的token ' + JSON.stringify(data))
     if(data && data.length != 0){
         if(!isValidAccessToken(data)){
             //console.log(' ----  无效  -----')
             data = await updateAccessToken()
             await setSync(type, data.access_token, data.expires_in)
+            var myDate = new Date();
+    var mytime = myDate.toLocaleTimeString();
+    fs.appendFile(
+        __dirname + '/log.txt',
+        mytime + ' ----  无效  ----- 请求' + JSON.stringify(data) + '\n',
+        function (err) {
+            console.log('log 写入出错' + err)
+        }
+    )
         }
     }else{
         data = await updateAccessToken()
@@ -92,6 +112,15 @@ exports.getToken = async (type) => {
     }
     
     //console.log(' 返回的token ' + JSON.stringify(data))
+    var myDate = new Date();
+    var mytime = myDate.toLocaleTimeString();
+    fs.appendFile(
+        __dirname + '/log.txt',
+        mytime + ' ----  最终返回 ----- ' + JSON.stringify(data) + '\n',
+        function (err) {
+            console.log('log 写入出错' + err)
+        }
+    )
     return data;
 }
 exports.getTicket = async () => {
