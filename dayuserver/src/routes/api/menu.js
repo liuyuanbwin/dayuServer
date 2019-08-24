@@ -6,3 +6,5 @@ router.get('/', async(ctx, next) => {
         msg:"kfskkfkskf"
     }
 })
+
+module.exports = router
