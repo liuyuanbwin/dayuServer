@@ -35,7 +35,7 @@ router.post('/create', async(ctx, next) => {
             "name":"💳同城卡券",
             "url":"http://www.bl1000.cn/wx/weather",
             "appid":"wx122013c737c2033f",
-            "pagepath":"yzkq_sun/pages/home/home"
+            "pagepath":"/yzkq_sun/pages/home/home"
         },
         {	
             "type":"view",
