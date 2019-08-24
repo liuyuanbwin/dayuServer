@@ -44,13 +44,13 @@ const router = new Router({
           path:"/clients",
           name:"clients",
           component: () => import("./dayu/modules/clients/Clients"),
-          meta:{title:"关键字管理"}
+          meta:{title:"客户管理"}
         },
         {
-          path: "/fundList",
-          name: "fundList",
-          component: () => import("./views/fundmanagement/FundList"),
-          meta: { title: "资金流水" }
+          path: "/menu",
+          name: "menu",
+          component: () => import("./dayu/modules/menu/Menu"),
+          meta: { title: "菜单管理" }
         },
         {
           path: "/payList",

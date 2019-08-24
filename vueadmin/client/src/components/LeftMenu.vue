@@ -40,6 +40,10 @@ export default {
           icon:"el-icon-tickets",
           name:"客户管理",
           path:'/clients'
+        },{
+          icon:"el-icon-tickets",
+          name:"菜单管理",
+          path:'/menu'
         }]
       // items: [
       //   {
