@@ -17,15 +17,10 @@ router.post('/create', async(ctx, next) => {
          {
               "name":"交通违章",
               "sub_button":[
-              {	
-                  "type":"media_id",
-                  "name":"交罚款",
-                  "media_id": "MEDIA_ID1"
-               },
                {	
                 "type":"media_id",
                 "name":"罚款缴费",
-                "media_id": "MEDIA_ID1"
+                "media_id": "9mDA4XPsO5S964M3J-mq_YlLDcA67PPlY5jFVflLV1M"
              }]
           },
           
