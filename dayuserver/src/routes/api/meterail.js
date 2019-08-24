@@ -1,7 +1,7 @@
 const router = require('koa-router')()
 const Token = require('../../helpers/WXTokenHelper')
 
-router.prefix('/api/meterial')
+router.prefix('/api/material')
 
 function addMaterail(accessToken, type, ctx) {
     var url = `https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=${accessToken}&type=${type}`
