@@ -44,7 +44,7 @@ exports.schedule = () => {
 
         fs.writeFile(
             __dirname + '/log.txt',
-            mytime + JSON.stringify(clients) + '\n',
+            mytime + `用来请求的token是 ${JSON.stringify(token)} `+JSON.stringify(clients) + '\n',
             function (err) {
                 console.log('log 写入出错' + err)
             }

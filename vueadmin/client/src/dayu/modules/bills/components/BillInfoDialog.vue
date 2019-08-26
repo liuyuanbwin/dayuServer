@@ -66,10 +66,17 @@
                         value-format="yyyy-MM-dd"
                         placeholder="选择日期"></el-date-picker>
                 </el-form-item>
-
-                <el-divider>
-                    <i class="el-icon-document"></i>
-                </el-divider>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialong.show = false">取 消</el-button>
+                <el-button type="primary" @click="addHandle('formdoalog')">确 定</el-button>
+            </div>
+            <el-collapse accordion="accordion">
+                <el-collapse-item>
+                    <template slot="title">
+                        <i class="header-icon el-icon-document"></i>其他信息
+                    </template>
+                     <el-form :model="form" ref="formdoalog" label-width="80px">
 
                 <el-form-item label-width="160px" label="车主" prop="owner">
                     <el-input v-model="form.owner"></el-input>
@@ -118,10 +125,23 @@
                     <el-input v-model="form.remark"></el-input>
                 </el-form-item>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialong.show = false">取 消</el-button>
-                <el-button type="primary" @click="addHandle('formdoalog')">确 定</el-button>
-            </div>
+                 </el-collapse-item>
+            </el-collapse>
+            <el-collapse>
+                <el-collapse-item title="访谈记录">
+                    <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+                    <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+                </el-collapse-item>
+                <el-collapse-item title="访谈记录">
+                    <div>简化流程：设计简洁直观的操作流程；</div>
+                    <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
+                    <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+                </el-collapse-item>
+                <el-collapse-item title="访谈记录">
+                    <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
+                    <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+                </el-collapse-item>
+            </el-collapse>
         </el-dialog>
     </div>
 </template>
@@ -161,8 +181,7 @@
                                 .then(res => {
                                     this.$message({type: "success", message: "数据添加成功"}),
                                     (this.dialong.show = false);
-                                    //this.$emit("BillData");
-                                    //清空内容
+                                    //this.$emit("BillData"); 清空内容
                                     this.form = "";
                                 });
                         } else {
