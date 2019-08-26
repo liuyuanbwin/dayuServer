@@ -247,7 +247,7 @@
             billDetail(index, row){
                  this
                             .$axios
-                            .get(`/api/vehicles/detail?id=${row._id}`)
+                            .post(`/api/vehicles/detail`,{id:row._id})
                             .then(res => {
                                 this.$message({type: "success", message:`车辆信息${JSON.stringify(res)}`});
                             });
