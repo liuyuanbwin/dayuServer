@@ -58,6 +58,20 @@ router.get('/', async(ctx,next) => {
     }
 })
 
+router.get('/detail', async(ctx, next) => {
+    try{
+        const results = await Vehicle.findOne({
+            "_id": mongoose.Types.ObjectId(ctx.request.query.id)
+        })
+        ctx.body = results
+    }catch(error){
+        ctx.body = {
+            code:-1,
+            error
+        }
+    }
+})
+
 router.post('/update', async(ctx,next) => {
 
     try {

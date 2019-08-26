@@ -74,6 +74,7 @@
                     <el-table-column label="操作" fixed="right">
                         <template slot-scope="scope">
                             <el-button size="mini" @click="billEdit(scope.$index, scope.row)">编辑</el-button>
+                            <el-button size="mini" @click="billDetail(scope.$index, scope.row)">详情</el-button>
                             <el-button
                                 size="mini"
                                 type="danger"
@@ -242,6 +243,14 @@
                     option: "add"
                 }
                 this.form = {}
+            },
+            billDetail(index, row){
+                 this
+                            .$axios
+                            .get(`/api/vehicles/detail?id=${row._id}`)
+                            .then(res => {
+                                this.$message({type: "success", message:`车辆信息${JSON.stringify(res)}`});
+                            });
             },
             billEdit(index, row) {
                 this.dialong = {
