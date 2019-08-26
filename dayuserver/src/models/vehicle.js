@@ -25,7 +25,8 @@ let vehicleSchema = new mongoose.Schema({
     headquarter:String,
     car_model:String,
     source:Number,
-    clients:[String]
+    clients:[String],
+    reviews:[String]
 },{
     _id:true
 })
