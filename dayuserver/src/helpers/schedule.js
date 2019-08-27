@@ -57,7 +57,7 @@ exports.schedule = () => {
             .forEach(async element => {
                 console.log('openid ' + element)
                 try {
-                    await Dayu.postModelMsg(token.token, {
+                    await Dayu.postModelMsg(token.access_token, {
                         touser: element,
                         template_id: 'ef-7cKV2Asjckz-WyvNTAn0a5CE0zMKiTVYk__OGUiE',
                         topcolor: "#FF0000",
