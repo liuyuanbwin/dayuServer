@@ -92,10 +92,10 @@ exports.getToken = async (type) => {
             console.log('log 写入出错' + err)
         }
     )
-    //console.log(' 第一次读到的token ' + JSON.stringify(data))
+    console.log(' 第一次读到的token ' + JSON.stringify(data))
     if (data && data.length != 0) {
         if (!isValidAccessToken(data)) {
-            //console.log(' ----  无效  -----')
+            console.log(' ----  无效  -----')
             data = await updateAccessToken()
             await setSync(type, data.access_token, data.expires_in)
             var myDate = new Date();
@@ -111,10 +111,10 @@ exports.getToken = async (type) => {
     } else {
         data = await updateAccessToken()
         await setSync(type, data.access_token, data.expires_in)
-        //console.log(' ----  更新  -----' + data)
+        console.log(' ----  更新  -----' + data)
     }
 
-    //console.log(' 返回的token ' + JSON.stringify(data))
+    console.log(' 返回的token ' + JSON.stringify(data))
     var myDate = new Date();
     var mytime = myDate.toLocaleTimeString();
     fs.appendFile(
@@ -124,6 +124,7 @@ exports.getToken = async (type) => {
             console.log('log 写入出错' + err)
         }
     )
+    data = await getAsync(type)
     return data;
 }
 exports.getTicket = async () => {
