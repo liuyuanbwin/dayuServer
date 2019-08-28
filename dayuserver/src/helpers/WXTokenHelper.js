@@ -98,6 +98,7 @@ exports.getToken = async (type) => {
             console.log(' ----  无效  -----')
             data = await updateAccessToken()
             await setSync(type, data.access_token, data.expires_in)
+            data = await getAsync(type)
             var myDate = new Date();
             var mytime = myDate.toLocaleTimeString();
             fs.appendFile(
@@ -111,6 +112,7 @@ exports.getToken = async (type) => {
     } else {
         data = await updateAccessToken()
         await setSync(type, data.access_token, data.expires_in)
+        data = await getAsync(type)
         console.log(' ----  更新  -----' + data)
     }
 
