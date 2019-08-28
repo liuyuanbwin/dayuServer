@@ -114,7 +114,7 @@ exports.getToken = async (type) => {
         console.log(' ----  更新  -----' + data)
     }
 
-    console.log(' 返回的token ' + JSON.stringify(data))
+    //console.log(' 返回的token ' + JSON.stringify(data))
     var myDate = new Date();
     var mytime = myDate.toLocaleTimeString();
     fs.appendFile(
@@ -125,6 +125,7 @@ exports.getToken = async (type) => {
         }
     )
     data = await getAsync(type)
+    console.log(' 返回的token ' + JSON.stringify(data))
     return data;
 }
 exports.getTicket = async () => {

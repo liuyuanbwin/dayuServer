@@ -28,11 +28,12 @@ exports.schedule = () => {
 
     rule.hour =11;
 
-    rule.minute =38;
+    rule.minute =43;
     var j = schedule.scheduleJob(rule, async function () {
 
         console.log('schedule sssss')
         let token = await Token.getToken('token')
+        console.log(' 使用的token ' + JSON.stringify(token))
         let clients = await Dayu.getUserlist(token.token)
 
         console.log('clenit ' + JSON.stringify(clients))
