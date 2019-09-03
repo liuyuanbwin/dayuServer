@@ -4,7 +4,7 @@ const Review = require('../../models/review')
 router.prefix('/api/review')
 
 router.get('/', async (ctx, next) => {
-    console.log(`查询回访 ${ctx.query}`)
+    console.log(`查询回访 ${JSON.stringify(ctx.query)}`)
     var results = await Review.find({vehicleId:ctx.query.id})
     ctx.status = 200
     ctx.body = {

@@ -44,7 +44,7 @@
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit(this)">立即创建</el-button>
                     <el-button>取消</el-button>
-                    <el-button @>刷新</el-button>
+                    <el-button @click="refresh()">刷新</el-button>
                 </el-form-item>
             </el-form>
         </el-dialog>
@@ -161,17 +161,21 @@
                 })
             },
             getReviewList() {
-                alert('ssssh')
+
+                alert(`form ${JSON.stringify(this.form)} + ${this.form.id}`)
                 this
                 .$axios
                 .get(`/api/review?id=${this.form.id}`)                         
                 .then(res => {
                     console.log(`Get ${JSON.stringify(res)}`)
                 })
+            },
+            refresh(){
+                this.getReviewList()
             }
         },
         mounted() {
-            this.getReviewList()
+            //this.getReviewList()
         }
         
     };
