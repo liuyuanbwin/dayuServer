@@ -111,6 +111,16 @@
             dialong: Object,
             form: Object
         },
+        watch:{
+            'dialong.show':{
+                handler(newName, oldName){
+                    console.log('dialong change !!!' + newName)
+                    if(newName == true){
+                        this.getReviewList()
+                    }
+                }
+            }
+        },
         methods: {
             addHandle(formdoalog) {
 
@@ -171,7 +181,7 @@
                 })
             },
             refresh(){
-                this.getReviewList()
+                
             }
         },
         mounted() {
