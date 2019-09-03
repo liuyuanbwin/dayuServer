@@ -95,10 +95,12 @@
             </div>
         </div>
         <BillDialog :dialong="dialong" :form="form" @BillData="getInfoList"></BillDialog>
+        <ReviewDialog :dialong="reviewdia" :form="form"></ReviewDialog> 
     </div>
 </template>
 <script>
     import BillDialog from "./components/BillInfoDialog"
+    import ReviewDialog from "./components/ReviewDialog"
     const moment = require('moment')
     export default {
         name: "list",
@@ -120,6 +122,11 @@
                     show: false,
                     title: "",
                     option: "edit"
+                },
+                reviewdia:{
+                    show:false,
+                    tilte:"",
+                    option:""
                 },
                 form: {}
             }
@@ -245,12 +252,18 @@
                 this.form = {}
             },
             billDetail(index, row){
-                 this
-                            .$axios
-                            .post(`/api/vehicles/detail`,{id:row._id})
-                            .then(res => {
-                                this.$message({type: "success", message:`车辆信息${JSON.stringify(res)}`});
-                            });
+                //  this
+                //             .$axios
+                //             .post(`/api/vehicles/detail`,{id:row._id})
+                //             .then(res => {
+                //                 this.$message({type: "success", message:`车辆信息${JSON.stringify(res)}`});
+                //             });
+                this.reviewdia = {
+                    title:"回访记录",
+                    show:true,
+                    option:""
+                }
+                this.form = {}
             },
             billEdit(index, row) {
                 this.dialong = {
@@ -311,7 +324,8 @@
             this.getInfoList();
         },
         components: {
-            BillDialog
+            BillDialog,
+            ReviewDialog
         }
     }
 </script>

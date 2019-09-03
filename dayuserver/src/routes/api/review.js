@@ -13,4 +13,25 @@ router.get('/', async (ctx, next) => {
     }
 })
 
+router.post('/add', async (ctx, next) => {
+
+    const review = new Review({
+        create_date:ctx.request.body.create_date,
+        content:ctx.request.body.content
+    })
+
+    let code = 0
+
+    try {
+        await review.save()
+        ctx.body = {
+            code:0
+        }
+    } catch (error) {
+        ctx.body = {
+            code:-1
+        }
+    }
+})
+
 module.exports = router
