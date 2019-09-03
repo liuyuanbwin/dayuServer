@@ -160,6 +160,7 @@
                 })
             },
             getReviewList() {
+                alert('ssssh')
                 this
                 .$axios
                 .get(`/api/review?id=${this.form.id}`)                         
