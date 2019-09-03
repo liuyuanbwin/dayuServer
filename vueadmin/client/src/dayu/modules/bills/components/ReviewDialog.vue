@@ -44,6 +44,7 @@
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit(this)">立即创建</el-button>
                     <el-button>取消</el-button>
+                    <el-button @>刷新</el-button>
                 </el-form-item>
             </el-form>
         </el-dialog>
@@ -169,9 +170,10 @@
                 })
             }
         },
-        created() {
+        mounted() {
             this.getReviewList()
         }
+        
     };
 </script>
 <style scoped="scoped"></style>
