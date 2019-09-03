@@ -4,7 +4,8 @@ let reviewSchema  = new mongoose.Schema({
     create_date:Date,
     content:String,
     create_man:String,
-    remark:String
+    remark:String,
+    vehicleId:String
 },{
     _id:true
 })

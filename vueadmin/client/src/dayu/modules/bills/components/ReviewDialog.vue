@@ -57,7 +57,8 @@
         data() {
             return {
                 form: {
-                    create_date: '',
+                    id:'',
+                    create_date:'',
                     content: ''
                 },
                 rules: {
@@ -76,11 +77,6 @@
                         }
                     ]
                 },
-                // formdialog: {   plate: [{ required: true, message: "车牌号不能为空", trigger: "blur"
-                // }],   registDate:[{ required: true, message: "请填写首次登记日期", trigger: "blur"}],
-                // linkmanTel: [{ required: true, message: "请填写联系电话", trigger: "blur"}] },
-                // roles:[     {title:"一般客户",role:0},     {title:"投保人", role:1}, {title:"被保险人",
-                // role:2},     {title:"联系人", role:3} ], role:"一般客户"
                 pickerOptions: {
                     disabledDate(time) {
                         return time.getTime() > Date.now();
@@ -148,7 +144,12 @@
                     if(valid){
                         //alert(`提交的是 ${JSON.stringify(this.form)}`)
                         this
-                        .post('/api/review/add', this.form)
+                        .$axios
+                        .post('/api/review/add', {
+                    create_date:this.form.create_date,
+                    content:this.form.content,
+                    vehicleId:this.form.id
+                })
                         .then(res => {
                             alert(`添加访问返回 ${JSON.stringify(res)}`)
                         })
@@ -161,7 +162,7 @@
             getReviewList() {
                 this
                 .$axios
-                .get('/api/review')
+                .get(`/api/review?id=${this.form.id}`)                         
                 .then(res => {
                     console.log(`Get ${JSON.stringify(res)}`)
                 })

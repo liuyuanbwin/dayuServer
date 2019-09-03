@@ -252,18 +252,14 @@
                 this.form = {}
             },
             billDetail(index, row){
-                //  this
-                //             .$axios
-                //             .post(`/api/vehicles/detail`,{id:row._id})
-                //             .then(res => {
-                //                 this.$message({type: "success", message:`车辆信息${JSON.stringify(res)}`});
-                //             });
                 this.reviewdia = {
                     title:"回访记录",
                     show:true,
                     option:""
                 }
-                this.form = {}
+                this.form = {
+                    id:row._id
+                }
             },
             billEdit(index, row) {
                 this.dialong = {

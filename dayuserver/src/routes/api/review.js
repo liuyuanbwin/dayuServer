@@ -17,7 +17,8 @@ router.post('/add', async (ctx, next) => {
 
     const review = new Review({
         create_date:ctx.request.body.create_date,
-        content:ctx.request.body.content
+        content:ctx.request.body.content,
+        vehicleId:ctx.request.body.vehicleId
     })
 
     let code = 0
