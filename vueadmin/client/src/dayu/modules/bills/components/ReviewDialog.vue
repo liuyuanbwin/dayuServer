@@ -12,22 +12,20 @@
                 <el-button @click="dialong.show = false">取 消</el-button>
                 <el-button type="primary" @click="addHandle('formdoalog')">确 定</el-button>
             </div>
-            <el-collapse>
-                <el-collapse-item title="访谈记录">
-                    <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
-                    <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
-                </el-collapse-item>
-                <el-collapse-item title="访谈记录">
-                    <div>简化流程：设计简洁直观的操作流程；</div>
-                    <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
-                    <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
-                </el-collapse-item>
-                <el-collapse-item title="访谈记录">
-                    <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-                    <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+            <el-collapse v-if="reviews !== undefined&&reviews.length > 0" v-for="(review, index) in reviews">
+                <el-collapse-item :title="timeRound(review.create_date)">
+                    <div>{{review.content}}</div>
                 </el-collapse-item>
             </el-collapse>
-            <el-form ref="form" :rules="rules" :model="form" label-width="80px">
+
+<el-card class="box-card" style="marginTop:10px;">
+  <el-form ref="form" :rules="rules" :model="form" label-width="80px">
+      <el-switch
+  v-model="value"
+  active-color="#13ce66"
+  inactive-color="#ff4949">
+</el-switch>
+                    <el-button type="primary" @click="onSubmit(this)">关闭提醒</el-button>
                 <el-form-item label="回访时间" prop="create_date">
                     <el-col :span="11">
                         <el-date-picker
@@ -42,24 +40,27 @@
                     <el-input type="textarea" v-model="form.content"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit(this)">立即创建</el-button>
-                    <el-button>取消</el-button>
-                    <el-button @click="refresh()">刷新</el-button>
+                    <el-button type="primary" @click="onSubmit(this)">添加回访</el-button>
+
                 </el-form-item>
             </el-form>
+</el-card>
+            
         </el-dialog>
     </div>
 </template>
 
 <script>
     // @ is an alias to /src
+    const moment = require('moment')
     export default {
         name: "ReviewDialog",
         data() {
             return {
+                reviews:[],
                 form: {
                     id:'',
-                    create_date:'',
+                    create_date:new Date(),
                     content: ''
                 },
                 rules: {
@@ -162,7 +163,9 @@
                     vehicleId:this.form.id
                 })
                         .then(res => {
-                            alert(`添加访问返回 ${JSON.stringify(res)}`)
+                            this.getReviewList()
+                            this.form.create_date = ''
+                            this.form.content = ''
                         })
                     }else{
                         alert(`请正确填写访问信息`)
@@ -170,14 +173,18 @@
                     }
                 })
             },
+            timeRound(date) {
+                return moment(date).format('YYYY-MM-DD')
+            },
             getReviewList() {
 
-                alert(`form ${JSON.stringify(this.form)} + ${this.form.id}`)
+                
                 this
                 .$axios
                 .get(`/api/review?id=${this.form.id}`)                         
                 .then(res => {
                     console.log(`Get ${JSON.stringify(res)}`)
+                    this.reviews = res.data.results
                 })
             },
             refresh(){

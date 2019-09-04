@@ -74,7 +74,7 @@
                     <el-table-column label="操作" fixed="right">
                         <template slot-scope="scope">
                             <el-button size="mini" @click="billEdit(scope.$index, scope.row)">编辑</el-button>
-                            <el-button size="mini" @click="billDetail(scope.$index, scope.row)">详情</el-button>
+                            <el-button size="mini" @click="billDetail(scope.$index, scope.row)">回访记录</el-button>
                             <el-button
                                 size="mini"
                                 type="danger"
