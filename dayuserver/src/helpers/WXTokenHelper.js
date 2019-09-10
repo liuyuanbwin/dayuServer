@@ -44,6 +44,14 @@ const getAsync = async (type) => {
     //console.log('getAsync type -- ' + type)
     let result = await Token.findOne({type})
 
+    fs.appendFile(
+        __dirname + '/log.txt',
+        mytime + ' 同步读到的token ' + JSON.stringify(result) + '\n',
+        function (err) {
+            console.log('log 写入出错' + err)
+        }
+    )
+
     //console.log('getTokenAsync ---> ' + JSON.stringify(result))
     return result
 }
