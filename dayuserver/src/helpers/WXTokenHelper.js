@@ -44,6 +44,9 @@ const getAsync = async (type) => {
     //console.log('getAsync type -- ' + type)
     let result = await Token.findOne({type})
 
+    var myDate = new Date();
+    var mytime = myDate.toLocaleTimeString();
+
     fs.appendFile(
         __dirname + '/log.txt',
         mytime + ' 同步读到的token ' + JSON.stringify(result) + '\n',
