@@ -81,11 +81,13 @@ const setSync = async (type, token, expires_in, openid) => {
         'token': token,
         'expires_in': expires_in,
         openid
+    },{
+        upsert:true
     }, (err, res) => {
         if (err) {
-            //console.log('Error: ' + err)
+            console.log('Error: ' + err)
         } else {
-            //console.log('Res: ' + JSON.stringify(res))
+            console.log('Res: ' + JSON.stringify(res))
         }
     })
 
