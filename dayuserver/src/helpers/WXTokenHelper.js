@@ -55,7 +55,7 @@ const getAsync = async (type) => {
         }
     )
 
-    //console.log('getTokenAsync ---> ' + JSON.stringify(result))
+    console.log('getTokenAsync ---> ' + JSON.stringify(result))
     return result
 }
 
