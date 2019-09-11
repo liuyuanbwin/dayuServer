@@ -75,7 +75,7 @@ exports.xmlReply = async (ctx, next) => {
                     }
                 })
                 .then((res, err) => {
-
+                    console.log(`发送模板消息结果 --> ${JSON.stringify(res)}`)
                     if (err) {
                         console.log('error ' + err + JSON.stringify(res));
 
