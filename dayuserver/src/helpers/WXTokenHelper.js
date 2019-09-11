@@ -35,7 +35,7 @@ const updateAccessToken = async () => {
             WxApi.accessToken + "&appid=" + config.wx.appid + "&secret=" + config.wx.appSecret
         );
         var data = JSON.parse(res.body);
-        console.log(' ---- *** ' + JSON.stringify(data) + ' ***  -----')
+        console.log('updateAccessToken ---- *** ' + JSON.stringify(data) + ' ***  -----')
         data.expires_in = new Date().getTime() + (data.expires_in - 20) * 1000;
         resolve(data);
     });
@@ -122,6 +122,7 @@ exports.getToken = async (type) => {
         }
     } else {
         data = await updateAccessToken()
+        console.log('没有读到数据 重新请求')
         await setSync(type, data.access_token, data.expires_in)
         data = await getAsync(type)
         console.log(' ----  更新  -----' + data)
