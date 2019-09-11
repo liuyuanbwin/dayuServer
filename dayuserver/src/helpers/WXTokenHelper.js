@@ -92,7 +92,7 @@ const setSync = async (type, token, expires_in, openid) => {
     //console.log('保存结果token ' +  JSON.stringify(result))
 }
 exports.getToken = async (type) => {
-    let data = await getAsync(type)
+    var data = await getAsync(type)
 
     var myDate = new Date();
     var mytime = myDate.toLocaleTimeString();
