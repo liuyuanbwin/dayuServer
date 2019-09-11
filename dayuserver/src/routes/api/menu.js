@@ -31,7 +31,7 @@ router.post('/create', async(ctx, next) => {
           },
           
           {
-            "type":"miniprogram",
+            "type":"view",
             "name":"🏠涿州社区",
             "url":"http://yhq1.bl1000.cn/plugin.php?id=tom_tongcheng&site=1&mod=index"
         },
