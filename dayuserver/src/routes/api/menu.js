@@ -32,8 +32,8 @@ router.post('/create', async(ctx, next) => {
           
           {
             "type":"miniprogram",
-            "name":"💳同城卡券",
-            "url":"http://www.bl1000.cn/wx/weather",
+            "name":"🏠涿州社区",
+            "url":"http://yhq1.bl1000.cn/plugin.php?id=tom_tongcheng&site=1&mod=index",
             "appid":"wx122013c737c2033f",
             "pagepath":"pages/home/home"
         },
