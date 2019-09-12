@@ -16,10 +16,7 @@ exports.schedule = () => {
         '今日不限行'
     ]
 
-    var currentdate = new Date()
-    var week = currentdate.getDay()
-    var forbiddenStr = forbiddenNums[week]
-
+    
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = [
         0,
@@ -30,6 +27,11 @@ exports.schedule = () => {
 
     rule.minute =0;
     var j = schedule.scheduleJob(rule, async function () {
+
+        var currentdate = new Date()
+    var week = currentdate.getDay()
+    var forbiddenStr = '今日不限行'//forbiddenNums[week]
+
 
         console.log('schedule sssss')
         let token = await Token.getToken('token')
