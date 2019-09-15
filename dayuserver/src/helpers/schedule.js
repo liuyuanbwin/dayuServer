@@ -30,7 +30,7 @@ exports.schedule = () => {
 
         var currentdate = new Date()
     var week = currentdate.getDay()
-    var forbiddenStr = '今日不限行'//forbiddenNums[week]
+    var forbiddenStr = forbiddenNums[week]
 
 
         console.log('schedule sssss')
