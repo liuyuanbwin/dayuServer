@@ -16,6 +16,7 @@ exports.schedule = () => {
         '今日不限行'
     ]
 
+
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = [
         0,
@@ -30,6 +31,7 @@ exports.schedule = () => {
         var currentdate = new Date()
         var week = currentdate.getDay()
         var forbiddenStr = forbiddenNums[week]
+
 
         console.log('schedule sssss')
         let token = await Token.getToken('token')
