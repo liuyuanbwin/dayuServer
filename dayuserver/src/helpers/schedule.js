@@ -16,20 +16,20 @@ exports.schedule = () => {
         '今日不限行'
     ]
 
-    var currentdate = new Date()
-    var week = currentdate.getDay()
-    var forbiddenStr = forbiddenNums[week]
-
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = [
         0,
         new schedule.Range(1, 6)
     ];
 
-    rule.hour =7;
+    rule.hour = 7;
 
-    rule.minute =0;
+    rule.minute = 0;
     var j = schedule.scheduleJob(rule, async function () {
+
+        var currentdate = new Date()
+        var week = currentdate.getDay()
+        var forbiddenStr = forbiddenNums[week]
 
         console.log('schedule sssss')
         let token = await Token.getToken('token')
@@ -38,15 +38,20 @@ exports.schedule = () => {
 
         console.log('clenit ' + JSON.stringify(clients))
 
-       // clients.body.data.openid =  ["omkUruH6_g0dovrbmjMM5VdtHAe4","omkUruLvdfDSS51akLyGDs9CV2CA", "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
+        // clients.body.data.openid =
+        // ["omkUruH6_g0dovrbmjMM5VdtHAe4","omkUruLvdfDSS51akLyGDs9CV2CA",
+        // "omkUruLhonCbGOw9ywJWzZ3vJUg0"]
         console.log('dirname ' + __dirname)
         var myDate = new Date();
         var mytime = myDate.toLocaleTimeString();
 
-        console.log(`用来请求的token是 ${JSON.stringify(token)} `+JSON.stringify(clients) + '\n')
+        console.log(
+            `用来请求的token是 ${JSON.stringify(token)} ` + JSON.stringify(clients) + '\n'
+        )
         fs.appendFile(
             __dirname + '/log.txt',
-            mytime + `用来请求的token是 ${JSON.stringify(token)} `+JSON.stringify(clients) + '\n',
+            mytime + `用来请求的token是 ${JSON.stringify(token)} ` + JSON.stringify(clients) +
+                    '\n',
             function (err) {
                 console.log('log 写入出错' + err)
             }
