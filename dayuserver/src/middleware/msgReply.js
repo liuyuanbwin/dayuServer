@@ -52,24 +52,32 @@ exports.xmlReply = async (ctx, next) => {
             await Dayu
                 .postModelMsg(token.token, {
                     touser: toFromName,
-                    template_id: 'IIFWNAzKrk_ZXpR92NA3D-VQoBDGVIsyDAQRKpCjVJc',
+                    template_id: 'WJfbmu_n3L_YLrO_ATG5fuOdrQ1nXcj2i53XlUFd6DM',
                     topcolor: "#FF0000",
 
                     data: {
                         first: {
-                            value: '尊敬的' + result.plate_num + '车主您的交强险信息如下',
+                            value: '尊敬的' + result.plate_num + '车主,您的车险信息如下',
                             color: "#778899"
                         },
-                        keynote1: {
+                        keyword1: {
                             value: moment(result.cli_expire_date).format('YYYY-MM-DD'),
                             color: '#005500'
                         },
-                        keynote2: {
-                            value: moment(result.cli_expire_date).format('YYYY-MM-DD'),
+                        keyword2: {
+                            value: moment(result.gap_expire_date).format('YYYY-MM-DD'),
+                            color: '#000077'
+                        },
+                        keyword3: {
+                            value: result.gap_content,
+                            color: '#000077'
+                        },
+                        keyword4:{
+                            value: result.insured_is,
                             color: '#000077'
                         },
                         remark: {
-                            value: '大宇车友竭诚为您服务,详情联系石微微',
+                            value: '大宇车友竭诚为您服务',
                             color: '#777700'
                         }
                     }
