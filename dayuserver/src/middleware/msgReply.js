@@ -49,12 +49,17 @@ exports.xmlReply = async (ctx, next) => {
         } else {
             let token = await Token.getToken('token')
 
-            if (result.cli_expire_date == '1970-01-01') {
-                        result.cli_expire_date = "无"
+            var cliExpireDate,gapExpireDate
+            if (moment(result.cli_expire_date).format('YYYY-MM-DD') == '1970-01-01' || moment(result.cli_expire_date).format('YYYY-MM-DD') == 'Invalid date') {
+                cliExpireDate = "无"
+            }else{
+                cliExpireDate = moment(result.cli_expire_date).format('YYYY-MM-DD')
             }
 
-            if (result.gap_expire_date == '1970-01-01') {
-                result.gap_expire_date = '无'
+            if (moment(result.gap_expire_date).format('YYYY-MM-DD') == '1970-01-01' || moment(result.gap_expire_date).format('YYYY-MM-DD') == 'Invalid date') {
+                gapExpireDate = '无'
+            }else{
+                gapExpireDate = moment(result.gap_expire_date).format('YYYY-MM-DD')
             }
 
             await Dayu
