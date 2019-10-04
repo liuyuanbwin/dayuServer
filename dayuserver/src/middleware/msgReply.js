@@ -76,8 +76,12 @@ exports.xmlReply = async (ctx, next) => {
                             value: result.insured_is,
                             color: '#000077'
                         },
+                        keyword5:{
+                            value: result.report_tel,
+                            color: '#000077'
+                        },
                         remark: {
-                            value: '大宇车友竭诚为您服务',
+                            value: result.remark,
                             color: '#777700'
                         }
                     }
