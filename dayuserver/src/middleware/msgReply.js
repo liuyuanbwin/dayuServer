@@ -49,11 +49,21 @@ exports.xmlReply = async (ctx, next) => {
         } else {
             let token = await Token.getToken('token')
 
+            if (result.cli_expire_date == '1970-01-01') {
+                        result.cli_expire_date = "无"
+            }
+
+            if (result.gap_expire_date == '1970-01-01') {
+                result.gap_expire_date = '无'
+            }
+
             await Dayu
                 .postModelMsg(token.token, {
                     touser: toFromName,
                     template_id: 'WJfbmu_n3L_YLrO_ATG5fuOdrQ1nXcj2i53XlUFd6DM',
                     topcolor: "#FF0000",
+
+                    
 
                     data: {
                         first: {
