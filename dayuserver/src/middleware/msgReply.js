@@ -76,11 +76,11 @@ exports.xmlReply = async (ctx, next) => {
                             color: "#778899"
                         },
                         keyword1: {
-                            value: moment(result.cli_expire_date).format('YYYY-MM-DD'),
+                            value: cliExpireDate,//moment(result.cli_expire_date).format('YYYY-MM-DD'),
                             color: '#005500'
                         },
                         keyword2: {
-                            value: moment(result.gap_expire_date).format('YYYY-MM-DD'),
+                            value: gapExpireDate,//moment(result.gap_expire_date).format('YYYY-MM-DD'),
                             color: '#000077'
                         },
                         keyword3: {
