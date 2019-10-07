@@ -8,11 +8,11 @@ var fs = require('fs')
 exports.schedule = () => {
     var forbiddenNums = [
         '今日不限行',
+        '3 和 8',
         '4 和 9',
         '5 和 0',
         '1 和 6',
         '2 和 7',
-        '3 和 8',
         '今日不限行'
     ]
 
@@ -89,7 +89,7 @@ exports.schedule = () => {
                                 color: '#FF0000'
                             },
                             keyword4: {
-                                value: '07:00-19:00',
+                                value: '07:00-20:00',
                                 color: '#005500'
                             },
                             remark: {

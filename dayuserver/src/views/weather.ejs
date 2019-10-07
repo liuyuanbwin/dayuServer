@@ -61,17 +61,17 @@
                                         $.toptip('点击右上角,分享更多朋友', 'success');
                                         var forbiddenNums = [
                                             '今日不限行',
+                                            '3 和 8',
                                             '4 和 9',
                                             '5 和 0',
                                             '1 和 6',
                                             '2 和 7',
-                                            '3 和 8',
                                             '今日不限行'
                                         ]
 
                                         var currentdate = new Date()
                                         var week = currentdate.getDay()
-                                        var forbiddenStr = '今日不限行'//forbiddenNums[week]
+                                        var forbiddenStr = '今日不限行' //forbiddenNums[week]
                                         $('#forbiddenNum').html(forbiddenStr)
                                         var burl = encodeURI(location.href.split('#')[0]);
                                         $.ajax({
