@@ -53,6 +53,12 @@ const router = new Router({
           meta: { title: "菜单管理" }
         },
         {
+          path:"/tools",
+          name:"tools",
+          component: () => import("./dayu/modules/tools/Tools"),
+          meta:{title:"工具箱"}
+        },
+        {
           path: "/payList",
           name: "payList",
           component: () => import("./views/fundmanagement/PayList"),

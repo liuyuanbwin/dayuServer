@@ -44,8 +44,12 @@ export default {
           icon:"el-icon-tickets",
           name:"菜单管理",
           path:'/menu'
+        },{
+          icon:"el-icon-suitcase",
+          name:"工具箱",
+          path:'/tools'
         }]
-      // items: [
+      // items: [S
       //   {
       //     icon: "el-icon-menu",
       //     name: "首页",
