@@ -27,7 +27,7 @@ router.post('/login', async ctx => {
     ctx.body = {
         tk,
         user:user,
-        identity,
+        identity:result[0].identity,
         code:1,
         status:200
     }
