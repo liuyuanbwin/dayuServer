@@ -4,7 +4,8 @@ let userSchema = new mongoose.Schema({
     name:String,
     email:String,
     password:String,
-    identity:String
+    identity:String,
+    statu:Number
 },{
     _id:true
 })

@@ -50,6 +50,8 @@ export default {
 						 console.log('登录成功 >>>>> ' + res.data.tk)
 						localStorage.setItem('token', res.data.tk)
 						localStorage.setItem('user', res.data.user)
+						localStorage.setItem('identity',res.data.identity)
+						console.log(`角色是 ${res.data.identity}`)
 						this.$router.push('/index')
 						 /*
 						const { token }  = res.data; 

@@ -64,7 +64,8 @@ router.post('/register', async(ctx, next) => {
        name:ctx.request.body.name,
        email:ctx.request.body.email,
        password:ctx.request.body.password,
-       identity:ctx.request.body.identity
+       identity:ctx.request.body.identity,
+       statu:0
    })
 
    let code = 0

@@ -7,7 +7,7 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      redirect: "listuser"
+      redirect: "home"
     },
     {
       path: "/index",
