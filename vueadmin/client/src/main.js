@@ -8,14 +8,19 @@ import 'element-ui/lib/theme-chalk/index.css'
 import moment from 'moment'
 import echarts from 'echarts'
 import VueQuillEditor from 'vue-quill-editor'
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 Vue.prototype.$echarts = echarts 
 Vue.prototype.$moment = moment 
 Vue.use(VueQuillEditor)
+Vue.use(MintUI)
 
- import VueAMap from 'vue-amap';
+
+
+import VueAMap from 'vue-amap';
  
  
- Vue.use(VueAMap);
+Vue.use(VueAMap);
 Vue.config.productionTip = false
 
 //百度地图	

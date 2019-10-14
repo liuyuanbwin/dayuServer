@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <Header></Header>
-    <LeftMenu></LeftMenu>
+    <AgencyLeftMenu></AgencyLeftMenu>
     <div class="rightContainer" :class="{'content-collapse':collapse}">
       <Tags/>
       <div class="content">
@@ -17,13 +17,13 @@
 
 <script>
 import Header from "../components/Header";
-import LeftMenu from "../components/LeftMenu";
+import AgencyLeftMenu from "../components/AgencyLeftMenu";
 import bus from "../common/bus";
 import Tags from "../common/Tags";
 // import moment from 'moment'
 // @ is an alias to /src
 export default {
-  name: "Index",
+  name: "AgencyIndex",
   data() {
     return {
       tagsList: [],
@@ -32,11 +32,10 @@ export default {
   },
   components: {
     Header,
-    LeftMenu,
+    AgencyLeftMenu,
     Tags
   },
   created() {
-    console.log(11111111)
     //内容区域跟随变化
     bus.$on("collapse", msg => {
       console.log(msg);
@@ -72,7 +71,7 @@ export default {
 }
 .rightContainer {
   position: absolute;
-  background: red;
+  background: green;
   left: 180px;
   right: 0;
   top: 72px;

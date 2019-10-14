@@ -23,8 +23,23 @@
           value === undefined || value === null || (typeof value === 'object' && Object.keys(value).length === 0)
           || (typeof value === 'string' && value.trim().length === 0)
         )
-      }
+      },
+      _isMobile() {
+	 let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+	 return flag;
+}
+
+    },
+    mounted() {
+    if (this._isMobile()) {
+      alert("手机端");
+      this.$router.replace('/m_index');
+    } else {
+      alert("pc端");
+      this.$router.replace('/pc_index');
     }
+  }
+
   }
 </script>
 

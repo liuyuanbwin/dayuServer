@@ -154,6 +154,7 @@ export default {
   },
   created() {
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
+    console.log(`leftMenu <<< ------------`)
     bus.$on("collapse", msg => {
       this.collapse = msg;
     });
