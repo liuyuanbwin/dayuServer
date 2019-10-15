@@ -32,7 +32,6 @@
     },
     mounted() {
     if (this._isMobile()) {
-      alert("手机端");
       this.$router.replace('/m_index');
     } else {
       alert("pc端");
