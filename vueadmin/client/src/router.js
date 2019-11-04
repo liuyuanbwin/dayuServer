@@ -12,6 +12,12 @@ const router = new Router({
       component:() => import("./dayuM/MLogin")
     },
     {
+      path:"/m_toolbox",
+      name:"Mtoolbox",
+      meta:{title:"手机工具箱"},
+      component:() => import("./dayuM/MIndex")
+    },
+    {
     path: "/",
     name: "AgencyIndex",
     meta: { title: "首页" },
