@@ -64,7 +64,11 @@ export default {
     console.log("search ~~~" + this.searchValue);
     this
     .$axios
-    .get(`/api/vehicles?plate_num=${this.searchValue}`)
+    .get(`/api/vehicles`,{
+      params:{
+        plate_num:this.searchValue
+      }
+    })
     .then(res => {
       console.log(`${JSON.stringify(res)}`)
     })
