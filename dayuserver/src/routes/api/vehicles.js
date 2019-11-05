@@ -37,7 +37,7 @@ router.get('/', async(ctx,next) => {
             
            
         }else{
-            console.log(`车牌号 ${ctx.params.plate_num}`)
+            console.log(`车牌号 ${JSON.stringify(ctx.params)}`)
             const result = await Vehicle.find({
                 plate_num:ctx.params.plate_num
             })
