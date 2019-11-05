@@ -41,7 +41,7 @@ router.get('/', async(ctx,next) => {
                 plate_num:ctx.params.plate_num
             })
         
-            const results = await Vehicle.find({})
+            // const results = await Vehicle.find({})
             ctx.status = 200
             ctx.body = {
                 code:0,
