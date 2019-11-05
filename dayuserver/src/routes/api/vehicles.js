@@ -38,11 +38,13 @@ router.get('/', async(ctx,next) => {
            
         }else{
             console.log(`车牌号--. ${JSON.stringify(ctx.request.query)}`)
+
+
             const result = await Vehicle.find({
-                plate_num:ctx.params.plate_num
+                plate_num:ctx.request.query.plate_num
             })
         
-            // const results = await Vehicle.find({})
+             const results = await Vehicle.find({})
             ctx.status = 200
             ctx.body = {
                 code:0,
