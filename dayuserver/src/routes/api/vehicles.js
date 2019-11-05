@@ -46,7 +46,7 @@ router.get('/', async(ctx,next) => {
             ctx.body = {
                 code:0,
                 result,
-                results,
+                results:"",
                 status:1
             }
         }
