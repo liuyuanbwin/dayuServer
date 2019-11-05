@@ -20,7 +20,7 @@ axios.defaults.baseURL = 'http://www.bl1000.cn'
 axios.defaults
 
 
-//axios.defaults.baseURL = 'http://localhost'
+//axios.defaults.baseURL = 'localhost:81'
 //axios.defaults.headers.common['Authorization'] = 'Bearer 5' + localStorage.getItem('token')
 // 请求拦截  设置统一headercd 
 axios.interceptors.request.use(
