@@ -39,10 +39,20 @@ router.get('/', async(ctx,next) => {
         }else{
             console.log(`车牌号--. ${JSON.stringify(ctx.request.query.plate_num)}`)
 
+                var keyword = ctx.request.query.plate_num
 
-            const result = await Vehicle.find({
-                plate_num:ctx.request.query.plate_num
-            })
+            //模糊查找
+            var _filter = {
+                $or:[
+                    {plate_num:{$regex:keyword}}
+                ]
+            }
+
+
+            const result = await Vehicle.find(_filter)
+            // ({
+            //     //plate_num:ctx.request.query.plate_num
+            // })
         
              const results = await Vehicle.find({})
             ctx.status = 200
