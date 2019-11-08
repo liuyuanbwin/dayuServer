@@ -6,7 +6,6 @@
           <mt-tab-container-item id="offer">
             <!-- 报价 -->
             <mt-header fixed title="报价"></mt-header>
-            <mt-cell v-for="n in 10" title="报价"></mt-cell>
           </mt-tab-container-item>
 
           <!-- --------------------------------------------------------- -->
@@ -15,9 +14,20 @@
             <!-- 订单 -->
             <mt-header fixed title="订单"></mt-header>
             <div id="searchdiv">
-              <i id="searchIcon" class="mint-toast-icon mintui mintui-search" ></i>
-              <mt-field v-model="searchValue" id="searchbar" label="" placeholder="输入车牌号/姓名/手机号码查询投保信息" ></mt-field>
+              <i id="searchIcon" class="mint-toast-icon mintui mintui-search"></i>
+              <mt-field
+                v-model="searchValue"
+                id="searchbar"
+                label
+                placeholder="输入车牌号/姓名/手机号码查询投保信息"
+              ></mt-field>
               <mt-button type="primary" id="searchButton" v-on:click="searchbill()">搜索</mt-button>
+            </div>
+            <div id="billlist" v-for="(item, i) in billlist" @click="toDetail(item)">
+              <mt-cell :title="item.plate_num" :label="item.remark" :value="item.insured_is">
+                <!-- <span>{{item.insurent_is}}</span> -->
+                <!-- {{item.plate_num}} -->
+              </mt-cell>
             </div>
 
             <!-- <mt-cell v-for="n in 5" title="订单"></mt-cell> -->
@@ -56,55 +66,64 @@ export default {
   data() {
     return {
       selected: "offer",
-      searchValue: ""
+      searchValue: "",
+      billlist: []
     };
   },
   methods: {
-     searchbill: function() {
-    console.log("search ~~~" + this.searchValue);
-    this
-    .$axios
-    .get(`/api/vehicles`,{
-      params:{
-        plate_num:this.searchValue
-      }
-    })
-    .then(res => {
-      console.log(`${JSON.stringify(res)}`)
-    })
+    searchbill: function() {
+      console.log("search ~~~" + this.searchValue);
+      this.$axios
+        .get(`/api/vehicles`, {
+          params: {
+            plate_num: this.searchValue
+          }
+        })
+        .then(res => {
+          console.log(`${JSON.stringify(res.data.result)}`);
+          this.billlist = res.data.result;
+        });
+    },
+    toDetail: function(item) {
+      this.$router.push({ path: "/m_billdetail", query: { detail: item } });
+    }
   }
-  },
-
- 
 };
 </script>
 
 <style scoped="scoped">
-#searchdiv{
+#searchdiv {
   margin-top: 40px;
 }
-#searchbar{
-  display:inline;
-  float:left;
+#searchbar {
+  display: inline;
+  float: left;
   border: 1px solid red;
   width: 75%;
   margin: 10px;
   height: 10px;
-  min-height:35px;
+  min-height: 35px;
 }
-#searchIcon{
-  display:inline;
-  float:left;
-  padding-left:10px;
+#searchIcon {
+  display: inline;
+  float: left;
+  padding-left: 10px;
   padding-top: 20px;
 }
-#searchButton{
-  display:inline;
-  float:left;
+#searchButton {
+  display: inline;
+  float: left;
   margin-top: 10px;
-  padding-top:0px;
- padding-right: 0px;
- padding-left: 0px;
- height: 35px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+  height: 35px;
+}
+#billlist {
+  display: block;
+  clear: both;
+}
+.mint-cell {
+  border-bottom: 1px solid darkgray;
 }
 </style>

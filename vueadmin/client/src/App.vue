@@ -34,8 +34,7 @@
     if (this._isMobile()) {
       this.$router.replace('/m_index');
     } else {
-      alert("pc端");
-      this.$router.replace('/pc_index');
+      this.$router.replace('/agencyindex');
     }
   }
 

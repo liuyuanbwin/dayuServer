@@ -33,7 +33,7 @@ router.post('/login', async ctx => {
     }
         }else{
            
-    ctx.status = 401
+    ctx.status = 40001
     ctx.body = {
         message: '密码错误'
     }

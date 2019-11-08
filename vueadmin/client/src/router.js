@@ -18,17 +18,23 @@ const router = new Router({
       component:() => import("./dayuM/MIndex")
     },
     {
+      path:"/m_billdetail",
+      name:"Mbilldetail",
+      meta:{title:"客户详情"},
+      component:() => import("./dayuM/MBillDetail")
+    },
+    {
     path: "/",
     name: "AgencyIndex",
     meta: { title: "首页" },
-    redirect: "/index",
+    //redirect: "/index",
   },
     {
       path: "/agencyindex",
       name: "AgencyIndex",
       component: () => import("./views/AgencyIndex"),
       meta: { title: "首页" },
-      //redirect: "/home",
+     // redirect: "/home",
       children: [
         {
           path: "/home",
@@ -205,13 +211,15 @@ router.beforeEach((to, from, next) => {
     next()
   }
   
-  // const isLogin = localStorage.eleToken ? true : false
+  const isLogin = localStorage.getItem('token') ? true : false
 
-  // if (to.path === '/login' || to.path === '/register') {
-  //   next()
-  // } else {
-  //   isLogin ? next() : next('/login')
-  // }
+  console.log(`路由守卫 ---》  ${isLogin} --- ${to.path} --- ${localStorage.getItem('token')}`)
+
+  if (to.path === '/login' || to.path === '/register') {
+    next()
+  } else {
+    isLogin ? next() : next('/login')
+  }
   
 });
 

@@ -1,5 +1,6 @@
 const router = require('koa-router')()
 const User = require('../../models/user')
+var mongoose = require('mongoose')
 
 router.prefix('/api/users')
 
@@ -57,7 +58,22 @@ router.get('/', async(ctx, next) => {
     }
     
 })
-
+router.post('/edit', async(ctx, next) => {
+    try {
+        const result = await User.where({
+            "_id":mongoose.Types.ObjectId(ctx.request.body.id)
+        }).update({
+            statu:ctx.request.body.statu
+        })
+        ctx.body = {
+            code:0
+        }
+    } catch (error) {
+        ctx.body = {
+            code:-1
+        }
+    }
+})
 router.post('/register', async(ctx, next) => {
    console.log(ctx.request.body + ' **** ' + ctx.request.body.name)
    const user = new User({

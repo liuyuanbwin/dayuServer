@@ -17,7 +17,7 @@
                 </el-form-item>
                 <el-form-item label="选择身份">
                     <el-select v-model="registerUser.identity" placeholder="请选择身份">
-                        <el-option value="manager" label="管理员"></el-option>
+                        <el-option value="manager" label="销售处"></el-option>
                         <el-option value="employee" label="业务员"></el-option>
                     </el-select>
                 </el-form-item>

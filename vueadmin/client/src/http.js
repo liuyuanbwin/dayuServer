@@ -47,11 +47,20 @@ axios.interceptors.response.use(
     // 错误提醒
     endLoading();
     Message.error(error.response.data);
-    console.log('>>>> ' + JSON.stringify(error.response.data))
+    // console.log('>>>> ' + JSON.stringify(error.response.data))
 
     const { status } = error.response;
     if (status == 401) {
       Message.error("token值无效，请重新登录");
+      // 清除token
+      localStorage.removeItem("token");
+
+      // 页面跳转
+      router.push("/login");
+    }
+
+    if (status == 40001) {
+      Message.error("用户名或密码错误，请重新登录");
       // 清除token
       localStorage.removeItem("token");
 

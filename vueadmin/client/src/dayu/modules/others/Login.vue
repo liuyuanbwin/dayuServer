@@ -76,7 +76,7 @@
                                     localStorage.setItem('token', res.data.tk)
                                     localStorage.setItem('user', res.data.user)
                                     localStorage.setItem('identity', res.data.identity)
-                                    console.log(`角色是 ${res.data.identity}`)
+                                    console.log(`角色是 ${res.data.identity}   ${localStorage.getItem('token')}`)
 
                                     const identity = res.data.identity
 
@@ -100,20 +100,6 @@
                                             .$router
                                             .push('/agencyindex')
                                     }
-
-                                    /*
-						const { token }  = res.data;
-						localStorage.setItem('eleToken',token); //存储token
-
-						// 解析token
-						const decode = jwt_decode(token)
-
-						//存储token到vuex
-						this.$store.dispatch('setAuthenticated' , !this.isEmpty(decode))
-						this.$store.dispatch('setUSER',decode)
-
-						this.$router.push('/index')
-						*/
                                 })
                         }
                     })
