@@ -72,7 +72,9 @@
                                 .$axios
                                 .post('/api/login', this.loginUser)
                                 .then(res => {
-                                    console.log('登录成功 >>>>> ' + res.data.tk)
+
+if(res.data.code == 1){
+     console.log('登录成功 >>>>> ' + res.data.tk)
                                     localStorage.setItem('token', res.data.tk)
                                     localStorage.setItem('user', res.data.user)
                                     localStorage.setItem('identity', res.data.identity)
@@ -100,6 +102,17 @@
                                             .$router
                                             .push('/agencyindex')
                                     }
+}else{
+    if(res.data.code == 40001){
+        this.$message({
+            message:'用户名或密码错误',
+            type:'error'
+        })
+    }
+}
+
+
+                                   
                                 })
                         }
                     })
