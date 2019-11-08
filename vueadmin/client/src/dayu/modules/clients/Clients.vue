@@ -98,7 +98,7 @@
                 getClients() {
                     this
                         .$axios
-                        .get('api/clients')
+                        .get('api/users')
                         .then(res => {
                             console.log('sksh   ' + JSON.stringify(res))
                             if (res.data.status === 1) {
@@ -116,7 +116,7 @@
                             : '未知'
                 }
             },
-            created() {
+            mounted() {
                 this.getClients()
             }
         }

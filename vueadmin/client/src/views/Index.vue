@@ -3,7 +3,7 @@
     <Header></Header>
     <LeftMenu></LeftMenu>
     <div class="rightContainer" :class="{'content-collapse':collapse}">
-      <Tags/>
+      <Tags />
       <div class="content">
         <transition name="move" mode="out-in">
           <keep-alive :include="tagsList">
@@ -36,7 +36,7 @@ export default {
     Tags
   },
   created() {
-    console.log(11111111)
+    console.log(11111111);
     //内容区域跟随变化
     bus.$on("collapse", msg => {
       console.log(msg);

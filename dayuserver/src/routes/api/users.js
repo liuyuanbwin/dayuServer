@@ -1,6 +1,7 @@
 const router = require('koa-router')()
 const User = require('../../models/user')
 var mongoose = require('mongoose')
+const proving = require('../../helpers/token/proving')
 
 router.prefix('/api/users')
 
