@@ -31,7 +31,7 @@
           <!-- <img class="avatar" :src="users.avatar"> -->
           <div class="welcome">
             <p class="name comename">欢迎</p>
-            <p class="name avatarname">石微微</p>
+            <p class="name avatarname">{{role}}</p>
             <!-- <p class="name avatarname">{{users.name}}</p> -->
           </div>
           <span class="username">
@@ -62,7 +62,8 @@ export default {
     return {
       collapse: false, //菜单栏是否闭合
       fullscreen: false,
-      showlrc: true
+      showlrc: true,
+      role:localStorage.getItem("identity")
     };
   },
   computed: {

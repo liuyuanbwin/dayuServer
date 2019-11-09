@@ -107,13 +107,13 @@ export default {
           {title:"被保险人", role:2},
           {title:"联系人", role:3}
       ]
-      return roleStrs[parseInt(role)].title;
+      return roleStrs[parseInt(1)].title;
     },
     userInfo() {
       console.log('获取用户列表')
       this.$axios
         .get("/api/users").then(res => {
-					 console.log(res)
+					 console.log(`获取到的用户信息 ---> ${JSON.stringify(res)}`)
           this.userData = res.data.results;
         }).catch(err => {
           console.log(err)
@@ -176,7 +176,7 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     this.userInfo();
   },
   components: {

@@ -28,6 +28,7 @@ router.post('/login', async ctx => {
             })
             ctx.status = 200
             ctx.body = {
+                id:result[0]._id,
                 tk,
                 user: user,
                 identity: result[0].identity,

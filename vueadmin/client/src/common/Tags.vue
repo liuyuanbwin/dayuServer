@@ -90,7 +90,7 @@
 				this.setTags(newValue);
 			}
 		},
-		created() {
+		mounted() {
 			this.setTags(this.$route);
 		}
 	}

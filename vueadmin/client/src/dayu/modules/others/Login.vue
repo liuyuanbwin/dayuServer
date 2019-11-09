@@ -90,12 +90,12 @@ export default {
                 //门市老板
               } else if (identity == "manager") {
                 console.log(`manager ***** -----`);
-                this.$router.push("/agencyindex");
+                this.$router.push("/index");
 
                 //普通业务员
               } else {
                 console.log(`employee ***** -----`);
-                this.$router.push("/agencyindex");
+                this.$router.push("/index");
               }
             } else {
               if (res.data.code == 40001) {

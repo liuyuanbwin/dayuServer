@@ -39,27 +39,28 @@ router.get('/', async(ctx,next) => {
         }else{
             console.log(`车牌号--. ${JSON.stringify(ctx.request.query.plate_num)}`)
 
-                var keyword = ctx.request.query.plate_num
+            var keyword = ctx.request.query.plate_num
 
-            //模糊查找
+            if(keyword){
+
+                 //模糊查找
             var _filter = {
                 $or:[
-                    {plate_num:{$regex:keyword}}
+                    {plate_num:{$regex:keyword}},
+                    {}
                 ]
             }
 
-
             const result = await Vehicle.find(_filter)
-            // ({
-            //     //plate_num:ctx.request.query.plate_num
-            // })
-        
-            const results = await Vehicle.find({})
+
+            }else{
+                const result = await Vehicle.find({})
+            }
+           
             ctx.status = 200
             ctx.body = {
                 code:0,
                 result,
-                results:"",
                 status:1
             }
         }
@@ -70,7 +71,42 @@ router.get('/', async(ctx,next) => {
             }
     }
 })
+router.post('/getVehicles', async(ctx, next) => {
+    try{
+       let { size = 10, page = 1} = ctx.request.body
+       let options = {
+           skip: Number((page - 1) * size),
+           limit:Number(size)
+       }
+       if(ctx.request.body.identity == "manager"){
+        let res = await Vehicle.find({managerid:ctx.request.body.managerid},null, options)
+        let total = await Vehicle.countDocuments()
+        
+       }else{
+        let res = await Vehicle.find({employeeid:ctx.request.body.employeeid},null, options)
+        let total = await Vehicle.countDocuments()
+       }
+       let data = {
+        list:res, 
+        pagination:{
+            total,
+            page,
+            size
+        }
+    }
 
+    ctx.body = {
+        code:0,
+        data
+    }
+       
+    }catch(error){
+        ctx.body = {
+            code:-1,
+            error
+        }
+    }
+})
 router.post('/detail', async(ctx, next) => {
     console.log('detail ' )
     try{
@@ -148,15 +184,17 @@ router.post('/add', async(ctx,next) => {
         checkcar_date:ctx.request.body.checkcar_date,
         customer_tel:ctx.request.body.customer_tel,
         report_tel:ctx.request.body.report_tel,
-        remark:ctx.request.remark,
+        remark:ctx.request.body.remark,
         owner:ctx.request.body.owner,
-        linkman:ctx.request.linkman,
-        linkman_tel1:ctx.request.linkman_tel1,
-        linkman_tel2:ctx.request.linkman_tel2,
-        busi_man:ctx.request.busi_man,
-        busi_man_tel:ctx.request.busi_man_tel,
-        headquarter:ctx.request.headquarter,
-        car_model:ctx.request.car_model
+        linkman:ctx.request.body.linkman,
+        linkman_tel1:ctx.request.body.linkman_tel1,
+        linkman_tel2:ctx.request.body.linkman_tel2,
+        busi_man:ctx.request.body.busi_man,
+        busi_man_tel:ctx.request.body.busi_man_tel,
+        headquarter:ctx.request.body.headquarter,
+        car_model:ctx.request.body.car_model,
+        managerid:ctx.request.body.managerid,
+        employeedi:ctx.request.body.employeeid
     })
 
     let code = 0

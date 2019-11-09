@@ -34,7 +34,7 @@
     if (this._isMobile()) {
       this.$router.replace('/m_index');
     } else {
-      this.$router.replace('/agencyindex');
+      this.$router.replace('/index');
     }
   }
 

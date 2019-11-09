@@ -1,17 +1,49 @@
 <template>
   <div>
+
     <div>
+      
       <div class="page-tab-container">
         <mt-tab-container class="page-tabbar-tab-container" v-model="selected" swipeable>
           <mt-tab-container-item id="offer">
-            <!-- 报价 -->
-            <mt-header fixed title="报价"></mt-header>
+         
+            <mt-header fixed title="待办事项"></mt-header>
+            <div id="waittodo">
+              <mt-navbar v-model="waitTodo">
+                <mt-tab-item id="3month">option A</mt-tab-item>
+                <mt-tab-item id="1month">option B</mt-tab-item>
+                <mt-tab-item id="7day">option C</mt-tab-item>
+              </mt-navbar>
+
+              <mt-tab-container v-model="waitTodo">
+                <mt-tab-container-item id="3month">
+                  <!-- <div id="billscroll">
+                    <ul
+                    v-infinite-scroll="loadMore"
+                    infinite-scroll-disabled="loading"
+                    infinite-scroll-distance="10"
+                  >
+                    <li v-for="item in list">{{ item }}</li>
+                  </ul>
+                  </div> -->
+                  <div id="billscroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+            <div v-for="item in data" :key="item.index">{{item.name}}</div>
+          </div>
+                </mt-tab-container-item>
+                <mt-tab-container-item id="1month">
+                  <mt-cell v-for="n in 4" :title="'content ' + n" />
+                </mt-tab-container-item>
+                <mt-tab-container-item id="7day">
+                  <mt-cell v-for="n in 6" :title="'content ' + n" />
+                </mt-tab-container-item>
+              </mt-tab-container>
+            </div>
           </mt-tab-container-item>
 
-          <!-- --------------------------------------------------------- -->
+
 
           <mt-tab-container-item id="bill">
-            <!-- 订单 -->
+
             <mt-header fixed title="订单"></mt-header>
             <div id="searchdiv">
               <i id="searchIcon" class="mint-toast-icon mintui mintui-search"></i>
@@ -25,23 +57,22 @@
             </div>
             <div id="billlist" v-for="(item, i) in billlist" @click="toDetail(item)">
               <mt-cell :title="item.plate_num" :label="item.remark" :value="item.insured_is">
-                <!-- <span>{{item.insurent_is}}</span> -->
-                <!-- {{item.plate_num}} -->
+
               </mt-cell>
             </div>
 
-            <!-- <mt-cell v-for="n in 5" title="订单"></mt-cell> -->
+
           </mt-tab-container-item>
         </mt-tab-container>
       </div>
     </div>
     <mt-tabbar v-model="selected">
       <mt-tab-item id="offer">
-        <!-- <img slot="icon" src="../assets/100x100.png"> -->
-        报价
+
+        待办事项
       </mt-tab-item>
       <mt-tab-item id="bill">
-        <!-- <img slot="icon" src="../assets/100x100.png"> -->
+
         订单
       </mt-tab-item>
     </mt-tabbar>
@@ -58,16 +89,22 @@ import {
   Cell,
   Header,
   Field,
-  Button
+  Button,
+  InfiniteScroll
 } from "mint-ui";
-
+//import infiniteScroll from 'vue-infinite-scroll'
 export default {
   name: "mindex",
   data() {
     return {
+      waitTodo: "3month",
+      loading: false,
       selected: "offer",
       searchValue: "",
-      billlist: []
+      billlist: [],
+     count: 0,
+      data: [],
+      busy: false
     };
   },
   methods: {
@@ -86,12 +123,32 @@ export default {
     },
     toDetail: function(item) {
       this.$router.push({ path: "/m_billdetail", query: { detail: item } });
+    },
+    loadMore: function() {
+      this.busy = true
+      setTimeout(() => {
+        for (var i = 0, j = 10; i < j; i++) {
+          this.data.push({name: this.count++ })
+        }
+        console.log(this.data)
+        this.busy = false
+      }, 1000)
     }
   }
 };
 </script>
 
 <style scoped="scoped">
+#billscroll{
+  margin-top: 40px;
+  height: 500px;
+  overflow-y: auto;
+}
+#waittodo {
+  margin-top: 40px;
+  margin-bottom: 140px;
+  padding: 10px;
+}
 #searchdiv {
   margin-top: 40px;
 }

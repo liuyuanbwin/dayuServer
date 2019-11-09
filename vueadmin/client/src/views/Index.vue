@@ -1,7 +1,8 @@
 <template>
   <div class="index">
     <Header></Header>
-    <LeftMenu></LeftMenu>
+    <LeftMenu v-if="role == 'supervisor'"></LeftMenu>
+    <AgencyLeftMenu v-else="role == 'manager' || role == 'employee'"></AgencyLeftMenu>
     <div class="rightContainer" :class="{'content-collapse':collapse}">
       <Tags />
       <div class="content">
@@ -18,6 +19,7 @@
 <script>
 import Header from "../components/Header";
 import LeftMenu from "../components/LeftMenu";
+import AgencyLeftMenu from "../components/AgencyLeftMenu";
 import bus from "../common/bus";
 import Tags from "../common/Tags";
 // import moment from 'moment'
@@ -27,12 +29,14 @@ export default {
   data() {
     return {
       tagsList: [],
-      collapse: false
+      collapse: false,
+      role:localStorage.getItem('identity')
     };
   },
   components: {
     Header,
     LeftMenu,
+    AgencyLeftMenu,
     Tags
   },
   created() {
