@@ -86,6 +86,7 @@ router.post('/getVehicles', async(ctx, next) => {
         let res = await Vehicle.find({employeeid:ctx.request.body.employeeid},null, options)
         let total = await Vehicle.countDocuments()
        }
+       console.log(`body ${JSON.stringify(ctx.request.body)}  res ${JSON.stringify(res)}`)
        let data = {
         list:res, 
         pagination:{
