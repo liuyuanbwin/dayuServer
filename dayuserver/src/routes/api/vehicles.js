@@ -72,6 +72,7 @@ router.get('/', async(ctx,next) => {
     }
 })
 router.post('/getVehicles', async(ctx, next) => {
+    console.log(`body ${JSON.stringify(ctx.request.body)}`)
     try{
        let { size = 10, page = 1} = ctx.request.body
        let options = {

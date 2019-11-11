@@ -2,13 +2,15 @@
   <div>
 
     <div>
-      
+     
       <div class="page-tab-container">
+        
         <mt-tab-container class="page-tabbar-tab-container" v-model="selected" swipeable>
           <mt-tab-container-item id="offer">
          
             <mt-header fixed title="待办事项"></mt-header>
             <div id="waittodo">
+               <mt-button type="primary" @click="loadMore">加载</mt-button>
               <mt-navbar v-model="waitTodo">
                 <mt-tab-item id="3month">option A</mt-tab-item>
                 <mt-tab-item id="1month">option B</mt-tab-item>
