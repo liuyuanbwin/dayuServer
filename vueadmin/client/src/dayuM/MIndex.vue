@@ -104,7 +104,8 @@ export default {
       billlist: [],
      count: 0,
       data: [],
-      busy: false
+      busy: false,
+      page:1
     };
   },
   methods: {
@@ -125,14 +126,15 @@ export default {
       this.$router.push({ path: "/m_billdetail", query: { detail: item } });
     },
     loadMore: function() {
-      this.busy = true
-      setTimeout(() => {
-        for (var i = 0, j = 10; i < j; i++) {
-          this.data.push({name: this.count++ })
-        }
-        console.log(this.data)
-        this.busy = false
-      }, 1000)
+      this
+      .$axios
+      .post(`api/vehicles/getVehicles`,{
+        id:localStorage.getItem('id'),
+        page:this.page
+      })
+      .then(res => {
+        console.log(`名下车辆 - ${JSON.stringify(res.data)}`)
+      })
     }
   }
 };
