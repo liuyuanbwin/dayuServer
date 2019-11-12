@@ -79,13 +79,14 @@ router.post('/getVehicles', async(ctx, next) => {
            skip: Number((page - 1) * size),
            limit:Number(size)
        }
+       var res,total
        if(ctx.request.body.identity == "manager"){
-        let res = await Vehicle.find({managerid:ctx.request.body.managerid},null, options)
-        let total = await Vehicle.countDocuments()
+        res = await Vehicle.find({managerid:ctx.request.body.managerid},null, options)
+        total = await Vehicle.countDocuments()
         
        }else{
-        let res = await Vehicle.find({employeeid:ctx.request.body.employeeid},null, options)
-        let total = await Vehicle.countDocuments()
+        res = await Vehicle.find({employeeid:ctx.request.body.employeeid},null, options)
+        total = await Vehicle.countDocuments()
        }
        console.log(`body ${JSON.stringify(ctx.request.body)}  res ${JSON.stringify(res)}`)
        let data = {

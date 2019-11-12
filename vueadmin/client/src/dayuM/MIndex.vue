@@ -16,7 +16,6 @@
                 <mt-tab-item id="1month">option B</mt-tab-item>
                 <mt-tab-item id="7day">option C</mt-tab-item>
               </mt-navbar>
-
               <mt-tab-container v-model="waitTodo">
                 <mt-tab-container-item id="3month">
                   <!-- <div id="billscroll">
@@ -128,12 +127,19 @@ export default {
       this.$router.push({ path: "/m_billdetail", query: { detail: item } });
     },
     loadMore: function() {
+
+      let identity = localStorage.getItem('identity')
+      var options = {id:localStorage.getItem('id'),
+        page:this.page,identity:identity}
+      if(identity == 'manager'){
+        options['managerid'] = localStorage.getItem('id')
+      }else{
+        options['employeeid'] = localStorage.getItem('id')
+      }
+
       this
       .$axios
-      .post(`api/vehicles/getVehicles`,{
-        id:localStorage.getItem('id'),
-        page:this.page
-      })
+      .post(`api/vehicles/getVehicles`,options)
       .then(res => {
         console.log(`名下车辆 - ${JSON.stringify(res.data)}`)
       })
