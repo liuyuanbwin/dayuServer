@@ -12,9 +12,9 @@
             <div id="waittodo">
                <mt-button type="primary" @click="loadMore">加载</mt-button>
               <mt-navbar v-model="waitTodo">
-                <mt-tab-item id="3month">option A</mt-tab-item>
-                <mt-tab-item id="1month">option B</mt-tab-item>
-                <mt-tab-item id="7day">option C</mt-tab-item>
+                <mt-tab-item id="3month">近三月提醒</mt-tab-item>
+                <mt-tab-item id="1month">近一月提醒</mt-tab-item>
+                <mt-tab-item id="7day">近一周提醒</mt-tab-item>
               </mt-navbar>
               <mt-tab-container v-model="waitTodo">
                 <mt-tab-container-item id="3month">
