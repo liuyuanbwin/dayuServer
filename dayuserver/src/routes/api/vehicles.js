@@ -81,6 +81,9 @@ router.post('/getVehicles', async(ctx, next) => {
        var year = datenew.getFullYear()
        var month = datenew.getMonth() + 3
        var day = datenew.getDay()
+       
+       var endDate = new Date()
+       endDate.setTime(datenew.getTime() + 24 * 60 *60 * 1000 * 90)
 
        let options = {
            skip: Number((page - 1) * size),
@@ -92,9 +95,9 @@ router.post('/getVehicles', async(ctx, next) => {
 
        if(ctx.request.body.identity == "manager"){
         res = await Vehicle.find(
-            {$and: [
+            {"$and": [
                 {managerid:ctx.request.body.managerid},
-                {"cli_expire_date":{$gte:new Date()},"et":new Date(year, month ,day)}
+                {"cli_expire_date":{"$gte":datenew,"$lte":endDate}}
         
         ]},null, options)
         total = await Vehicle.countDocuments()
