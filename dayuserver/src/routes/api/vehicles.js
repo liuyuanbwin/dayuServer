@@ -83,7 +83,7 @@ router.post('/getVehicles', async(ctx, next) => {
        var day = datenew.getDay()
        
        var endDate = new Date()
-       endDate.setTime(datenew.getTime() + 24 * 60 *60 * 1000 * 90)
+       endDate.setTime(datenew.getTime() + 24 * 60 *60 * 1000 * 1)
 
        let options = {
            skip: Number((page - 1) * size),
