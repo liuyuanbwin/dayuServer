@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <div>
-      <div class="page-tab-container">
-        <mt-tab-container class="page-tabbar-tab-container" v-model="selected" swipeable>
+  <div :style="{height: deviceHieght - 26 + 'px'}">
+    <div :style="{height: deviceHieght - 26 + 'px'}">
+      <div class="page-tab-container" >
+        <mt-tab-container class="page-tabbar-tab-container" v-model="selected" swipeable :style="{height: deviceHieght - 26 + 'px'}">
           <mt-tab-container-item id="offer">
             <mt-header fixed title="待办事项"></mt-header>
-            <div id="waittodo">
-              <mt-button type="primary" @click="loadMore">加载</mt-button>
+            <div id="waittodo" :style="{height: wrapperHeight - 80 + 'px',background:red}">
+              <!-- <mt-button type="primary" @click="loadMore">加载</mt-button> -->
               <mt-navbar v-model="waitTodo">
                 <mt-tab-item id="3month">近三月提醒</mt-tab-item>
                 <mt-tab-item id="1month">近一月提醒</mt-tab-item>
@@ -14,25 +14,51 @@
               </mt-navbar>
               <mt-tab-container v-model="waitTodo">
                 <mt-tab-container-item id="3month">
-                  <div id="billscroll">
-                    <mt-loadmore
-                      :top-method="loadTop"
-                      :bottom-method="loadBottom"
-                      :bottom-all-loaded="isAllLoaded"
-                      ref="loadmore"
+                  <div class="page-loadmore" :style="{height: deviceHieght - 80 - 52 + 'px',background:red}">
+                    <h1 class="page-title">Pull up</h1>
+                    <p class="page-loadmore-desc">在列表底部, 按住 - 上拉 - 释放可以获取更多数据</p>
+                    <p class="page-loadmore-desc">translate : {{ translate }}</p>
+                    <div
+                      class="loading-background"
+                      :style="{ transform: 'scale3d(' + moveTranslate + ',' + moveTranslate + ',1)' }"
+                    >translateScale : {{ moveTranslate }}</div>
+                    <div
+                      class="page-loadmore-wrapper"
+                      ref="wrapper"
+                      :style="{ height: wrapperHeight + 'px' }"
                     >
-                      <ul>
-                        <li v-for="item in test">{{ item }}</li>
-                      </ul>
-                    </mt-loadmore>
-
-                    <!--显示加载中转菊花-->
-                    <div class="loading-box tc" v-if="isLoading">
-                      <mt-spinner type="snake" class="loading-more"></mt-spinner>
-                      <span class="loading-more-txt">加载中...</span>
+                      <mt-loadmore
+                        :top-method="loadTop"
+                        @translate-change="translateChange"
+                        @top-status-change="handleTopChange"
+                        :bottom-method="loadBottom"
+                        @bottom-status-change="handleBottomChange"
+                        :bottom-all-loaded="allLoaded"
+                        ref="loadmore"
+                      >
+                        <ul class="page-loadmore-list">
+                          <li v-for="item in billlist" class="page-loadmore-listitem">{{ item.plate_num }}</li>
+                        </ul>
+                        <div slot="top" class="mint-loadmore-top">
+                          <span
+                            v-show="topStatus !== 'loading'"
+                            :class="{ 'is-rotate': topStatus === 'drop' }"
+                          >↓</span>
+                          <span v-show="topStatus === 'loading'">
+                            <mt-spinner type="snake"></mt-spinner>
+                          </span>
+                        </div>
+                        <div slot="bottom" class="mint-loadmore-bottom">
+                          <span
+                            v-show="bottomStatus !== 'loading'"
+                            :class="{ 'is-rotate': bottomStatus === 'drop' }"
+                          >↑</span>
+                          <span v-show="bottomStatus === 'loading'">
+                            <mt-spinner type="snake"></mt-spinner>
+                          </span>
+                        </div>
+                      </mt-loadmore>
                     </div>
-
-                    <div class="no-more" v-if="noMore">没有更多了~</div>
                   </div>
                 </mt-tab-container-item>
                 <mt-tab-container-item id="1month">
@@ -71,7 +97,7 @@
   </div>
 </template>
 
-<script>
+  <script>
 import {
   Tabbar,
   TabItem,
@@ -82,13 +108,10 @@ import {
   Header,
   Field,
   Button,
-  InfiniteScroll,
   Spinner,
   Toast,
   Loadmore
 } from "mint-ui";
-//import infiniteScroll from 'vue-infinite-scroll'
-//Vue.use(InfiniteScroll);
 
 export default {
   name: "mindex",
@@ -98,41 +121,44 @@ export default {
   data() {
     return {
       waitTodo: "3month",
-      loading: false,
+
       selected: "offer",
       searchValue: "",
       billlist: [],
-      count: 0,
-      data: [],
-      busy: true,
-      page: 1,
-      isAllLoaded: false,
+
       list: [],
-      isLoading: false, // 加载中转菊花
-      isMoreLoading: true, // 加载更多中
-      noMore: false, // 是否还有更多
-      test: 10,
-      pageInfo: {
-        // 分页信息
-        page: 1,
-        page_size: 2,
-        total: 0, // 总条数
-        totalPage: 1 // 总分页数
-      }
+      allLoaded: false,
+      bottomStatus: "",
+      wrapperHeight: 0,
+      topStatus: "",
+      wrapperHeight: 0,
+      translate: 0,
+      moveTranslate: 0,
+      deviceHieght:0
     };
   },
+  created() {
+    // for (let i = 1; i <= 1; i++) {
+    //   this.list.push(i);
+    // }
+    this.getProjectInfo('loadMore')
+  },
   mounted() {
-    //this.getProjectInfo()
+    this.wrapperHeight =
+      document.documentElement.clientHeight -
+      this.$refs.wrapper.getBoundingClientRect().top;
+
+    this.deviceHieght = document.documentElement.clientHeight
   },
   watch: {
     waitTodo: function(val, oldVal) {
       console.log(`val => ${val} oldVal => ${oldVal}`);
-      // this.busy = true
-      // this.loadMore()
+      this.busy = true;
 
       this.isMoreLoading = true;
       this.selectIndex = index;
-      this.pageInfo.page = 1; // 初始化
+      this.pageInfo.page = 1;
+
       this.pageInfo.totalPage = 1;
       this.list = [];
       this.noMore = false;
@@ -156,13 +182,51 @@ export default {
     toDetail: function(item) {
       this.$router.push({ path: "/m_billdetail", query: { detail: item } });
     },
+
+    handleBottomChange(status) {
+      this.bottomStatus = status;
+    },
+    loadBottom() {
+      console.log("ssss");
+      this.getProjectInfo('loadMore')
+      // setTimeout(() => {
+      //   let lastValue = this.list[this.list.length - 1];
+      //   if (lastValue < 40) {
+      //     for (let i = 1; i <= 10; i++) {
+      //       this.list.push(lastValue + i);
+      //     }
+      //   } else {
+      //     this.allLoaded = true;
+      //   }
+      //   this.$refs.loadmore.onBottomLoaded();
+      // }, 1500);
+    },
+    handleTopChange(status) {
+      this.moveTranslate = 1;
+      this.topStatus = status;
+    },
+    translateChange(translate) {
+      const translateNum = +translate;
+      this.translate = translateNum.toFixed(2);
+      this.moveTranslate = (1 + translateNum / 70).toFixed(2);
+    },
+    loadTop() {
+      setTimeout(() => {
+        let firstValue = this.list[0];
+        for (let i = 1; i <= 10; i++) {
+          this.list.unshift(firstValue - i);
+        }
+        this.$refs.loadmore.onTopLoaded();
+      }, 1500);
+    },
     getProjectInfo(type) {
-      // 获取项目列表
       let _this = this;
       this.isLoading = true;
 
+      console.log('getprojectinfo   .....')
+
       let identity = localStorage.getItem("identity");
-      // this.busy = true
+      this.busy = true;
       var options = {
         id: localStorage.getItem("id"),
         page: this.page,
@@ -174,17 +238,18 @@ export default {
         options["employeeid"] = localStorage.getItem("id");
       }
 
-      this.$axios
-        .post(`api/vehicles/getVehicles`, options)
-        // this.$http.get('/api/steward/projects', {
-        //     params: {
-        //         status: _this.selectIndex,
-        //         current_page: _this.pageInfo.page,
-        //         per_page: _this.pageInfo.page_size
-        //     }
-        // })
+      this.$axios.post(`api/vehicles/getVehicles`, options)
+      // this.$$axios
+      //   .get("/api/steward/projects", {
+      //     params: {
+      //       status: _this.selectIndex,
+      //       current_page: _this.pageInfo.page,
+      //       per_page: _this.pageInfo.page_size
+      //     }
+      //   })
         .then(res => {
           console.log(`名下车辆 - ${JSON.stringify(res.data)}`);
+          this.$refs.loadmore.onBottomLoaded();
           let datas = res.data;
           if (datas.code === 0) {
             if (type === "loadMore") {
@@ -192,8 +257,8 @@ export default {
             } else {
               this.billlist = datas.data.list;
             }
-            // 设置分页
-            this.pageInfo.total = 100; //datas.data.list.length
+            this.pageInfo.total = 100;
+            datas.data.list.length;
             console.log(`total = ${datas.data.list.length}`);
             this.pageInfo.totalPage = Math.ceil(
               this.pageInfo.total / this.pageInfo.page_size
@@ -202,6 +267,7 @@ export default {
               "总页数",
               Math.ceil(this.pageInfo.total / this.pageInfo.page_size)
             );
+            console.log(`res >>>>> ${JSON.stringify(this.billlist)}`);
           } else {
             Toast({
               message: datas.msg,
@@ -211,42 +277,12 @@ export default {
           this.isLoading = false;
           this.isMoreLoading = false;
         });
-    },
-    loadMore() {
-      // 加载更多
-      this.pageInfo.page += 1; // 增加分页
-      this.isMoreLoading = true; // 设置加载更多中
-      this.isLoading = true; // 加载中
-      console.log(`----> ${this.pageInfo.page}, ${this.pageInfo.totalPage}`);
-      if (this.pageInfo.page > this.pageInfo.totalPage) {
-        // 超过了分页
-        this.noMore = true; // 显示没有更多了
-        this.isLoading = false; // 关闭加载中
-        return false;
-      }
-      // 做个缓冲
-      setTimeout(() => {
-        this.getProjectInfo("loadMore");
-      }, 100);
-    },
-    loadTop() {
-      console.log("---- loadTop ----");
-      this.getProjectInfo("loadMore");
-      this.$refs.loadmore.onTopLoaded();
-    },
-    loadBottom() {
-      console.log("---- loadBottom ----");
-      this.getProjectInfo("loadMore");
-      //this.isAllLoaded = true;
-      this.test = this.test + 10;
-      this.$refs.loadmore.onBottomLoaded();
     }
-    //<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="isAllLoaded" ref="loadmore">
   }
 };
 </script>
 
-<style scoped="scoped">
+  <style scoped="scoped">
 #billscroll {
   margin-top: 10px;
   height: calc(100vh - 176px);
@@ -255,7 +291,6 @@ export default {
 }
 #waittodo {
   margin-top: 40px;
-  margin-bottom: 140px;
   padding: 10px;
 }
 #searchdiv {
@@ -298,5 +333,52 @@ export default {
 }
 .projectLi {
   height: 500px;
+}
+.loading-background,
+.mint-loadmore-top span {
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+.mint-loadmore-top span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.mint-loadmore-top span.is-rotate {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.page-loadmore .mint-spinner {
+  display: inline-block;
+  vertical-align: middle;
+}
+.page-loadmore-desc {
+  text-align: center;
+  color: #666;
+  padding-bottom: 5px;
+}
+.page-loadmore-desc:last-of-type,
+.page-loadmore-listitem {
+  border-bottom: 1px solid #eee;
+}
+.page-loadmore-listitem {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+.page-loadmore-listitem:first-child {
+  border-top: 1px solid #eee;
+}
+.page-loadmore-wrapper {
+  overflow: scroll;
+}
+.mint-loadmore-bottom span {
+  display: inline-block;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+  vertical-align: middle;
+}
+.mint-loadmore-bottom span.is-rotate {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 </style>
