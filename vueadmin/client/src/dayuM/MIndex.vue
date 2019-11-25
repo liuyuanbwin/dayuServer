@@ -122,7 +122,7 @@ export default {
     };
   },
   mounted() {
-    //this.getProjectInfo()
+    this.getProjectInfo()
   },
   watch: {
     waitTodo: function(val, oldVal) {
