@@ -96,7 +96,7 @@ router.post('/getVehicles', async(ctx, next) => {
         res = await Vehicle.find(
             {"$and": [
                 {managerid:ctx.request.body.managerid},
-                {"cli_expire_date":{"$gte":datenew,"$lte":endDate}}
+                {"cli_expire_date":{"$gte":startDate,"$lte":endDate}}
         
         ]},null, options)
         total = await Vehicle.countDocuments()
