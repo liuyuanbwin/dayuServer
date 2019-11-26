@@ -5,7 +5,7 @@
         <mt-tab-container class="page-tabbar-tab-container" v-model="selected" swipeable :style="{height: deviceHieght - 26 + 'px'}">
           <mt-tab-container-item id="offer">
             <mt-header fixed title="待办事项"></mt-header>
-            <div id="waittodo" :style="{height: wrapperHeight - 80 + 'px',background:red}">
+            <div id="waittodo" :style="{height: wrapperHeight - 80 + 'px',background:'red'}">
               <!-- <mt-button type="primary" @click="loadMore">加载</mt-button> -->
               <mt-navbar v-model="waitTodo">
                 <mt-tab-item id="3month">近三月提醒</mt-tab-item>
@@ -14,7 +14,7 @@
               </mt-navbar>
               <mt-tab-container v-model="waitTodo">
                 <mt-tab-container-item id="3month">
-                  <div class="page-loadmore" :style="{height: deviceHieght - 80 - 52 + 'px',background:red}">
+                  <div class="page-loadmore" :style="{height: deviceHieght - 80 - 52 + 'px',background:'red'}">
                     <h1 class="page-title">Pull up</h1>
                     <p class="page-loadmore-desc">在列表底部, 按住 - 上拉 - 释放可以获取更多数据</p>
                     <p class="page-loadmore-desc">translate : {{ translate }}</p>
@@ -37,7 +37,7 @@
                         ref="loadmore"
                       >
                         <ul class="page-loadmore-list">
-                          <li v-for="item in billlist" class="page-loadmore-listitem">{{ item.plate_num }}</li>
+                          <li v-for="item in billlist" class="page-loadmore-listitem" @click="loadDetail(item)">{{ item.plate_num }}</li>
                         </ul>
                         <div slot="top" class="mint-loadmore-top">
                           <span
@@ -83,7 +83,7 @@
               ></mt-field>
               <mt-button type="primary" id="searchButton" v-on:click="searchbill()">搜索</mt-button>
             </div>
-            <div id="billlist" v-for="(item, i) in billlist" @click="toDetail(item)">
+            <div id="billlist" v-for="(item, i) in billlist" @click="loadDetail(item)">
               <mt-cell :title="item.plate_num" :label="item.remark" :value="item.insured_is"></mt-cell>
             </div>
           </mt-tab-container-item>
@@ -183,7 +183,8 @@ export default {
           this.billlist = res.data.result;
         });
     },
-    toDetail: function(item) {
+    loadDetail: function(item) {
+      console.log(`loadDetail ---> ${JSON.stringify(item)}`)
       this.$router.push({ path: "/m_billdetail", query: { detail: item } });
     },
 

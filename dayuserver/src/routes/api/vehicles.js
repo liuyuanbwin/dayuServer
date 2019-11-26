@@ -79,7 +79,7 @@ router.post('/getVehicles', async(ctx, next) => {
        var datenew = new Date()
 
        var  startDate = new Date()
-       startDate.setTime(datenew.getTime() - 24 * 60 *60 * 1000 * 12)
+       startDate.setTime(datenew.getTime() - 24 * 60 *60 * 1000 * 12 * 5)
        
        var endDate = new Date()
        endDate.setTime(datenew.getTime() + 24 * 60 *60 * 1000 * 1)
@@ -99,11 +99,11 @@ router.post('/getVehicles', async(ctx, next) => {
                 {"cli_expire_date":{"$gte":startDate,"$lte":endDate}}
         
         ]},null, options)
-        total = await Vehicle.countDocuments()
+        total = await res.length()//Vehicle.countDocuments()
         
        }else{
         res = await Vehicle.find({employeeid:ctx.request.body.employeeid},null, options)
-        total = await Vehicle.countDocuments()
+        total = await res.length()//Vehicle.countDocuments()
        }
        console.log(`body ${JSON.stringify(ctx.request.body)}  res ${JSON.stringify(res)}`)
        let data = {
