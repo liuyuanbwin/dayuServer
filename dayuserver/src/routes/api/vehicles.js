@@ -99,6 +99,8 @@ router.post('/getVehicles', async(ctx, next) => {
                 {"cli_expire_date":{"$gte":startDate,"$lte":endDate}}
         
         ]},null, options)
+
+        console.log(`res ---> ${JSON.stringify(res)}}`)
         total = await res.length()//Vehicle.countDocuments()
         
        }else{
@@ -121,6 +123,7 @@ router.post('/getVehicles', async(ctx, next) => {
     }
        
     }catch(error){
+        console.log(`error ---> ${JSON.stringify(error)}`)
         ctx.body = {
             code:-1,
             error
