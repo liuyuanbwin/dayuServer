@@ -101,11 +101,11 @@ router.post('/getVehicles', async(ctx, next) => {
         ]},null, options)
 
         console.log(`res ---> ${JSON.stringify(res)}}`)
-        total = await res.length()//Vehicle.countDocuments()
+        total = await res.length//Vehicle.countDocuments()
         
        }else{
         res = await Vehicle.find({employeeid:ctx.request.body.employeeid},null, options)
-        total = await res.length()//Vehicle.countDocuments()
+        total = await res.length//Vehicle.countDocuments()
        }
        console.log(`body ${JSON.stringify(ctx.request.body)}  res ${JSON.stringify(res)}`)
        let data = {
@@ -115,12 +115,12 @@ router.post('/getVehicles', async(ctx, next) => {
             page,
             size
         }
-    }
+     }
 
-    ctx.body = {
+     ctx.body = {
         code:0,
         data
-    }
+     }
        
     }catch(error){
         console.log(`error ---> ${JSON.stringify(error)}`)
