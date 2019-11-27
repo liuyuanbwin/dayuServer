@@ -133,7 +133,9 @@ router.post('/getVehicles', async (ctx, next) => {
             console.log(`manager conditions ---> ${JSON.stringify(conditions)}`)
 
             try {
-                res = await Vehicle.find(conditions,null,options)
+                res = await Vehicle.find(conditions,function(err,person){
+                    console.log(`error -->> ${JSON.stringify(err)}`)
+                },options)
                 total = res.length //Vehicle.countDocuments()
                 console.log(`maanger res --< ${JSON.stringify(res)}}`)
             } catch (reserror) {
