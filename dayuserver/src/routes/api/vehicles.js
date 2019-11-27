@@ -7,217 +7,263 @@ var mongoose = require('mongoose')
 
 router.prefix('/api/vehicles')
 
-router.get('/', async(ctx,next) => {
+router.get('/', async (ctx, next) => {
 
-    let token = ctx.request.header.authorization 
+    let token = ctx.request.header.authorization
 
-    if(token){
+    if (token) {
         let res = proving(token)
 
-        if(res){
+        if (res) {
             console.log('判定通过')
-        }else{
+        } else {
             console.log('判定没通过')
         }
 
-        if(!res){
+        if (!res) {
             ctx.status = 401
             ctx.body = {
-                message:'token 不是token 无效'
+                message: 'token 不是token 无效'
             }
             return
         }
 
-        if(res && res.exp <= new Date()/1000){
+        if (res && res.exp <= new Date() / 1000) {
 
             ctx.status = 401
             ctx.body = {
-                messag:'token 过期 无效'
+                messag: 'token 过期 无效'
             }
-            
-           
-        }else{
+
+        } else {
             console.log(`车牌号--. ${JSON.stringify(ctx.request.query.plate_num)}`)
 
             var keyword = ctx.request.query.plate_num
 
-            if(keyword){
+            if (keyword) {
 
-                 //模糊查找
-            var _filter = {
-                $or:[
-                    {plate_num:{$regex:keyword}},
-                    {}
-                ]
-            }
+                //模糊查找
+                var _filter = {
+                    $or: [{
+                        plate_num: {
+                            $regex: keyword
+                        }
+                    }, {}]
+                }
 
-            const result = await Vehicle.find(_filter)
+                const result = await Vehicle.find(_filter)
 
-            }else{
+            } else {
                 const result = await Vehicle.find({})
             }
-           
+
             ctx.status = 200
             ctx.body = {
-                code:0,
+                code: 0,
                 result,
-                status:1
+                status: 1
             }
         }
-    }else{
+    } else {
         ctx.status = 401
-            ctx.body = {
-                messag:'token 没有 无效'
-            }
+        ctx.body = {
+            messag: 'token 没有 无效'
+        }
     }
 })
-router.post('/getVehicles', async(ctx, next) => {
-    console.log(`body ${JSON.stringify(ctx.request.body)}`)
-    try{
-       let { size = 10000, page = 1} = ctx.request.body
+router.post('/getVehicles', async (ctx, next) => {
 
-       var datenew = new Date()
+    try {
+        let {
+            size = 10000,
+                page = 1
+        } = ctx.request.body
 
-       var  startDate = new Date()
-       startDate.setTime(datenew.getTime() - 24 * 60 *60 * 1000 * 12)
-       
-       var endDate = new Date()
-       endDate.setTime(datenew.getTime() + 24 * 60 *60 * 1000 * 1)
+        let querytype = ctx.request.body.querytype
 
-       let options = {
-           skip: Number((page - 1) * size),
-           limit:Number(size)
-       }
-       var res,total
+        var conditions = {}
 
-       
+        if (querytype == 'all') {
 
-       if(ctx.request.body.identity == "manager"){
-        res = await Vehicle.find(
-            {"$and": [
-                {managerid:ctx.request.body.managerid},
-                {"cli_expire_date":{"$gte":startDate,"$lte":endDate}}
-        
-        ]},null, options)
+            conditions = {}
 
-        console.log(`res ---> ${JSON.stringify(res)}}`)
-        total = await res.length//Vehicle.countDocuments()
-        
-       }else{
-        res = await Vehicle.find({employeeid:ctx.request.body.employeeid},null, options)
-        total = await res.length//Vehicle.countDocuments()
-       }
-       console.log(`body ${JSON.stringify(ctx.request.body)}  res ${JSON.stringify(res)}`)
-       let data = {
-        list:res, 
-        pagination:{
-            total,
-            page,
-            size
+        } else if (querytype == 'datesort') {
+
+            //取到当前的时间
+            var dateNow = new Date()
+
+            var startDate = new Date()
+            startDate.setTime(dateNow.getTime() - 1000 * 60 * 60 * 24 * 365 * 5)
+
+            var endDate = new Date()
+            endDate.setTime(dateNow.getTime() + 1000 * 60 * 60 * 24 * ctx.request.body.days)
+
+            let options = {
+                skip: Number((page - 1) * size),
+                limit: Number(size)
+            }
+            
+            var res,
+                total
+
+            conditions = {
+                "and":[{
+                    "cli_expire_date":{
+                        "$gte": startDate,
+                        "$lte": endDate
+                    }
+                }]
+            }
         }
-     }
 
-     ctx.body = {
-        code:0,
-        data
-     }
-       
-    }catch(error){
-        console.log(`error ---> ${JSON.stringify(error)}`)
+        
+
+        if (ctx.request.body.identity == "manager") {
+            // res = await Vehicle.find({
+            //     "$and": [{
+            //         managerid: ctx.request.body.managerid
+            //     }, {
+            //         "cli_expire_date": {
+            //             "$gte": startDate,
+            //             "$lte": endDate
+            //         }
+            //     }]
+            // }, null, options)
+            conditions.and.push({managerid:ctx.request.body.managerid})
+            console.log(`conditions ---> ${conditions}`)
+
+            
+            res = await Vehicle.find(conditions,null,options)
+            total = await res.length //Vehicle.countDocuments()
+
+        } else {
+            // res = await Vehicle.find({
+            //     employeeid: ctx.request.body.employeeid
+            // }, null, options)
+            conditions.and.push({employeeid:ctx.request.body.employeeid})
+
+            console.log(`conditions ---> ${conditions}`)
+            res = await Vehicle.find(conditions,null,options)
+            total = await res.length //Vehicle.countDocuments()
+        }
+
+        let data = {
+            list: res,
+            pagination: {
+                total,
+                page,
+                size
+            }
+        }
+        console.log(
+            `body ${JSON.stringify(ctx.request.body)}  res ${JSON.stringify(data)}`
+        )
         ctx.body = {
-            code:-1,
+            code: 0,
+            data
+        }
+
+    } catch (error) {
+        ctx.body = {
+            code: -1,
             error
         }
     }
 })
-router.post('/detail', async(ctx, next) => {
-    console.log('detail ' )
-    try{
+router.post('/detail', async (ctx, next) => {
+    console.log('detail ')
+    try {
         const results = await Vehicle.findOne({
-            "_id": mongoose.Types.ObjectId(ctx.request.body.id)
+            "_id": mongoose
+                .Types
+                .ObjectId(ctx.request.body.id)
         })
         ctx.body = results
-    }catch(error){
+    } catch (error) {
         ctx.body = {
-            code:-1,
+            code: -1,
             error
         }
     }
 })
 
-router.post('/update', async(ctx,next) => {
+router.post('/update', async (ctx, next) => {
 
     try {
 
-        const result = await Vehicle.where({
-            "_id": mongoose.Types.ObjectId(ctx.request.body.id)
-        }).update({
-                plate_num:ctx.request.body.plate_num,
-                insurant:ctx.request.body.insurant,
-                vehicle_type:ctx.request.body.vehicle_type,
-                regist_date:ctx.request.body.regist_date,
-                busi_depart:ctx.request.body.busi_depart,
-                vin_no:ctx.request.body.vin_no,
-                engine_sn:ctx.request.body.engine_sn,
-                insured_is:ctx.request.body.insured_is,
-                cli_expire_date:ctx.request.body.cli_expire_date,
-                gap_expire_date:ctx.request.body.gap_expire_date,
-                gap_content:ctx.request.body.gap_content,
-                checkcar_date:ctx.request.body.checkcar_date,
-                customer_tel:ctx.request.body.customer_tel,
-                report_tel:ctx.request.body.report_tel,
-                remark:ctx.request.body.remark,
-                owner:ctx.request.body.owner,
-                linkman:ctx.request.body.linkman,
-                linkman_tel1:ctx.request.body.linkman_tel1,
-                linkman_tel2:ctx.request.body.linkman_tel2,
-                busi_man:ctx.request.body.busi_man,
-                busi_man_tel:ctx.request.body.busi_man_tel,
-                headquarter:ctx.request.body.headquarter,
-                car_model:ctx.request.body.car_model
+        const result = await Vehicle
+            .where({
+                "_id": mongoose
+                    .Types
+                    .ObjectId(ctx.request.body.id)
             })
-        
+            .update({
+                plate_num: ctx.request.body.plate_num,
+                insurant: ctx.request.body.insurant,
+                vehicle_type: ctx.request.body.vehicle_type,
+                regist_date: ctx.request.body.regist_date,
+                busi_depart: ctx.request.body.busi_depart,
+                vin_no: ctx.request.body.vin_no,
+                engine_sn: ctx.request.body.engine_sn,
+                insured_is: ctx.request.body.insured_is,
+                cli_expire_date: ctx.request.body.cli_expire_date,
+                gap_expire_date: ctx.request.body.gap_expire_date,
+                gap_content: ctx.request.body.gap_content,
+                checkcar_date: ctx.request.body.checkcar_date,
+                customer_tel: ctx.request.body.customer_tel,
+                report_tel: ctx.request.body.report_tel,
+                remark: ctx.request.body.remark,
+                owner: ctx.request.body.owner,
+                linkman: ctx.request.body.linkman,
+                linkman_tel1: ctx.request.body.linkman_tel1,
+                linkman_tel2: ctx.request.body.linkman_tel2,
+                busi_man: ctx.request.body.busi_man,
+                busi_man_tel: ctx.request.body.busi_man_tel,
+                headquarter: ctx.request.body.headquarter,
+                car_model: ctx.request.body.car_model
+            })
+
         ctx.body = {
-            code:0
+            code: 0
         }
 
     } catch (err) {
-        
+
         ctx.body = {
-            code:-1
+            code: -1
         }
     }
-    
+
 })
 
-router.post('/add', async(ctx,next) => {
+router.post('/add', async (ctx, next) => {
 
     const vehicle = new Vehicle({
-        plate_num:ctx.request.body.plate_num,
-        insurant:ctx.request.body.insurant,
-        vehicle_type:ctx.request.body.vehicle_type,
-        regist_date:ctx.request.body.regist_date,
-        busi_depart:ctx.request.body.busi_depart,
-        vin_no:ctx.request.body.vin_no,
-        engine_sn:ctx.request.body.engine_sn,
-        insured_is:ctx.request.body.insured_is,
-        cli_expire_date:ctx.request.body.cli_expire_date,
-        gap_expire_date:ctx.request.body.gap_expire_date,
-        gap_content:ctx.request.body.gap_content,
-        checkcar_date:ctx.request.body.checkcar_date,
-        customer_tel:ctx.request.body.customer_tel,
-        report_tel:ctx.request.body.report_tel,
-        remark:ctx.request.body.remark,
-        owner:ctx.request.body.owner,
-        linkman:ctx.request.body.linkman,
-        linkman_tel1:ctx.request.body.linkman_tel1,
-        linkman_tel2:ctx.request.body.linkman_tel2,
-        busi_man:ctx.request.body.busi_man,
-        busi_man_tel:ctx.request.body.busi_man_tel,
-        headquarter:ctx.request.body.headquarter,
-        car_model:ctx.request.body.car_model,
-        managerid:ctx.request.body.managerid,
-        employeedi:ctx.request.body.employeeid
+        plate_num: ctx.request.body.plate_num,
+        insurant: ctx.request.body.insurant,
+        vehicle_type: ctx.request.body.vehicle_type,
+        regist_date: ctx.request.body.regist_date,
+        busi_depart: ctx.request.body.busi_depart,
+        vin_no: ctx.request.body.vin_no,
+        engine_sn: ctx.request.body.engine_sn,
+        insured_is: ctx.request.body.insured_is,
+        cli_expire_date: ctx.request.body.cli_expire_date,
+        gap_expire_date: ctx.request.body.gap_expire_date,
+        gap_content: ctx.request.body.gap_content,
+        checkcar_date: ctx.request.body.checkcar_date,
+        customer_tel: ctx.request.body.customer_tel,
+        report_tel: ctx.request.body.report_tel,
+        remark: ctx.request.body.remark,
+        owner: ctx.request.body.owner,
+        linkman: ctx.request.body.linkman,
+        linkman_tel1: ctx.request.body.linkman_tel1,
+        linkman_tel2: ctx.request.body.linkman_tel2,
+        busi_man: ctx.request.body.busi_man,
+        busi_man_tel: ctx.request.body.busi_man_tel,
+        headquarter: ctx.request.body.headquarter,
+        car_model: ctx.request.body.car_model,
+        managerid: ctx.request.body.managerid,
+        employeedi: ctx.request.body.employeeid
     })
 
     let code = 0
@@ -225,17 +271,15 @@ router.post('/add', async(ctx,next) => {
     try {
         await vehicle.save()
         ctx.body = {
-            code:0
-        }  
+            code: 0
+        }
     } catch (err) {
         console.log(err)
         ctx.body = {
-            code:-1
+            code: -1
         }
     }
 
 })
-
-
 
 module.exports = router
