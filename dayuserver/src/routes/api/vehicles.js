@@ -92,7 +92,7 @@ router.post('/getVehicles', async (ctx, next) => {
         var dateNow = new Date()
 
         var startDate = new Date()
-        startDate.setTime(dateNow.getTime() - 1000 * 60 * 60 * 24 * 365 * 5)
+        startDate.setTime(dateNow.getTime() - 1000 * 60 * 60 * 24 * 365 * 1)
 
         var endDate = new Date()
         endDate.setTime(dateNow.getTime() + 1000 * 60 * 60 * 24 * ctx.request.body.days)

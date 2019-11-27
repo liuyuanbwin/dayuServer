@@ -247,7 +247,7 @@
                 this.busy = true;
                 var options = {
                     querytype:'datesort',
-                    days:100,
+                    days:10,
                     id: localStorage.getItem("id"),
                     page: this.page,
                     identity: identity
