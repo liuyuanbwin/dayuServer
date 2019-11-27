@@ -79,9 +79,23 @@ router.post('/getVehicles', async (ctx, next) => {
                 page = 1
         } = ctx.request.body
 
+        let options = {
+            skip: Number((page - 1) * size),
+            limit: Number(size)
+        }
+
         let querytype = ctx.request.body.querytype
 
         var conditions = {}
+
+        //取到当前的时间
+        var dateNow = new Date()
+
+        var startDate = new Date()
+        startDate.setTime(dateNow.getTime() - 1000 * 60 * 60 * 24 * 365 * 5)
+
+        var endDate = new Date()
+        endDate.setTime(dateNow.getTime() + 1000 * 60 * 60 * 24 * ctx.request.body.days)
 
         if (querytype == 'all') {
 
@@ -89,19 +103,9 @@ router.post('/getVehicles', async (ctx, next) => {
 
         } else if (querytype == 'datesort') {
 
-            //取到当前的时间
-            var dateNow = new Date()
+            
 
-            var startDate = new Date()
-            startDate.setTime(dateNow.getTime() - 1000 * 60 * 60 * 24 * 365 * 5)
-
-            var endDate = new Date()
-            endDate.setTime(dateNow.getTime() + 1000 * 60 * 60 * 24 * ctx.request.body.days)
-
-            let options = {
-                skip: Number((page - 1) * size),
-                limit: Number(size)
-            }
+            
             
             var res,
                 total
@@ -119,16 +123,16 @@ router.post('/getVehicles', async (ctx, next) => {
         
 
         if (ctx.request.body.identity == "manager") {
-            res = await Vehicle.find({
-                "$and": [{
-                    managerid: ctx.request.body.managerid
-                }, {
-                    "cli_expire_date": {
-                        "$gte": startDate,
-                        "$lte": endDate
-                    }
-                }]
-            }, null, options)
+            // res = await Vehicle.find({
+            //     "$and": [{
+            //         managerid: ctx.request.body.managerid
+            //     }, {
+            //         "cli_expire_date": {
+            //             "$gte": startDate,
+            //             "$lte": endDate
+            //         }
+            //     }]
+            // }, null, options)
             conditions.and.push({managerid:ctx.request.body.managerid})
             console.log(`manager conditions ---> ${JSON.stringify(conditions)}`)
 
