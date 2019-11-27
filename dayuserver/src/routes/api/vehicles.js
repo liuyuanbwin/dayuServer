@@ -119,21 +119,30 @@ router.post('/getVehicles', async (ctx, next) => {
         
 
         if (ctx.request.body.identity == "manager") {
-            // res = await Vehicle.find({
-            //     "$and": [{
-            //         managerid: ctx.request.body.managerid
-            //     }, {
-            //         "cli_expire_date": {
-            //             "$gte": startDate,
-            //             "$lte": endDate
-            //         }
-            //     }]
-            // }, null, options)
+            res = await Vehicle.find({
+                "$and": [{
+                    managerid: ctx.request.body.managerid
+                }, {
+                    "cli_expire_date": {
+                        "$gte": startDate,
+                        "$lte": endDate
+                    }
+                }]
+            }, null, options)
             conditions.and.push({managerid:ctx.request.body.managerid})
             console.log(`manager conditions ---> ${JSON.stringify(conditions)}`)
 
             
-                res = await Vehicle.find(conditions,function(err,person){
+                res = await Vehicle.find({
+                    "$and": [{
+                        managerid: ctx.request.body.managerid
+                    }, {
+                        "cli_expire_date": {
+                            "$gte": startDate,
+                            "$lte": endDate
+                        }
+                    }]
+                },function(err,person){
                     console.log(`error -->> ${JSON.stringify(err)}`)
                 },options)
                 total = res.length //Vehicle.countDocuments()
