@@ -113,7 +113,7 @@
         },
         data() {
             return {
-                waitTodo: "cli",
+                waitTodo: "gap",
                 selected: "offer",
                 searchValue: "",
                 billlist: [],
@@ -217,15 +217,15 @@
                 let identity = localStorage.getItem("identity");
                 this.busy = true;
                 var options = {
-                    querytype: 'datesort',
+                    querytype: 'cli',
                     days: 5,
                     id: localStorage.getItem("id"),
                     page: this.page,
-                    identity: identity
+                    identity: identity,
                 };
 
                 if (this.waitTodo == 'cli') {
-                    options.days = 7
+                    options.days = 70
                 } else if (this.waitTodo == 'gap') {
                     options.days = 30
                 } else {

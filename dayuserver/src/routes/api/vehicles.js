@@ -99,6 +99,8 @@ router.post('/getVehicles', async (ctx, next) => {
         var endDate = new Date()
         endDate.setTime(dateNow.getTime() + 1000 * 60 * 60 * 24 * days)
 
+        console.log(`<<<<<<<<<>>>>>>>> body ${JSON.stringify(ctx.request.body)}`)
+
         if (querytype == 'all') {
 
             conditions = {}
