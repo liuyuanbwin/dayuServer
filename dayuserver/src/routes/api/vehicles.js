@@ -146,7 +146,7 @@ router.post('/getVehicles', async (ctx, next) => {
                     managerid: ctx.request.body.managerid
                 })
             console.log(`manager conditions ---> ${JSON.stringify(conditions)}`)
-            res = await Vehicle.find(conditions, null, options).skip(size * (page - 1).limit(size)
+            res = await Vehicle.find(conditions, null, options).skip(size * (page - 1)).limit(size)
             total = res.length //Vehicle.countDocuments()
             console.log(`maanger res --< ${JSON.stringify(res)}}`)
 
@@ -158,7 +158,7 @@ router.post('/getVehicles', async (ctx, next) => {
                     employeeid: ctx.request.body.employeeid
                 })
             console.log(`conditions ---> ${JSON.stringify(conditions)}`)
-            res = await Vehicle.find(conditions, null, options).skip(size * (page - 1).limit(size)
+            res = await Vehicle.find(conditions, null, options).skip(size * (page - 1)).limit(size)
             total = res.length //Vehicle.countDocuments()
             console.log(`employeeid res --< ${JSON.stringify(res)}}`)
         }
