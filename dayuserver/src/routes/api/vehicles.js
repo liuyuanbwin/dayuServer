@@ -101,14 +101,14 @@ router.post('/getVehicles', async (ctx, next) => {
 
         console.log(`<<<<<<<<<>>>>>>>> body ${JSON.stringify(ctx.request.body)}`)
 
+        var res,
+        total
+
         if (querytype == 'all') {
 
             conditions = {}
 
         } else if (querytype == 'cli') {
-
-            var res,
-                total
 
             conditions = {
                 "$and":[{
