@@ -113,7 +113,7 @@
         },
         data() {
             return {
-                waitTodo: "gap",
+                waitTodo: "cli",
                 selected: "offer",
                 searchValue: "",
                 billlist: [],
@@ -126,14 +126,18 @@
                 translate: 0,
                 moveTranslate: 0,
                 deviceHieght: 0,
-                pageInfo: {}
+                pageInfo: {
+                    page:1,
+                    total:0,
+                    size:15
+                }
             };
         },
         created() {
-            this.getProjectInfo('loadMore')
+           // this.getProjectInfo('newLoad','created')
         },
         mounted() {
-            this.getProjectInfo()
+            //this.getProjectInfo()
             this.wrapperHeight = document.documentElement.clientHeight - this
                 .$refs
                 .wrapper
@@ -150,7 +154,7 @@
                 this.pageInfo.totalPage = 1;
                 this.list = [];
                 this.noMore = false;
-                this.getProjectInfo();
+                this.getProjectInfo('newLoad','watch');
             }
         },
         methods: {
@@ -185,7 +189,7 @@
             },
             loadBottom() {
                 console.log("ssss");
-                this.getProjectInfo('loadMore')
+                this.getProjectInfo('loadMore','loadBottom')
             },
             handleTopChange(status) {
                 this.moveTranslate = 1;
@@ -197,40 +201,21 @@
                 this.moveTranslate = (1 + translateNum / 70).toFixed(2);
             },
             loadTop() {
-                setTimeout(() => {
-                    let firstValue = this.list[0];
-                    for (let i = 1; i <= 10; i++) {
-                        this
-                            .list
-                            .unshift(firstValue - i);
-                    }
-                    this
-                        .$refs
-                        .loadmore
-                        .onTopLoaded();
-                }, 1500);
+                this.getProjectInfo('newLoad','loadTop')
             },
-            getProjectInfo(type) {
+            getProjectInfo(type, path) {
+                console.log(`path ${path}`)
                 let _this = this;
                 this.isLoading = true;
-                console.log('getprojectinfo   .....')
                 let identity = localStorage.getItem("identity");
                 this.busy = true;
                 var options = {
-                    querytype: 'gap',
+                    querytype: this.waitTodo,
                     days: 5,
                     id: localStorage.getItem("id"),
-                    page: this.page,
+                    page: this.pageInfo.page,
                     identity: identity,
                 };
-
-                if (this.waitTodo == 'cli') {
-                    options.days = 70
-                } else if (this.waitTodo == 'gap') {
-                    options.days = 130
-                } else {
-                    options.days = 90
-                }
 
                 if (identity == "manager") {
                     options["managerid"] = localStorage.getItem("id");
@@ -241,7 +226,6 @@
                     .$axios
                     .post(`api/vehicles/getVehicles`, options)
                     .then(res => {
-                        console.log(`名下车辆 - ${JSON.stringify(res.data)}`);
                         this
                             .$refs
                             .loadmore
@@ -249,22 +233,21 @@
                         let datas = res.data;
                         if (datas.code === 0) {
                             if (type === "loadMore") {
+                                this.pageInfo.page = this.pageInfo.page + 1
                                 this.billlist = this
                                     .billlist
                                     .concat(datas.data.list);
                             } else {
                                 this.billlist = datas.data.list;
                             }
-                            this.pageInfo.total = 100;
-                            datas.data.list.length;
-                            console.log(`total = ${datas.data.list.length}`);
+                            this.pageInfo.total = datas.data.pagination.total;
                             this.pageInfo.totalPage = Math.ceil(
                                 this.pageInfo.total / this.pageInfo.page_size
                             );
                             console.log("总页数", Math.ceil(this.pageInfo.total / this.pageInfo.page_size));
                             console.log(`res >>>>> ${JSON.stringify(this.billlist)}`);
                         } else {
-                            Toast({message: datas.msg, duration: 2000});
+                            Toast(`出错了 --->>> ${res.error}}`)
                         }
                         this.isLoading = false;
                         this.isMoreLoading = false;

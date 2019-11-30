@@ -75,10 +75,10 @@ router.post('/getVehicles', async (ctx, next) => {
 
     try {
         let {
-            size = 10000,
-            page = 1,
-            days = 1,
-            querytype = 'all'
+            size = 15,
+                page = 1,
+                days = 1,
+                querytype = 'all'
         } = ctx.request.body
 
         let options = {
@@ -102,7 +102,7 @@ router.post('/getVehicles', async (ctx, next) => {
         console.log(`<<<<<<<<<>>>>>>>> body ${JSON.stringify(ctx.request.body)}`)
 
         var res,
-        total
+            total
 
         if (querytype == 'all') {
 
@@ -111,62 +111,54 @@ router.post('/getVehicles', async (ctx, next) => {
         } else if (querytype == 'cli') {
 
             conditions = {
-                "$and":[{
-                    "cli_expire_date":{
+                "$and": [{
+                    "cli_expire_date": {
                         "$gte": startDate,
                         "$lte": endDate
                     }
                 }]
             }
-        }else if (querytype == 'gap'){
+        } else if (querytype == 'gap') {
             conditions = {
-                "$and":[
-                    {
-                        "gap_expire_date":{
-                            "$gte":startDate,
-                            "$lte":endDate
-                        }
+                "$and": [{
+                    "gap_expire_date": {
+                        "$gte": startDate,
+                        "$lte": endDate
                     }
-                ]
+                }]
             }
-        }else if(querytype == "checkcar"){
+        } else if (querytype == "checkcar") {
             conditions = {
-                "$and":[
-                    {
-                        "checkcar_date":{
-                            "$gte":startDate,
-                            "$lte":endDate
-                        }
+                "$and": [{
+                    "checkcar_date": {
+                        "$gte": startDate,
+                        "$lte": endDate
                     }
-                ]
+                }]
             }
         }
 
         if (ctx.request.body.identity == "manager") {
-            
-            conditions.$and.push({managerid:ctx.request.body.managerid})
+
+            conditions
+                .$and
+                .push({
+                    managerid: ctx.request.body.managerid
+                })
             console.log(`manager conditions ---> ${JSON.stringify(conditions)}`)
-            res = await Vehicle.find(conditions, null, options)
-                // res = await Vehicle.find({
-                //     "$and": [{
-                //         managerid: ctx.request.body.managerid
-                //     }, {
-                //         "cli_expire_date": {
-                //             "$gte": startDate,
-                //             "$lte": endDate
-                //         }
-                //     }]
-                // },function(err,person){
-                //     console.log(`error -->> ${JSON.stringify(err)}`)
-                // },options)
-                total = res.length //Vehicle.countDocuments()
-                console.log(`maanger res --< ${JSON.stringify(res)}}`)
-        
+            res = await Vehicle.find(conditions, null, options).skip(size * page).limit(size)
+            total = res.length //Vehicle.countDocuments()
+            console.log(`maanger res --< ${JSON.stringify(res)}}`)
+
         } else {
 
-            conditions.and.push({employeeid:ctx.request.body.employeeid})
+            conditions
+                .$and
+                .push({
+                    employeeid: ctx.request.body.employeeid
+                })
             console.log(`conditions ---> ${JSON.stringify(conditions)}`)
-            res = await Vehicle.find(conditions,null,options)
+            res = await Vehicle.find(conditions, null, options).skip(size * page).limit(size)
             total = res.length //Vehicle.countDocuments()
             console.log(`employeeid res --< ${JSON.stringify(res)}}`)
         }
