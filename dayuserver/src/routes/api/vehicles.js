@@ -39,6 +39,7 @@ router.get('/', async (ctx, next) => {
             console.log(`车牌号--. ${JSON.stringify(ctx.request.query.plate_num)}`)
 
             var keyword = ctx.request.query.plate_num
+            var result = {}
 
             if (keyword) {
 
@@ -51,10 +52,10 @@ router.get('/', async (ctx, next) => {
                     }, {}]
                 }
 
-                const result = await Vehicle.find(_filter)
+                result = await Vehicle.find(_filter)
 
             } else {
-                const result = await Vehicle.find({})
+                result = await Vehicle.find({})
             }
 
             ctx.status = 200

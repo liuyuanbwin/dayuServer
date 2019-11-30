@@ -37,10 +37,14 @@
                                         :bottom-all-loaded="allLoaded"
                                         ref="loadmore">
                                         <ul class="page-loadmore-list">
-                                          <mt-cell
-                                            v-for="item in billlist"
-                                            :title="item.plate_num"
-                                          ></mt-cell>
+                                          <div class="billcell" v-for="item in billlist" @click="loadDetail(item)">
+                                              <div class="billplate">
+                                                  {{item.plate_num}}
+                                              </div>
+                                              <div class="billinsurant">{{item.insurant}}</div>
+                                              <div class="billremark">{{item.customer_tel}}</div>
+                                              <div class="billremark">{{item.remark}}</div>
+                                          </div>
                                         </ul>
                                         <div slot="top" class="mint-loadmore-top">
                                             <span
@@ -155,6 +159,9 @@
                 this.list = [];
                 this.noMore = false;
                 this.getProjectInfo('newLoad','watch');
+            },
+            selected:function (val, oldVal){
+                console.log(`当前页面 -> ${val} 上个页面是 ->${oldVal}}`)
             }
         },
         methods: {
@@ -201,10 +208,11 @@
                 this.moveTranslate = (1 + translateNum / 70).toFixed(2);
             },
             loadTop() {
+                this.pageInfo.page = 1
                 this.getProjectInfo('newLoad','loadTop')
             },
             getProjectInfo(type, path) {
-                console.log(`path ${path}`)
+                
                 let _this = this;
                 this.isLoading = true;
                 let identity = localStorage.getItem("identity");
@@ -216,6 +224,8 @@
                     page: this.pageInfo.page,
                     identity: identity,
                 };
+
+                console.log(`path ${path} options ${JSON.stringify(options)}`)
 
                 if (identity == "manager") {
                     options["managerid"] = localStorage.getItem("id");
@@ -232,8 +242,8 @@
                             .onBottomLoaded();
                         let datas = res.data;
                         if (datas.code === 0) {
+                            this.pageInfo.page = this.pageInfo.page + 1
                             if (type === "loadMore") {
-                                this.pageInfo.page = this.pageInfo.page + 1
                                 this.billlist = this
                                     .billlist
                                     .concat(datas.data.list);
@@ -244,8 +254,15 @@
                             this.pageInfo.totalPage = Math.ceil(
                                 this.pageInfo.total / this.pageInfo.page_size
                             );
+                            console.log(`billist.length ${this.billlist.length} <----> total ${this.pageInfo.total}`)
+                            if (this.billlist.length == this.pageInfo.total) {
+                                
+                                this.allLoaded = true
+                            }else{
+                                this.allLoaded = false
+                            }
                             console.log("总页数", Math.ceil(this.pageInfo.total / this.pageInfo.page_size));
-                            console.log(`res >>>>> ${JSON.stringify(this.billlist)}`);
+                            //console.log(`res >>>>> ${JSON.stringify(this.billlist)}`);
                         } else {
                             Toast(`出错了 --->>> ${res.error}}`)
                         }
