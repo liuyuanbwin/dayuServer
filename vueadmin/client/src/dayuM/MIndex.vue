@@ -217,7 +217,7 @@
                 let identity = localStorage.getItem("identity");
                 this.busy = true;
                 var options = {
-                    querytype: 'cli',
+                    querytype: 'gap',
                     days: 5,
                     id: localStorage.getItem("id"),
                     page: this.page,
@@ -227,7 +227,7 @@
                 if (this.waitTodo == 'cli') {
                     options.days = 70
                 } else if (this.waitTodo == 'gap') {
-                    options.days = 30
+                    options.days = 130
                 } else {
                     options.days = 90
                 }

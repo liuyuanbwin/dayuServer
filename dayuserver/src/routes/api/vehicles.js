@@ -111,7 +111,7 @@ router.post('/getVehicles', async (ctx, next) => {
                 total
 
             conditions = {
-                "and":[{
+                "$and":[{
                     "cli_expire_date":{
                         "$gte": startDate,
                         "$lte": endDate
@@ -120,7 +120,7 @@ router.post('/getVehicles', async (ctx, next) => {
             }
         }else if (querytype == 'gap'){
             conditions = {
-                "and":[
+                "$and":[
                     {
                         "gap_expire_date":{
                             "$gte":startDate,
@@ -131,7 +131,7 @@ router.post('/getVehicles', async (ctx, next) => {
             }
         }else if(querytype == "checkcar"){
             conditions = {
-                "and":[
+                "$and":[
                     {
                         "checkcar_date":{
                             "$gte":startDate,
