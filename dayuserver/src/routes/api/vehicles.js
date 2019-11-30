@@ -45,12 +45,17 @@ router.get('/', async (ctx, next) => {
 
                 //模糊查找
                 var _filter = {
-                    $or: [{
-                        plate_num: {
-                            $regex: keyword
-                        }
-                    }, {}]
+                    plate_num: {
+                        $regex: keyword
+                    }
                 }
+                // {
+                //     $or: [{
+                //         plate_num: {
+                //             $regex: keyword
+                //         }
+                //     }, {}]
+                // }
 
                 result = await Vehicle.find(_filter)
 
