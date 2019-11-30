@@ -144,7 +144,7 @@ router.post('/getVehicles', async (ctx, next) => {
 
         if (ctx.request.body.identity == "manager") {
             
-            conditions.and.push({managerid:ctx.request.body.managerid})
+            conditions.$and.push({managerid:ctx.request.body.managerid})
             console.log(`manager conditions ---> ${JSON.stringify(conditions)}`)
             res = await Vehicle.find(conditions, null, options)
                 // res = await Vehicle.find({
