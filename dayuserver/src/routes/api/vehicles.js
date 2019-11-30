@@ -86,7 +86,7 @@ router.post('/getVehicles', async (ctx, next) => {
             limit: Number(size)
         }
 
-        let querytype = ctx.request.body.querytype
+        //let querytype = ctx.request.body.querytype
 
         var conditions = {}
 
