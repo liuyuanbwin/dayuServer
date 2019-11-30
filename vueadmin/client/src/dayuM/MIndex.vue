@@ -9,73 +9,58 @@
                     :style="{height: deviceHieght - 26 + 'px'}">
                     <mt-tab-container-item id="offer">
                         <mt-header fixed="fixed" title="待办事项"></mt-header>
-                        <div
-                            id="waittodo"
-                            :style="{height: wrapperHeight - 80 + 'px',background:'red'}">
+                        <div id="waittodo" :style="{height: wrapperHeight + 'px',background:'gray'}">
                             <!-- <mt-button type="primary" @click="loadMore">加载</mt-button> -->
                             <mt-navbar v-model="waitTodo">
-                                <mt-tab-item id="3month">近三月提醒</mt-tab-item>
-                                <mt-tab-item id="1month">近一月提醒</mt-tab-item>
-                                <mt-tab-item id="7day">近一周提醒</mt-tab-item>
+                                <mt-tab-item id="cli">交强险</mt-tab-item>
+                                <mt-tab-item id="gap">商业险</mt-tab-item>
+                                <mt-tab-item id="checkcar">验车</mt-tab-item>
                             </mt-navbar>
-                            <mt-tab-container v-model="waitTodo">
-                                <mt-tab-container-item id="3month">
-                                    <div
-                                        class="page-loadmore"
-                                        :style="{height: deviceHieght - 80 - 52 + 'px',background:'red'}">
-                                        <h1 class="page-title">Pull up</h1>
-                                        <p class="page-loadmore-desc">在列表底部, 按住 - 上拉 - 释放可以获取更多数据</p>
-                                        <p class="page-loadmore-desc">translate :
-                                            {{ translate }}</p>
-                                        <div
-                                            class="loading-background"
-                                            :style="{ transform: 'scale3d(' + moveTranslate + ',' + moveTranslate + ',1)' }">translateScale :
-                                            {{ moveTranslate }}</div>
-                                        <div
-                                            class="page-loadmore-wrapper"
-                                            ref="wrapper"
-                                            :style="{ height: wrapperHeight + 'px' }">
-                                            <mt-loadmore
-                                                :top-method="loadTop"
-                                                @translate-change="translateChange"
-                                                @top-status-change="handleTopChange"
-                                                :bottom-method="loadBottom"
-                                                @bottom-status-change="handleBottomChange"
-                                                :bottom-all-loaded="allLoaded"
-                                                ref="loadmore">
-                                                <ul class="page-loadmore-list">
-                                                    <li
-                                                        v-for="item in billlist"
-                                                        class="page-loadmore-listitem"
-                                                        @click="loadDetail(item)">{{ item.plate_num }}</li>
-                                                </ul>
-                                                <div slot="top" class="mint-loadmore-top">
-                                                    <span
-                                                        v-show="topStatus !== 'loading'"
-                                                        :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
-                                                    <span v-show="topStatus === 'loading'">
-                                                        <mt-spinner type="snake"></mt-spinner>
-                                                    </span>
-                                                </div>
-                                                <div slot="bottom" class="mint-loadmore-bottom">
-                                                    <span
-                                                        v-show="bottomStatus !== 'loading'"
-                                                        :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
-                                                    <span v-show="bottomStatus === 'loading'">
-                                                        <mt-spinner type="snake"></mt-spinner>
-                                                    </span>
-                                                </div>
-                                            </mt-loadmore>
+                            <!-- <mt-radio
+                            title="到期类型"
+                            v-model="expiretype"
+                            :options="['交强险','商业险','验车']"
+                            ></mt-radio> -->
+                            <div
+                                class="page-loadmore"
+                                :style="{height: deviceHieght + 'px',background:'lightgray'}">
+                                <div
+                                    class="page-loadmore-wrapper"
+                                    ref="wrapper"
+                                    :style="{ height: wrapperHeight + 'px' }">
+                                    <mt-loadmore
+                                        :top-method="loadTop"
+                                        @translate-change="translateChange"
+                                        @top-status-change="handleTopChange"
+                                        :bottom-method="loadBottom"
+                                        @bottom-status-change="handleBottomChange"
+                                        :bottom-all-loaded="allLoaded"
+                                        ref="loadmore">
+                                        <ul class="page-loadmore-list">
+                                          <mt-cell
+                                            v-for="item in billlist"
+                                            :title="item.plate_num"
+                                          ></mt-cell>
+                                        </ul>
+                                        <div slot="top" class="mint-loadmore-top">
+                                            <span
+                                                v-show="topStatus !== 'loading'"
+                                                :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
+                                            <span v-show="topStatus === 'loading'">
+                                                <mt-spinner type="snake"></mt-spinner>
+                                            </span>
                                         </div>
-                                    </div>
-                                </mt-tab-container-item>
-                                <mt-tab-container-item id="1month">
-                                    <mt-cell v-for="n in 4" :title="'content ' + n"/>
-                                </mt-tab-container-item>
-                                <mt-tab-container-item id="7day">
-                                    <mt-cell v-for="n in 6" :title="'content ' + n"/>
-                                </mt-tab-container-item>
-                            </mt-tab-container>
+                                        <div slot="bottom" class="mint-loadmore-bottom">
+                                            <span
+                                                v-show="bottomStatus !== 'loading'"
+                                                :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
+                                            <span v-show="bottomStatus === 'loading'">
+                                                <mt-spinner type="snake"></mt-spinner>
+                                            </span>
+                                        </div>
+                                    </mt-loadmore>
+                                </div>
+                            </div>
                         </div>
                     </mt-tab-container-item>
 
@@ -117,7 +102,8 @@
         Button,
         Spinner,
         Toast,
-        Loadmore
+        Loadmore,
+        Radio
     } from "mint-ui";
 
     export default {
@@ -127,12 +113,10 @@
         },
         data() {
             return {
-                waitTodo: "3month",
-
+                waitTodo: "cli",
                 selected: "offer",
                 searchValue: "",
                 billlist: [],
-
                 list: [],
                 allLoaded: false,
                 bottomStatus: "",
@@ -141,35 +125,28 @@
                 wrapperHeight: 0,
                 translate: 0,
                 moveTranslate: 0,
-                deviceHieght: 0
+                deviceHieght: 0,
+                pageInfo: {}
             };
         },
         created() {
-            // for (let i = 1; i <= 1; i++) {   this.list.push(i); }
             this.getProjectInfo('loadMore')
         },
         mounted() {
-            //<<<<<<< HEAD
             this.getProjectInfo()
-            //======
             this.wrapperHeight = document.documentElement.clientHeight - this
                 .$refs
                 .wrapper
                 .getBoundingClientRect()
                 .top;
-
             this.deviceHieght = document.documentElement.clientHeight
-            //>>>>>>> 559ca10d6b1d8011e06d4942c150475bb265248e
         },
         watch: {
             waitTodo: function (val, oldVal) {
                 console.log(`val => ${val} oldVal => ${oldVal}`);
                 this.busy = true;
-
                 this.isMoreLoading = true;
-                this.selectIndex = index;
                 this.pageInfo.page = 1;
-
                 this.pageInfo.totalPage = 1;
                 this.list = [];
                 this.noMore = false;
@@ -209,10 +186,6 @@
             loadBottom() {
                 console.log("ssss");
                 this.getProjectInfo('loadMore')
-                // setTimeout(() => {   let lastValue = this.list[this.list.length - 1];   if
-                // (lastValue < 40) {     for (let i = 1; i <= 10; i++) {
-                // this.list.push(lastValue + i);     }   } else {     this.allLoaded = true; }
-                // this.$refs.loadmore.onBottomLoaded(); }, 1500);
             },
             handleTopChange(status) {
                 this.moveTranslate = 1;
@@ -240,24 +213,30 @@
             getProjectInfo(type) {
                 let _this = this;
                 this.isLoading = true;
-
                 console.log('getprojectinfo   .....')
-
                 let identity = localStorage.getItem("identity");
                 this.busy = true;
                 var options = {
-                    querytype:'datesort',
-                    days:10,
+                    querytype: 'datesort',
+                    days: 5,
                     id: localStorage.getItem("id"),
                     page: this.page,
                     identity: identity
                 };
+
+                if (this.waitTodo == 'cli') {
+                    options.days = 7
+                } else if (this.waitTodo == 'gap') {
+                    options.days = 30
+                } else {
+                    options.days = 90
+                }
+
                 if (identity == "manager") {
                     options["managerid"] = localStorage.getItem("id");
                 } else {
                     options["employeeid"] = localStorage.getItem("id");
                 }
-
                 this
                     .$axios
                     .post(`api/vehicles/getVehicles`, options)
@@ -374,7 +353,7 @@
         border-bottom: 1px solid #eee;
     }
     .page-loadmore-listitem {
-        height: 50px;
+        height: 150px;
         line-height: 50px;
         text-align: center;
     }

@@ -76,7 +76,9 @@ router.post('/getVehicles', async (ctx, next) => {
     try {
         let {
             size = 10000,
-                page = 1
+            page = 1,
+            days = 1,
+            querytype = 'all'
         } = ctx.request.body
 
         let options = {
@@ -95,18 +97,14 @@ router.post('/getVehicles', async (ctx, next) => {
         startDate.setTime(dateNow.getTime() - 1000 * 60 * 60 * 24 * 30 * 1)
 
         var endDate = new Date()
-        endDate.setTime(dateNow.getTime() + 1000 * 60 * 60 * 24 * ctx.request.body.days)
+        endDate.setTime(dateNow.getTime() + 1000 * 60 * 60 * 24 * days)
 
         if (querytype == 'all') {
 
             conditions = {}
 
-        } else if (querytype == 'datesort') {
+        } else if (querytype == 'cli') {
 
-            
-
-            
-            
             var res,
                 total
 
@@ -118,49 +116,53 @@ router.post('/getVehicles', async (ctx, next) => {
                     }
                 }]
             }
+        }else if (querytype == 'gap'){
+            conditions = {
+                "and":[
+                    {
+                        "gap_expire_date":{
+                            "$gte":startDate,
+                            "$lte":endDate
+                        }
+                    }
+                ]
+            }
+        }else if(querytype == "checkcar"){
+            conditions = {
+                "and":[
+                    {
+                        "checkcar_date":{
+                            "$gte":startDate,
+                            "$lte":endDate
+                        }
+                    }
+                ]
+            }
         }
 
-        
-
         if (ctx.request.body.identity == "manager") {
-            // res = await Vehicle.find({
-            //     "$and": [{
-            //         managerid: ctx.request.body.managerid
-            //     }, {
-            //         "cli_expire_date": {
-            //             "$gte": startDate,
-            //             "$lte": endDate
-            //         }
-            //     }]
-            // }, null, options)
+            
             conditions.and.push({managerid:ctx.request.body.managerid})
             console.log(`manager conditions ---> ${JSON.stringify(conditions)}`)
-
-            
-                res = await Vehicle.find({
-                    "$and": [{
-                        managerid: ctx.request.body.managerid
-                    }, {
-                        "cli_expire_date": {
-                            "$gte": startDate,
-                            "$lte": endDate
-                        }
-                    }]
-                },function(err,person){
-                    console.log(`error -->> ${JSON.stringify(err)}`)
-                },options)
+            res = await Vehicle.find(conditions, null, options)
+                // res = await Vehicle.find({
+                //     "$and": [{
+                //         managerid: ctx.request.body.managerid
+                //     }, {
+                //         "cli_expire_date": {
+                //             "$gte": startDate,
+                //             "$lte": endDate
+                //         }
+                //     }]
+                // },function(err,person){
+                //     console.log(`error -->> ${JSON.stringify(err)}`)
+                // },options)
                 total = res.length //Vehicle.countDocuments()
                 console.log(`maanger res --< ${JSON.stringify(res)}}`)
-            
-
-           
-
+        
         } else {
-            // res = await Vehicle.find({
-            //     employeeid: ctx.request.body.employeeid
-            // }, null, options)
-            conditions.and.push({employeeid:ctx.request.body.employeeid})
 
+            conditions.and.push({employeeid:ctx.request.body.employeeid})
             console.log(`conditions ---> ${JSON.stringify(conditions)}`)
             res = await Vehicle.find(conditions,null,options)
             total = res.length //Vehicle.countDocuments()
