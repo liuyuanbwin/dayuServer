@@ -32,7 +32,7 @@
                     localStorage.setItem('user', res.data.user)
                     localStorage.setItem('identity', res.data.identity)
                     localStorage.setItem('id',res.data.id)
-                    this.$router.push('/m_toolbox')
+                    this.$router.push('/m_index')
                 })
         }
     }

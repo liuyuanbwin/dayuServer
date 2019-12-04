@@ -6,15 +6,15 @@ Vue.use(Router)
 const router = new Router({
   routes: [
     {
-      path:"/m_index",
+      path:"/m_login",
       name:"Mindex",
       meta:{title:"手机端"},
       component:() => import("./dayuM/MLogin")
     },
     {
-      path:"/m_toolbox",
+      path:"/m_index",
       name:"Mtoolbox",
-      meta:{title:"手机工具箱"},
+      meta:{title:"手机工具箱",keepAlive:true},
       component:() => import("./dayuM/MIndex")
     },
     {
@@ -23,6 +23,10 @@ const router = new Router({
       meta:{title:"客户详情"},
       component:() => import("./dayuM/MBillDetail")
     },
+    // {
+    //   path:"/m_tools",
+    //   name:""
+    // },
     {
     path: "/",
     name: "index",
@@ -124,6 +128,9 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login' || to.path === '/register') {
     next()
   } else {
+    // if (to.path === '/m_index') {
+    //   isLogin ? next() : next('/m_index')
+    // }
     isLogin ? next() : next('/login')
   }
   

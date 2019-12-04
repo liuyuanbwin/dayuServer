@@ -133,12 +133,13 @@
         },
         methods: {
             checkcarexpire() {
+                console.log(`this.allTableData ${JSON.stringify(this.allData)}`)
                 this.filteData = this
                     .allTableData
                     .filter(data => {
 
                         var date = data['cli_expire_date']
-                        //console.log (this.judgeTime(date.replace(/-|T|:/g,'')))
+                        console.log (this.judgeTime(date.replace(/-|T|:/g,'')))
                         if (date) {
                             return this.judgeTime(date.replace(/-|T|:/g, '')) > -30 && this.judgeTime(
                                 date.replace(/-|T|:/g, '')
@@ -200,7 +201,7 @@
                     .get('/api/vehicles')
                     .then(res => {
                         if (res.data.status === 1) {
-                            const data = res.data.results;
+                            const data = res.data.result;
                             this.allTableData = data;
                             this.filteData = data
                             this.setPaginations()
@@ -208,6 +209,7 @@
                     })
             },
             setPaginations() {
+                console.log(`filteData ${JSON.stringify(this.filtedata)}`)
                 this.paginations.total = this.filteData.length; //数据的数量
                 this.paginations.page_index = 1; //默认显示第一页
                 this.paginations.page_size = 10; //每页显示多少数据
@@ -317,6 +319,9 @@
             }
         },
         created() {
+            
+        },
+        mounted(){
             this.getInfoList();
         },
         components: {

@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view/>
+   <keep-alive>
+      <router-view v-if='$route.meta.keepAlive'/>
+    </keep-alive>
+      <router-view v-if='!$route.meta.keepAlive'/>
+      <!-- <router-view/> -->
   </div>
 </template>
 
@@ -26,7 +30,8 @@
       },
       _isMobile() {
 	 let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
-	 return flag;
+   console.log(`判断客户端类型  ----< ${flag}}`)
+   return flag;
 }
 
     },
