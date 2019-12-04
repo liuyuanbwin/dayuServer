@@ -7,14 +7,14 @@ const router = new Router({
   routes: [
     {
       path:"/m_login",
-      name:"Mindex",
+      name:"Mlogin",
       meta:{title:"手机端"},
       component:() => import("./dayuM/MLogin")
     },
     {
       path:"/m_index",
-      name:"Mtoolbox",
-      meta:{title:"手机工具箱",keepAlive:true},
+      name:"MIndex",
+      meta:{title:"主页",keepAlive:true},
       component:() => import("./dayuM/MIndex")
     },
     {
@@ -23,10 +23,12 @@ const router = new Router({
       meta:{title:"客户详情"},
       component:() => import("./dayuM/MBillDetail")
     },
-    // {
-    //   path:"/m_tools",
-    //   name:""
-    // },
+    {
+      path:"/m_tools",
+      name:"MTools",
+      meta:{title:"工具箱"},
+      component:() => import("./dayuM/MTools")
+    },
     {
     path: "/",
     name: "index",

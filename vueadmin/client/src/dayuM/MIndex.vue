@@ -207,6 +207,9 @@ export default {
     },
     tools: function() {
       console.log(`点击了工具箱`);
+      this.$router.push({
+        path:"/m_tools"
+      })
     },
 
     handleBottomChange(status) {
