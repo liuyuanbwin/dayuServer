@@ -9,43 +9,42 @@
 </template>
 
 <script>
-  import jwt_decode from 'jwt-decode'
-  export default {
-    name:"App",
-    created () { //持久化登录
-      if(localStorage.eleToken) {
-        //获取token解析
-        const decode = jwt_decode(localStorage.eleToken);
-        //存储vuex中
-        this.$store.dispatch('setAuthenticated' , !this.isEmpty(decode))
-				this.$store.dispatch('setUSER',decode)
-      }
+import jwt_decode from 'jwt-decode'
+export default {
+  name: 'App',
+  created () { // 持久化登录
+    if (localStorage.eleToken) {
+      // 获取token解析
+      const decode = jwt_decode(localStorage.eleToken)
+      // 存储vuex中
+      this.$store.dispatch('setAuthenticated', !this.isEmpty(decode))
+      this.$store.dispatch('setUSER', decode)
+    }
+  },
+  methods: {
+    isEmpty (value) {
+      return (
+        value === undefined || value === null || (typeof value === 'object' && Object.keys(value).length === 0) ||
+          (typeof value === 'string' && value.trim().length === 0)
+      )
     },
-    methods:{
-      isEmpty(value) {
-        return (
-          value === undefined || value === null || (typeof value === 'object' && Object.keys(value).length === 0)
-          || (typeof value === 'string' && value.trim().length === 0)
-        )
-      },
-      _isMobile() {
+    _isMobile () {
 	 let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
-   console.log(`判断客户端类型  ----< ${flag}}`)
-   return flag;
-}
+      console.log(`判断客户端类型  ----< ${flag}}`)
+      return flag
+    }
 
-    },
-    mounted() {
+  },
+  mounted () {
     if (this._isMobile()) {
-      this.$router.replace('/m_index');
+      this.$router.replace('/m_index')
     } else {
-      this.$router.replace('/index');
+      this.$router.replace('/index')
     }
   }
 
-  }
+}
 </script>
-
 
 <style>
 html,body,#app {

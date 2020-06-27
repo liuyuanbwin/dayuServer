@@ -17,21 +17,21 @@
 </template>
 
 <script>
-import Header from "../components/Header";
-import LeftMenu from "../components/LeftMenu";
-import AgencyLeftMenu from "../components/AgencyLeftMenu";
-import bus from "../common/bus";
-import Tags from "../common/Tags";
+import Header from '../components/Header'
+import LeftMenu from '../components/LeftMenu'
+import AgencyLeftMenu from '../components/AgencyLeftMenu'
+import bus from '../common/bus'
+import Tags from '../common/Tags'
 // import moment from 'moment'
 // @ is an alias to /src
 export default {
-  name: "Index",
-  data() {
+  name: 'Index',
+  data () {
     return {
       tagsList: [],
       collapse: false,
-      role:localStorage.getItem('identity')
-    };
+      role: localStorage.getItem('identity')
+    }
   },
   components: {
     Header,
@@ -39,24 +39,24 @@ export default {
     AgencyLeftMenu,
     Tags
   },
-  created() {
-    console.log(11111111);
-    //内容区域跟随变化
-    bus.$on("collapse", msg => {
-      console.log(msg);
-      this.collapse = msg;
+  created () {
+    console.log(11111111)
+    // 内容区域跟随变化
+    bus.$on('collapse', msg => {
+      console.log(msg)
+      this.collapse = msg
     }),
-      // 只有在标签页列表里的页面才使用keep-alive，即关闭标签之后就不保存到内存中了。
-      bus.$on("tags", msg => {
-        let arr = [];
-        for (let i = 0, len = msg.length; i < len; i++) {
-          msg[i].name && arr.push(msg[i].name);
-        }
-        this.tagsList = arr;
-        // console.log(tags)
-      });
+    // 只有在标签页列表里的页面才使用keep-alive，即关闭标签之后就不保存到内存中了。
+    bus.$on('tags', msg => {
+      let arr = []
+      for (let i = 0, len = msg.length; i < len; i++) {
+        msg[i].name && arr.push(msg[i].name)
+      }
+      this.tagsList = arr
+      // console.log(tags)
+    })
   }
-};
+}
 </script>
 <style scoped>
 .index {
@@ -76,7 +76,7 @@ export default {
 }
 .rightContainer {
   position: absolute;
-  background: red;
+
   left: 180px;
   right: 0;
   top: 72px;
